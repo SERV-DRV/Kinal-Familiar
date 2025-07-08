@@ -3,10 +3,17 @@
  */
 
 .anchorPaneInicioView {
-    -fx-background-color:  #102876;
+    -fx-background-color:  white;
 }
 
-.anchorPaneInicioViewLogin {
-     -fx-background-color:  white;
-     -fx-
+.gridpaneMenu {
+    -fx-background-color: #363f4e;
+}
+
+.labelMenuInferior {
+    -fx-background-color: #2ed1ac;
+}
+
+.HBOX {
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0.5, 5, 5);
 }
