@@ -1,0 +1,11 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.anchorPaneInicioView {
+    -fx-background-color:  #102876;
+}
+
+.anchorPaneInicioViewLogin {
+     -fx-background-color:  white;
+}
