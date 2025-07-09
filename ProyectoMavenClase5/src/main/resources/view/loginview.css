@@ -1,0 +1,17 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2eafad;
+    -fx-border-color: transparent transparent #2eafad transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-padding: 5px 0 5px 0;
+    -fx-font-weight: bold; 
+}
+
+.text-field:focused {
+    -fx-border-color: transparent transparent #2ed1ac transparent;
+    -fx-border-width: 0 0 2px 0;
+}
