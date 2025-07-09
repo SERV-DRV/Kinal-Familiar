@@ -69,7 +69,7 @@
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/inventario.png" />
+                  <Image url="@../images/statics.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
