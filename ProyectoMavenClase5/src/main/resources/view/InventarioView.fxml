@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,19 +14,20 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
    <children>
       <Label layoutX="1025.0" prefHeight="725.0" prefWidth="263.0" styleClass="HBOX" />
-      <GridPane prefHeight="724.0" prefWidth="321.0" styleClass="gridpaneMenu">
+      <GridPane prefHeight="723.0" prefWidth="321.0" styleClass="gridpaneMenu">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="70.00000381469727" />
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="251.99999618530273" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="55.77777099609375" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="166.8888956705729" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
@@ -34,9 +37,11 @@
           <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <Label prefHeight="90.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="108.0" prefWidth="70.0" style="-fx-background-color: #2ed1ac;" GridPane.rowIndex="4" />
             <Label prefHeight="142.0" prefWidth="161.0" styleClass="labelMenuInferior" GridPane.rowIndex="8" />
             <Label prefHeight="113.0" prefWidth="262.0" styleClass="labelMenuInferior" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane prefHeight="152.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.5555419921875" minWidth="10.0" prefWidth="141.5555419921875" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="115.77778625488281" minWidth="10.0" prefWidth="102.4444580078125" />
@@ -48,21 +53,8 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="149.0" text="Apellido" textFill="WHITE" GridPane.columnIndex="1" />
                   <Label prefHeight="17.0" prefWidth="149.0" text="Nombre" textFill="WHITE" />
-                  <Label prefHeight="17.0" prefWidth="149.0" text="cORREO:" textFill="WHITE" GridPane.rowIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="149.0" text="Correo:" textFill="WHITE" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" styleClass="btnSalir" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-            <GridPane GridPane.columnIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="77.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Logo y nombre de Kinal Familiar" GridPane.columnIndex="1" />
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Logo y nombre de Kinal Familiar" />
                </children>
             </GridPane>
             <ImageView fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
@@ -107,24 +99,45 @@
             </ImageView>
             <Button mnemonicParsing="false" prefHeight="83.0" prefWidth="258.0" styleClass="btnMenus" text="Menu Principal               &gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="258.0" styleClass="btnMenus" text="Estadisticas                  &gt;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="258.0" styleClass="btnMenus" text="Inventario                     &gt;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="251.0" styleClass="btnMenus" text="Inventario                     &gt;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Carrito de Compras        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Factura                        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Salir de la Aplicación      &gt;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefHeight="81.0" prefWidth="266.0" styleClass="btnContactanos" text="Contactanos              &gt;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="251.0" styleClass="btnContactanos" text="Contactanos              &gt;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label opacity="0.87" prefHeight="74.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="31.0" />
+               </font>
+            </Label>
+            <Label opacity="0.87" prefHeight="91.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" />
+            <ImageView fitHeight="57.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/org/kinalfamiliar/images/kinalFamiliarLogo-re.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
-      <TableView layoutX="351.0" layoutY="93.0" prefHeight="590.0" prefWidth="644.0">
+      <TableView layoutX="351.0" layoutY="140.0" prefHeight="543.0" prefWidth="644.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn prefWidth="75.0" text="ID Producto" />
+          <TableColumn prefWidth="86.00003051757812" text="Nombre" />
+            <TableColumn prefWidth="44.22222900390625" text="Stock" />
+            <TableColumn prefWidth="72.0" text="Precio c/u" />
+            <TableColumn prefWidth="183.33331298828125" text="Descripción" />
+            <TableColumn minWidth="3.3333740234375" prefWidth="50.66668701171875" text="Estado" />
+            <TableColumn prefWidth="128.6666259765625" text="Categoria" />
         </columns>
       </TableView>
-      <Label layoutX="321.0" prefHeight="64.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #363f4e;" text="SE VA A CRUD: FILA DE LA TABLA" />
+      <Label layoutX="321.0" prefHeight="64.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #2ed1ac;" text="INVENTARIO | KINAL FAMILIAR">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="19.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding></Label>
       <GridPane layoutX="1037.0" layoutY="118.0" prefHeight="214.0" prefWidth="241.0" styleClass="gripaneAcciones">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="223.0" />
@@ -183,6 +196,9 @@
                </GridPane.margin>
             </ImageView>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="10.0" />
+         </padding>
       </GridPane>
       <Label layoutX="1026.0" layoutY="345.0" prefHeight="17.0" prefWidth="262.0" style="-fx-background-color: #363f4e; -fx-border-color: #363f4e;" />
       <Label contentDisplay="CENTER" layoutX="1037.0" layoutY="72.0" prefHeight="48.0" prefWidth="241.0" text="Barra de Opciones">
@@ -215,13 +231,13 @@
                   <Insets right="145.0" />
                </GridPane.margin>
             </ImageView>
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="2" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="1" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="3" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="4" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="5" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" styleClass="txtCampos" text="s" GridPane.rowIndex="6" />
+            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="ID Producto" styleClass="txtCampos" />
+            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Nombre Producto" styleClass="txtCampos" GridPane.rowIndex="1" />
+            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Descripción Producto" styleClass="txtCampos" GridPane.rowIndex="4" />
+            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Estado Producto" styleClass="txtCampos" GridPane.rowIndex="5" />
+            <Spinner prefHeight="25.0" prefWidth="231.0" GridPane.rowIndex="2" />
+            <Spinner prefHeight="25.0" prefWidth="307.0" GridPane.rowIndex="3" />
+            <ComboBox prefHeight="25.0" prefWidth="308.0" styleClass="txtCampos" GridPane.rowIndex="6" />
          </children>
          <padding>
             <Insets bottom="5.0" left="8.0" right="5.0" top="5.0" />
@@ -235,5 +251,7 @@
             <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
          </padding>
       </Label>
+      <Polyline fill="#363f4e" layoutX="351.0" layoutY="378.0" points="-75.88888549804688, 30.4444580078125, -75.88888549804688, 30.4444580078125, -29.6666259765625, 66.88888549804688, -29.6666259765625, -2.666656494140625" stroke="#363f4e" strokeType="INSIDE" />
+      <TextField layoutX="351.0" layoutY="84.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
    </children>
 </AnchorPane>

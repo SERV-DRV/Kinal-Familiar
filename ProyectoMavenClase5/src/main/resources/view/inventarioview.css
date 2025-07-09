@@ -116,7 +116,7 @@
 }
 
 .btnMenus:hover {
-    -fx-translate-y: 1spx;
+    -fx-translate-y: 1px;
     -fx-border-color: transparent transparent transparent #2ed1ac;
     -fx-border-width: 0 0 0 3;
     -fx-background-color: transparent;
@@ -211,4 +211,9 @@
     -fx-border-color:#2ed1ac;
     -fx-background-color:#2eafad;
     -fx-font-fill: white;
+}
+
+.spinner{
+    -fx-background-color: #363f4e;
+    -fx-text-fill: white;
 }

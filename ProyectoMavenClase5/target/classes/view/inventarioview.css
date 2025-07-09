@@ -74,3 +74,146 @@
     -fx-text-fill: white;
     -fx-text-fill: white;
 }
+
+.table-view {
+    -fx-background-color: rgba(46, 209, 172, 0.15);
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.85);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(46, 209, 172, 0.35);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(54, 63, 78, 0.9);
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: rgba(54, 63, 78, 1.0);
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 30px;
+    -fx-border-color: transparent;
+    -fx-background-color: rgba(54, 63, 78, 1.0);
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.buscarTxt{
+    -fx-font-family: "Bookshelf Symbol 7";
+    -fx-font-size: 14px;
+    -fx-background-color: #363f4e;
+    -fx-border-radius: 50px;
+    -fx-text-fill:white;
+}
+
+.btnMenus:hover {
+    -fx-translate-y: 1px;
+    -fx-border-color: transparent transparent transparent #2ed1ac;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btnMenus:pressed{
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+    -fx-border-color:#2eafad;
+}
+
+.btnContactanos:hover {
+    -fx-translate-y: 1px;
+    -fx-border-color: transparent transparent transparent #363f4e;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btnContactanos:pressed{
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+    -fx-border-color:#2eafad;
+}
+
+.btnAgregar:hover{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
+}
+
+.btnEditar:hover{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
+}
+
+.btnEliminar:hover{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
+}
+
+.btnActualizar:hover{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
+}
+
+.btnDescargar:hover{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
+}
+
+.btnAgregar:pressed{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2eafad;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+}
+
+.btnEditar:pressed{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2eafad;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+}
+
+.btnEliminar:pressed{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2eafad;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+}
+
+.btnActualizar:pressed{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2eafad;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+}
+
+.btnDescargar:pressed{
+    -fx-translate-y: 1px;
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+}
+
+.spinner{
+    -fx-background-color: #363f4e;
+    -fx-text-fill: white;
+}
