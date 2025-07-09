@@ -59,7 +59,7 @@
             </GridPane>
             <ImageView fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/acount%20(2).png" />
+                  <Image url="@../images/acount%20(2).png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
