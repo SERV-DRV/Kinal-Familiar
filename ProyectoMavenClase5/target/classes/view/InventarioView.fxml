@@ -64,37 +64,37 @@
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/home.png" />
+                  <Image url="@../images/home.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/statics.png" />
+                  <Image url="@../images/inventario.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/inventario.png" />
+                  <Image url="@../images/inventario.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/shopping%20car.png" />
+                  <Image url="@../images/shopping%20car.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/factura.png" />
+                  <Image url="@../images/factura.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="8">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/contact.png" />
+                  <Image url="@../images/contact.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/exit.png" />
+                  <Image url="@../images/exit.png" />
                </image>
             </ImageView>
             <Button mnemonicParsing="false" prefHeight="83.0" prefWidth="258.0" styleClass="btnMenus" text="Menu Principal               &gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -115,7 +115,7 @@
             <Label opacity="0.87" prefHeight="91.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" />
             <ImageView fitHeight="57.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/kinalFamiliarLogo-re.png" />
+                  <Image url="@../images/kinalFamiliarLogo-re.png" />
                </image>
             </ImageView>
          </children>
@@ -157,7 +157,7 @@
             <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnAgregar" text="Descargar" GridPane.rowIndex="4" />
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/add.png" />
+                  <Image url="@../images/add.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
@@ -165,7 +165,7 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/update.png" />
+                  <Image url="@../images/update.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
@@ -173,7 +173,7 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/edit.png" />
+                  <Image url="@../images/edit.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
@@ -181,7 +181,7 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/delete.png" />
+                  <Image url="@../images/delete.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
@@ -189,7 +189,7 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/download.png" />
+                  <Image url="@../images/download.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
