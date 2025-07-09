@@ -1,2 +1,2 @@
-org\santiagoderosa\controller\InicioController.class
-org\santiagoderosa\System\Main.class
+org\kinalfamiliar\System\Main.class
+org\kinalfamiliar\controller\InventarioController.class

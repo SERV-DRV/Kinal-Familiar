@@ -30,7 +30,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage escenario) throws Exception {
-       FXMLLoader cargador = new FXMLLoader(getClass().getResource("/view/InicioView.fxml"));
+       FXMLLoader cargador = new FXMLLoader(getClass().getResource("/view/InventarioView.fxml"));
        Parent raiz = cargador.load();
        Scene escena = new Scene(raiz);
        escenario.setScene(escena);
