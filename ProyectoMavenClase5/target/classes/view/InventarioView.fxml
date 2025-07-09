@@ -231,10 +231,10 @@
                   <Insets right="145.0" />
                </GridPane.margin>
             </ImageView>
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="ID Producto" styleClass="txtCampos" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Nombre Producto" styleClass="txtCampos" GridPane.rowIndex="1" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Descripción Producto" styleClass="txtCampos" GridPane.rowIndex="4" />
-            <TextField opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Estado Producto" styleClass="txtCampos" GridPane.rowIndex="5" />
+            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="ID Producto" styleClass="txtCampos" />
+            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Nombre Producto" styleClass="txtCampos" GridPane.rowIndex="1" />
+            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Descripción Producto" styleClass="txtCampos" GridPane.rowIndex="4" />
+            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Estado Producto" styleClass="txtCampos" GridPane.rowIndex="5" />
             <Spinner prefHeight="25.0" prefWidth="231.0" GridPane.rowIndex="2" />
             <Spinner prefHeight="25.0" prefWidth="307.0" GridPane.rowIndex="3" />
             <ComboBox prefHeight="25.0" prefWidth="308.0" styleClass="txtCampos" GridPane.rowIndex="6" />
