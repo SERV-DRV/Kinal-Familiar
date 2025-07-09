@@ -18,14 +18,6 @@ public class Main extends Application{
 
     public static void main(String[] args) {
         launch(args);
-//        JSONObject persona = new JSONObject();
-//            persona.put("nombre:","Santiago");
-//            persona.put("apellido:","De Rosa");
-//            persona.put("edad:", 17 );
-//            persona.put("valido:",true);
-//            
-//            System.out.println("Contenido de JSON:");
-//            System.out.println(persona.toString(1));
     }
 
     @Override

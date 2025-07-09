@@ -1,2 +1,3 @@
-org\kinalfamiliar\System\Main.class
 org\kinalfamiliar\controller\InventarioController.class
+org\kinalfamiliar\System\Main.class
+org\kinalfamiliar\db\Conexion.class
