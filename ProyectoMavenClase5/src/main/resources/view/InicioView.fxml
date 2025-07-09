@@ -64,10 +64,6 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Logo y nombre de Kinal Familiar" GridPane.columnIndex="1" />
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Logo y nombre de Kinal Familiar" />
-               </children>
             </GridPane>
             <ImageView fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
@@ -122,17 +118,22 @@
             <Label prefHeight="97.0" prefWidth="80.0" GridPane.rowIndex="6" />
             <Label prefHeight="97.0" prefWidth="80.0" GridPane.rowIndex="7" />
             <Label prefHeight="97.0" prefWidth="80.0" GridPane.rowIndex="8" />
+            <ImageView fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/org/kinalfamiliar/images/acount%20(2).png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
-      <TableView layoutX="351.0" layoutY="93.0" prefHeight="590.0" prefWidth="644.0">
+      <TableView layoutX="351.0" layoutY="134.0" prefHeight="541.0" prefWidth="644.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn prefWidth="74.00006103515625" text="ID Producto" />
+          <TableColumn prefWidth="97.3333740234375" text="Nombre" />
+            <TableColumn prefWidth="56.0" text="Stock" />
+            <TableColumn prefWidth="64.6666259765625" text="Precio c/u" />
+            <TableColumn prefWidth="184.0001220703125" text="Descripcion" />
+            <TableColumn prefWidth="66.666748046875" text="Estado" />
+            <TableColumn prefWidth="102.6666259765625" text="Categoria" />
         </columns>
       </TableView>
       <Label layoutX="321.0" prefHeight="64.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #363f4e;" text="INVENTARIO | KINAL FAMILIAR">
@@ -158,10 +159,10 @@
         </rowConstraints>
          <children>
             <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Agregar" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnAgregar" text="Eliminar" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Editar" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Actualizar" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnAgregar" text="Descargar" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnEliminar" text="Eliminar" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnEditar" text="Editar" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnActualizar" text="Actualizar" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnDescargar" text="Descargar" GridPane.rowIndex="4" />
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../java/org/kinalfamiliar/images/add.png" />
@@ -255,6 +256,7 @@
             <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
          </padding>
       </Label>
-      <Polyline fill="#363f4e" layoutX="178.0" layoutY="394.0" nodeOrientation="LEFT_TO_RIGHT" points="143.33331298828125, 15.333343505859375, 143.33331298828125, -65.00003051757812, 96.66668701171875, -26.333343505859375, 96.66668701171875, -26.333343505859375" stroke="#363f4e" strokeType="INSIDE" />
+      <Polyline fill="#363f4e" layoutX="178.0" layoutY="394.0" nodeOrientation="LEFT_TO_RIGHT" points="143.33331298828125, 15.333343505859375, 143.3333740234375, -62.666656494140625, 96.66668701171875, -26.333343505859375, 96.66668701171875, -26.333343505859375" stroke="#363f4e" strokeType="INSIDE" />
+      <TextField layoutX="351.0" layoutY="82.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
    </children>
 </AnchorPane>
