@@ -11,6 +11,11 @@
     -fx-background-color: #363f4e;
 }
 
+.gripaneAcciones {
+    -fx-border-color:rgba(0,0,0,0.2);
+    
+}
+
 .labelMenuInferior {
     -fx-background-color: #2ed1ac;
 }
@@ -19,10 +24,6 @@
     -fx-border-color:#363f4e;
 }
 
-.gripaneAcciones {
-    -fx-border-color:rgba(0,0,0,0.2);
-    
-}
 
 .btnSalir {
     -fx-border-color:#2ed1ac;
@@ -32,17 +33,16 @@
 }
 
 .btnSalir:hover{
-    -fx-translate-y: 2px;
     -fx-border-color:#2ed1ac;
     -fx-background-color:#2ed1ac;
     -fx-border-radius:10px;
     -fx-font-fill: white;
+    -fx-text-fill: #FFFFFF;
 }
 
 .btnSalir:pressed {
+    -fx-translate-y: 2px;
     -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-    -fx-border-radius:10px;
     -fx-border-color:#2eafad;
 }
 
@@ -60,7 +60,7 @@
     -fx-background-color: transparent;
 }
 
-.btnAgregar, .btnActualizar, .btnDescargar, .btnEliminar, .btnEditar {
+.btnCruds {
     -fx-font-size: 17px;
     -fx-font-family: "Bookshelf Symbol 7";
     -fx-border-color: #363f4e;
@@ -68,11 +68,49 @@
     -fx-text-fill: white;
 }
 
-.txtCampos {
-    -fx-background-color:#363f4e;
-    -fx-opacity: 0.9;
-    -fx-text-fill: #FFFFFF;    
+.btnCruds:hover{
+    -fx-border-color:#2ed1ac;
+    -fx-background-color:#2ed1ac;
+    -fx-font-fill: white;
 }
+
+.btnCruds:pressed{
+    -fx-translate-y: 2;
+}
+
+.btnMenus:hover {
+    -fx-border-color: transparent transparent transparent #2ed1ac;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btnMenus:pressed{
+    -fx-translate-y: 1px;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+    -fx-border-color:#2eafad;
+}
+
+.btnContactanos:hover {
+    -fx-border-color: transparent transparent transparent #363f4e;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btnContactanos:pressed{
+    -fx-translate-y: 1px;
+    -fx-background-color:#2eafad;
+    -fx-font-fill: white;
+    -fx-border-color:#2eafad;
+}
+
+/*
+ * ===================================================================
+ *  Estilo del TableView
+ * ===================================================================
+ */
 
 .table-view {
     -fx-background-color: rgba(46, 209, 172, 0.15);
@@ -106,6 +144,8 @@
     -fx-font-weight: bold;
 }
 
+/* ____________________________________________________________________________________________________ */
+
 .buscarTxt{
     -fx-font-family: "Bookshelf Symbol 7";
     -fx-font-size: 14px;
@@ -114,103 +154,12 @@
     -fx-text-fill:white;
 }
 
-.btnMenus:hover {
-    -fx-translate-y: 1px;
-    -fx-border-color: transparent transparent transparent #2ed1ac;
-    -fx-border-width: 0 0 0 3;
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
+.txtCampos {
+    -fx-background-color:#363f4e;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #FFFFFF;    
 }
 
-.btnMenus:pressed{
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-    -fx-border-color:#2eafad;
-}
-
-.btnContactanos:hover {
-    -fx-translate-y: 1px;
-    -fx-border-color: transparent transparent transparent #363f4e;
-    -fx-border-width: 0 0 0 3;
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-}
-
-.btnContactanos:pressed{
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-    -fx-border-color:#2eafad;
-}
-
-.btnAgregar:hover{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-font-fill: white;
-}
-
-.btnEditar:hover{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-font-fill: white;
-}
-
-.btnEliminar:hover{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-font-fill: white;
-}
-
-.btnActualizar:hover{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-font-fill: white;
-}
-
-.btnDescargar:hover{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-font-fill: white;
-}
-
-.btnAgregar:pressed{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2eafad;
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-}
-
-.btnEditar:pressed{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2eafad;
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-}
-
-.btnEliminar:pressed{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2eafad;
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-}
-
-.btnActualizar:pressed{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2eafad;
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-}
-
-.btnDescargar:pressed{
-    -fx-translate-y: 1px;
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2eafad;
-    -fx-font-fill: white;
-}
 
 .spinner{
     -fx-background-color: #363f4e;

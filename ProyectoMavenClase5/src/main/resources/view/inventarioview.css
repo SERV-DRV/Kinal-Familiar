@@ -12,8 +12,7 @@
 }
 
 .gripaneAcciones {
-    -fx-border-color:rgba(0,0,0,0.2);
-    
+    -fx-border-color:rgba(0,0,0,0.2);    
 }
 
 .labelMenuInferior {
@@ -24,7 +23,6 @@
     -fx-border-color:#363f4e;
 }
 
-
 .btnSalir {
     -fx-border-color:#2ed1ac;
     -fx-background-color:#2ed1ac;
@@ -33,32 +31,15 @@
 }
 
 .btnSalir:hover{
-    -fx-border-color:#2ed1ac;
-    -fx-background-color:#2ed1ac;
-    -fx-border-radius:10px;
     -fx-font-fill: white;
     -fx-text-fill: #FFFFFF;
 }
 
 .btnSalir:pressed {
     -fx-translate-y: 2px;
-    -fx-background-color:#2eafad;
-    -fx-border-color:#2eafad;
 }
 
-.btnMenus {
-    -fx-font-family: "Bookshelf Symbol 7";
-    -fx-font-size: 20px;
-    -fx-text-fill: white;
-    -fx-background-color: transparent;
-}
 
-.btnContactanos {
-    -fx-font-family: "Bookshelf Symbol 7";
-    -fx-font-size: 22px;
-    -fx-text-fill: black;
-    -fx-background-color: transparent;
-}
 
 .btnCruds {
     -fx-font-size: 17px;
@@ -78,11 +59,16 @@
     -fx-translate-y: 2;
 }
 
-.btnMenus:hover {
-    -fx-border-color: transparent transparent transparent #2ed1ac;
-    -fx-border-width: 0 0 0 3;
-    -fx-background-color: transparent;
+.btnMenus {
+    -fx-font-family: "Bookshelf Symbol 7";
+    -fx-font-size: 20px;
     -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.btnMenus:hover {
+    -fx-border-color: #2ed1ac;
+    -fx-border-width: 0 0 0 3;
 }
 
 .btnMenus:pressed{
@@ -92,8 +78,15 @@
     -fx-border-color:#2eafad;
 }
 
+.btnContactanos {
+    -fx-font-family: "Bookshelf Symbol 7";
+    -fx-font-size: 22px;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+
 .btnContactanos:hover {
-    -fx-border-color: transparent transparent transparent #363f4e;
+    -fx-border-color: #363f4e;
     -fx-border-width: 0 0 0 3;
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -159,7 +152,6 @@
     -fx-opacity: 0.9;
     -fx-text-fill: #FFFFFF;    
 }
-
 
 .spinner{
     -fx-background-color: #363f4e;
