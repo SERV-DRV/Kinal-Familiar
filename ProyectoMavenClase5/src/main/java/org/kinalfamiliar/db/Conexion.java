@@ -14,8 +14,8 @@ public class Conexion {
     private Connection conexion;
     
     private static final String URL = "jdbc:mysql://localhost:3306/KinalFamiliarDB?userSSL=false";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Lycurgus#223";
+    private static final String USER = "quintom";
+    private static final String PASSWORD = "admin";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     public Conexion() {

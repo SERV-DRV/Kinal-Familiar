@@ -36,14 +36,13 @@
             <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="90.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefHeight="108.0" prefWidth="70.0" style="-fx-background-color: #2ed1ac;" GridPane.rowIndex="4" />
-            <Label prefHeight="142.0" prefWidth="161.0" styleClass="labelMenuInferior" GridPane.rowIndex="8" />
-            <Label prefHeight="113.0" prefWidth="262.0" styleClass="labelMenuInferior" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label prefHeight="142.0" prefWidth="161.0" styleClass="labelMenuInferior" GridPane.rowIndex="7" />
+            <Label prefHeight="113.0" prefWidth="262.0" styleClass="labelMenuInferior" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <GridPane prefHeight="152.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.5555419921875" minWidth="10.0" prefWidth="141.5555419921875" />
@@ -85,17 +84,12 @@
                   <Image url="@../images/shopping%20car.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../images/factura.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="8">
+            <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                <image>
                   <Image url="@../images/contact.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+            <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                <image>
                   <Image url="@../images/exit.png" />
                </image>
@@ -104,10 +98,9 @@
             <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="258.0" styleClass="btnMenus" text="Estadisticas                  &gt;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="251.0" styleClass="btnMenus" text="Inventario                     &gt;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Carrito de Compras        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Factura                        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Salir de la Aplicación      &gt;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="251.0" styleClass="btnContactanos" text="Contactanos              &gt;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Label opacity="0.87" prefHeight="74.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Salir de la Aplicación      &gt;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="251.0" styleClass="btnContactanos" text="Contactanos              &gt;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label opacity="0.87" prefHeight="106.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
                <padding>
                   <Insets left="5.0" />
                </padding>
@@ -133,7 +126,7 @@
             <TableColumn fx:id="colIdCategoria" prefWidth="100.0" text="Categoria ID" />
         </columns>
       </TableView>
-      <Label layoutX="321.0" prefHeight="64.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #2ed1ac;" text="INVENTARIO | KINAL FAMILIAR">
+      <Label layoutX="321.0" prefHeight="72.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #2ed1ac;" text="INVENTARIO | KINAL FAMILIAR">
          <font>
             <Font name="Bookshelf Symbol 7" size="19.0" />
          </font>
@@ -243,17 +236,8 @@
             <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
          </padding>
       </Label>
-      <Polyline fill="#363f4e" layoutX="351.0" layoutY="378.0" points="-75.88888549804688, 30.4444580078125, -75.88888549804688, 30.4444580078125, -29.6666259765625, 66.88888549804688, -29.6666259765625, -2.666656494140625" stroke="#363f4e" strokeType="INSIDE" />
-      <TextField fx:id="txtBuscar" layoutX="351.0" layoutY="84.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
-      <Button layoutX="950.0" layoutY="84.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnAgregar">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/update.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Polyline fill="#363f4e" layoutX="351.0" layoutY="378.0" points="-75.888916015625, 69.33328247070312, -75.888916015625, 69.33328247070312, -29.66668701171875, 111.33331298828125, -29.66668701171875, 33.33331298828125" stroke="#363f4e" strokeType="INSIDE" />
+      <TextField fx:id="txtBuscar" layoutX="351.0" layoutY="90.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
       <TextField fx:id="txtIdProducto" alignment="TOP_LEFT" layoutX="1240.0" layoutY="20.0" opacity="0.7" prefHeight="25.0" prefWidth="25.0" promptText="ID" style="-fx-background-color: transparent;" visible="false" />
    </children>
 </AnchorPane>

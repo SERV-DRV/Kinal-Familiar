@@ -82,6 +82,9 @@ public class InventarioController implements Initializable {
         cargarCategorias();
         cargarTableView();
         tblProductos.setOnMouseClicked(eh -> cargarFormulario());
+        txtBuscar.textProperty().addListener((obs, oldText, newText) -> {
+            buscarProducto();
+        });
     }
 
     private void configurarColumnas() {
@@ -383,6 +386,21 @@ public class InventarioController implements Initializable {
             cargarFormulario();
         }
     }
+    
+    @FXML
+    private void buscarProducto() {
+        String filtro = txtBuscar.getText().toLowerCase();
+        ObservableList<Producto> items = tblProductos.getItems();
+
+        for (int i = 0; i < items.size(); i++) {
+            Producto producto = items.get(i);
+            if (producto.getNombre().toLowerCase().contains(filtro)) {
+                tblProductos.getSelectionModel().select(i);
+                tblProductos.scrollTo(i);
+                break;
+            }
+        }
+    }
 
     @FXML
     private void btnAtrasAction() {
@@ -401,9 +419,4 @@ public class InventarioController implements Initializable {
             cargarFormulario();
         }
     }
-
-//    @FXML
-//    private void escenaMenuPrincipal() {
-//        principal.escenaMenuPirncipal();
-//    }
 }
