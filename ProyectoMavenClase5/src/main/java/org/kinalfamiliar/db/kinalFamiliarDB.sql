@@ -2,6 +2,7 @@ drop database if exists KinalFamiliarDB;
 create database KinalFamiliarDB;
 use KinalFamiliarDB;
 
+/*
 create table Usuarios(
 	idUsuario int auto_increment,
     nombreUsuario varchar(64) not null,
@@ -10,7 +11,7 @@ create table Usuarios(
     contrasenaUsuario varchar(16) not null,
     constraint PK_usuarios primary key(idUsuarios)
 );
-
+*/
 create table Categorias(
 	idCategoria int auto_increment,
     nombreCategoria varchar(64) not null,
@@ -22,7 +23,6 @@ create table Productos(
     nombreProducto varchar(128) not null,
     cantidadProducto int not null,
     precioProducto decimal(10,2) not null,
-    descripcionProducto varchar(256) not null,
     estadoProducto enum("Disponible", "Indisponible"),
     idCategoria int not null,
     constraint FK_productos_categorias foreign key(idCategoria)
@@ -100,15 +100,14 @@ delimiter //
 		in p_nombreProducto varchar(128),
 		in p_cantidadProducto int,
 		in p_precioProducto decimal(10,2),
-		in p_descripcionProducto varchar(256),
 		in p_estadoProducto enum("Disponible", "Indisponible"),
 		in p_idCategoria int
         )
 		begin
 			insert into Productos(nombreProducto, cantidadProducto, 
-				precioProducto, descripcionProducto, estadoProducto, idCategoria)
+				precioProducto, estadoProducto, idCategoria)
 				values(p_nombreProducto, p_cantidadProducto, 
-					p_precioProducto, p_descripcionProducto, p_estadoProducto, p_idCategoria);
+					p_precioProducto, p_estadoProducto, p_idCategoria);
         end//
 delimiter ;
 
@@ -121,7 +120,6 @@ delimiter //
 				PD.nombreProducto as Nombre,
 				PD.cantidadProducto as Cantidad,
 				PD.precioProducto as Precio,
-				PD.descripcionProducto as Descripcion,
 				PD.estadoProducto as Estado,
 				PD.idCategoria as CategoriaID
 			from Productos PD;
@@ -135,7 +133,6 @@ delimiter //
 		in p_nombreProducto varchar(128),
 		in p_cantidadProducto int,
 		in p_precioProducto decimal(10,2),
-		in p_descripcionProducto varchar(256),
 		in p_estadoProducto enum("Disponible", "Indisponible"),
 		in p_idCategoria int
         )
@@ -145,7 +142,6 @@ delimiter //
 					PD.nombreProducto = p_nombreProducto,
 					PD.cantidadProducto = p_cantidadProducto,
 					PD.precioProducto = p_precioProducto,
-					PD.descripcionProducto = p_descripcionProducto,
 					PD.estadoProducto = p_estadoProducto,
 					PD.idCategoria = p_idCategoria
 			where PD.idProducto = p_idProducto;
@@ -170,7 +166,6 @@ delimiter //
 				PD.nombreProducto as Nombre,
 				PD.cantidadProducto as Cantidad,
 				PD.precioProducto as Precio,
-				PD.descripcionProducto as Descripcion,
 				PD.estadoProducto as Estado,
 				PD.idCategoria as CategoriaID
 			from Productos PD
@@ -198,21 +193,21 @@ CALL sp_InsertarCategoria('Lectura Juvenil');
 CALL sp_InsertarCategoria('Lectura Infantil');
 
 -- DATOS PRODUCTOS
-CALL sp_InsertarProducto('Libro Matemáticas 5to grado', 50, 90.00, 'Libro de texto con ejercicios y teoría', 'Activo', 1);
-CALL sp_InsertarProducto('Cuaderno Profesional 100 hojas', 200, 15.00, 'Cuaderno rayado tamaño carta', 'Activo', 2);
-CALL sp_InsertarProducto('Bolígrafo Bic Azul', 500, 2.50, 'Bolígrafo de tinta azul, punta media', 'Activo', 3);
-CALL sp_InsertarProducto('Caja de crayones Crayola', 120, 18.00, 'Caja con 24 colores para dibujo', 'Activo', 4);
-CALL sp_InsertarProducto('Resma de papel carta', 80, 45.00, '500 hojas tamaño carta', 'Activo', 5);
-CALL sp_InsertarProducto('Mochila Escolar Spiderman', 35, 120.00, 'Mochila con diseño infantil y varios compartimentos', 'Activo', 6);
-CALL sp_InsertarProducto('Libro para colorear', 60, 12.00, 'Libro de actividades para niños pequeños', 'Activo', 7);
-CALL sp_InsertarProducto('Juego de geometría', 100, 25.00, 'Set con regla, compás, transportador y escuadras', 'Activo', 8);
-CALL sp_InsertarProducto('Calculadora científica Casio', 40, 195.00, 'Calculadora con funciones científicas avanzadas', 'Activo', 9);
-CALL sp_InsertarProducto('Diccionario Español-Inglés', 55, 85.00, 'Diccionario bilingüe para estudiantes', 'Activo', 10);
-CALL sp_InsertarProducto('Cartulina brillante', 300, 5.00, 'Cartulina color brillante tamaño doble carta', 'Activo', 11);
-CALL sp_InsertarProducto('Grapadora metálica', 25, 30.00, 'Grapadora de escritorio con grapas incluidas', 'Activo', 12);
-CALL sp_InsertarProducto('Tijeras escolares', 150, 8.00, 'Tijeras con punta redonda para niños', 'Activo', 13);
-CALL sp_InsertarProducto('Libro Harry Potter y la Piedra Filosofal', 20, 160.00, 'Novela juvenil de fantasía', 'Activo', 14);
-CALL sp_InsertarProducto('Cuento ilustrado La Oruga Muy Hambrienta', 40, 95.00, 'Libro infantil ilustrado', 'Activo', 15);
+CALL sp_InsertarProducto('Libro Matemáticas 5to grado', 50, 90.00, 'Disponible', 1);
+CALL sp_InsertarProducto('Cuaderno Profesional 100 hojas', 200, 15.00, 'Disponible', 2);
+CALL sp_InsertarProducto('Bolígrafo Bic Azul', 500, 2.50, 'Disponible', 3);
+CALL sp_InsertarProducto('Caja de crayones Crayola', 120, 18.00, 'Disponible', 4);
+CALL sp_InsertarProducto('Resma de papel carta', 80, 45.00, 'Disponible', 5);
+CALL sp_InsertarProducto('Mochila Escolar Spiderman', 35, 120.00, 'Disponible', 6);
+CALL sp_InsertarProducto('Libro para colorear', 60, 12.00, 'Disponible', 7);
+CALL sp_InsertarProducto('Juego de geometría', 100, 25.00, 'Disponible', 8);
+CALL sp_InsertarProducto('Calculadora científica Casio', 40, 195.00, 'Disponible', 9);
+CALL sp_InsertarProducto('Diccionario Español-Inglés', 55, 85.00, 'Disponible', 10);
+CALL sp_InsertarProducto('Cartulina brillante', 300, 5.00, 'Disponible', 11);
+CALL sp_InsertarProducto('Grapadora metálica', 25, 30.00, 'Disponible', 12);
+CALL sp_InsertarProducto('Tijeras escolares', 150, 8.00, 'Disponible', 13);
+CALL sp_InsertarProducto('Libro Harry Potter y la Piedra Filosofal', 20, 160.00, 'Disponible', 14);
+CALL sp_InsertarProducto('Cuento ilustrado La Oruga Muy Hambrienta', 40, 95.00, 'Disponible', 15);
 
 
 

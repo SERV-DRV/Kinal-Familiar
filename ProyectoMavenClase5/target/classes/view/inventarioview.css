@@ -71,8 +71,7 @@
 .txtCampos {
     -fx-background-color:#363f4e;
     -fx-opacity: 0.9;
-    -fx-text-fill: white;
-    -fx-text-fill: white;
+    -fx-text-fill: #FFFFFF;    
 }
 
 .table-view {

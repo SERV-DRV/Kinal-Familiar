@@ -4,15 +4,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
@@ -53,8 +56,8 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="149.0" text="Apellido" textFill="WHITE" GridPane.columnIndex="1" />
                   <Label prefHeight="17.0" prefWidth="149.0" text="Nombre" textFill="WHITE" />
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Correo:" textFill="WHITE" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" styleClass="btnSalir" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="149.0" text="Correo:" textFill="WHITE" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <ImageView fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
@@ -120,15 +123,14 @@
             </ImageView>
          </children>
       </GridPane>
-      <TableView layoutX="351.0" layoutY="140.0" prefHeight="543.0" prefWidth="644.0">
+      <TableView fx:id="tblProductos" layoutX="351.0" layoutY="140.0" prefHeight="543.0" prefWidth="644.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID Producto" />
-          <TableColumn prefWidth="86.00003051757812" text="Nombre" />
-            <TableColumn prefWidth="44.22222900390625" text="Stock" />
-            <TableColumn prefWidth="72.0" text="Precio c/u" />
-            <TableColumn prefWidth="183.33331298828125" text="Descripción" />
-            <TableColumn minWidth="3.3333740234375" prefWidth="50.66668701171875" text="Estado" />
-            <TableColumn prefWidth="128.6666259765625" text="Categoria" />
+          <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="colNombre" prefWidth="160.0" text="Nombre" />
+            <TableColumn fx:id="colCantidad" prefWidth="100.0" text="Stock" />
+            <TableColumn fx:id="colPrecio" prefWidth="110.0" text="Precio c/u" />
+            <TableColumn fx:id="colEstado" prefWidth="120.0" text="Estado" />
+            <TableColumn fx:id="colIdCategoria" prefWidth="100.0" text="Categoria ID" />
         </columns>
       </TableView>
       <Label layoutX="321.0" prefHeight="64.0" prefWidth="967.0" style="-fx-background-color: #2ed1ac; -fx-border-color: #2ed1ac;" text="INVENTARIO | KINAL FAMILIAR">
@@ -144,17 +146,15 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Agregar" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnAgregar" text="Eliminar" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Editar" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="btnAgregar" text="Actualizar" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnAgregar" text="Descargar" GridPane.rowIndex="4" />
+            <Button fx:id="btnNuevo" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#agregarAction" prefHeight="33.0" prefWidth="175.0" styleClass="btnCruds" text="Nuevo" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#cancelarEliminar" prefHeight="28.0" prefWidth="175.0" styleClass="btnCruds" text="Eliminar" GridPane.rowIndex="2" />
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editarAction" prefHeight="33.0" prefWidth="175.0" styleClass="btnCruds" text="Editar" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="175.0" styleClass="btnCruds" text="Descargar" GridPane.rowIndex="3" />
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/add.png" />
@@ -165,7 +165,7 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/update.png" />
+                  <Image url="@../images/edit.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
@@ -173,21 +173,13 @@
             </ImageView>
             <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/edit.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="145.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-               <image>
                   <Image url="@../images/delete.png" />
                </image>
                <GridPane.margin>
                   <Insets right="145.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+            <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/download.png" />
                </image>
@@ -209,7 +201,7 @@
             <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
          </padding>
       </Label>
-      <GridPane layoutX="1037.0" layoutY="414.0" prefHeight="298.0" prefWidth="241.0" styleClass="gripaneAcciones">
+      <GridPane layoutX="1037.0" layoutY="414.0" prefHeight="300.0" prefWidth="240.0" styleClass="gripaneAcciones">
          <columnConstraints>
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="223.0" />
          </columnConstraints>
@@ -217,30 +209,30 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../java/org/kinalfamiliar/images/add.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="145.0" />
-               </GridPane.margin>
-            </ImageView>
-            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="ID Producto" styleClass="txtCampos" />
-            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Nombre Producto" styleClass="txtCampos" GridPane.rowIndex="1" />
-            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Descripción Producto" styleClass="txtCampos" GridPane.rowIndex="4" />
-            <TextField alignment="CENTER" opacity="0.7" prefHeight="25.0" prefWidth="183.0" promptText="Estado Producto" styleClass="txtCampos" GridPane.rowIndex="5" />
-            <Spinner prefHeight="25.0" prefWidth="231.0" GridPane.rowIndex="2" />
-            <Spinner prefHeight="25.0" prefWidth="307.0" GridPane.rowIndex="3" />
-            <ComboBox prefHeight="25.0" prefWidth="308.0" styleClass="txtCampos" GridPane.rowIndex="6" />
+            <TextField fx:id="txtNombre" alignment="TOP_LEFT" disable="true" opacity="0.7" prefHeight="30.0" prefWidth="180.0" promptText="Nombre Producto" styleClass="txtCampos" />
+            <Spinner fx:id="spCantidad" disable="true" prefHeight="30.0" prefWidth="231.0" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cbxCategoria" disable="true" prefHeight="30.0" prefWidth="223.0" styleClass="txtCampos" GridPane.rowIndex="4" />
+            <TextField fx:id="txtPrecio" alignment="TOP_LEFT" disable="true" opacity="0.7" prefHeight="30.0" prefWidth="180.0" promptText="Precio" styleClass="txtCampos" GridPane.rowIndex="2" />
+            <HBox spacing="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <children>
+                  <RadioButton fx:id="rbDisponible" disable="true" mnemonicParsing="false" text="Disponible">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="grupoEstado" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbIndisponible" disable="true" mnemonicParsing="false" text="Indisponible" toggleGroup="$grupoEstado" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="20.0" />
+               </padding>
+            </HBox>
          </children>
          <padding>
-            <Insets bottom="5.0" left="8.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </GridPane>
       <Label contentDisplay="CENTER" layoutX="1036.0" layoutY="373.0" prefHeight="48.0" prefWidth="241.0" text="        Inventario">
@@ -252,6 +244,16 @@
          </padding>
       </Label>
       <Polyline fill="#363f4e" layoutX="351.0" layoutY="378.0" points="-75.88888549804688, 30.4444580078125, -75.88888549804688, 30.4444580078125, -29.6666259765625, 66.88888549804688, -29.6666259765625, -2.666656494140625" stroke="#363f4e" strokeType="INSIDE" />
-      <TextField layoutX="351.0" layoutY="84.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
+      <TextField fx:id="txtBuscar" layoutX="351.0" layoutY="84.0" prefHeight="36.0" prefWidth="643.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
+      <Button layoutX="950.0" layoutY="84.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnAgregar">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="txtIdProducto" alignment="TOP_LEFT" layoutX="1240.0" layoutY="20.0" opacity="0.7" prefHeight="25.0" prefWidth="25.0" promptText="ID" style="-fx-background-color: transparent;" visible="false" />
    </children>
 </AnchorPane>
