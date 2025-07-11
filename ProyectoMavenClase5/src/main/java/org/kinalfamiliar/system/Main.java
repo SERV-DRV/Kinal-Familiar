@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package org.kinalfamiliar.system;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,11 +12,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
-/**
- *
- * @author informatica
- */
-public class Main extends Application{
+public class Main extends Application {
+
+    public Stage cambioEscena;
+    private static String URL_VIEW = "/view/";
+    private static String URL_IMAGE = "/images/";
 
     public static void main(String[] args) {
         launch(args);
@@ -22,10 +24,35 @@ public class Main extends Application{
 
     @Override
     public void start(Stage escenario) throws Exception {
-       FXMLLoader cargador = new FXMLLoader(getClass().getResource("/view/InventarioView.fxml"));
-       Parent raiz = cargador.load();
-       Scene escena = new Scene(raiz);
-       escenario.setScene(escena);
-       escenario.show();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource(URL_VIEW + "InventarioView.fxml"));
+        Parent raiz = cargador.load();
+        Scene escena = new Scene(raiz);
+        escenario.setScene(escena);
+        escenario.show();
     }
+
+    public void cambiarEscena(String fxml, double ancho, double alto) {
+        try {
+            FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(URL_VIEW + fxml));
+            Parent archivoFXML = cargadorFXML.load();
+
+            Scene escena = new Scene(archivoFXML, ancho, alto);
+            cambioEscena.setScene(escena);
+
+            Object controller = cargadorFXML.getController();
+
+            try {
+                Method metodo = controller.getClass().getMethod("setPrincipal", Main.class);
+                metodo.invoke(controller, this);
+            } catch (NoSuchMethodException e) {
+                System.out.println("El controlador no tiene el método setPrincipal.");
+            } catch (IllegalAccessException | InvocationTargetException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
+            System.out.println("Ocurrió un error al cambiar la escena: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
 }
