@@ -11,9 +11,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author olive
+ * @author ks
  */
-public class RegistroUsuarioController implements Initializable {
+public class RegisterController implements Initializable {
 
     /**
      * Initializes the controller class.
