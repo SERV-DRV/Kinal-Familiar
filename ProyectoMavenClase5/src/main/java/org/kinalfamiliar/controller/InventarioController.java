@@ -273,6 +273,13 @@ public class InventarioController implements Initializable {
         txtBuscar.setDisable(activo);
         btnNuevo.setText(activo ? "Guardar" : "Nuevo");
         btnEliminar.setText(activo ? "Cancelar" : "Eliminar");
+         if (btnNuevo.getText().contains("Nuevo")) {
+            btnNuevo.getStyleClass().remove("botonGuardar");
+            btnNuevo.getStyleClass().add("botonNuevo");
+        } else if (btnNuevo.getText().contains("Guardar")) {
+            btnNuevo.getStyleClass().remove("botonNuevo");
+            btnNuevo.getStyleClass().add("botonGuardar");
+        }
         btnEditar.setDisable(activo);
     }
 
