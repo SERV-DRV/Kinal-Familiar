@@ -1,7 +1,0 @@
-org\kinalfamiliar\controller\InventarioController.class
-org\kinalfamiliar\controller\InventarioController$acciones.class
-org\kinalfamiliar\db\Conexion.class
-org\kinalfamiliar\model\Categoria.class
-org\kinalfamiliar\model\Producto.class
-org\kinalfamiliar\System\Main.class
-org\kinalfamiliar\controller\LoginController.class
