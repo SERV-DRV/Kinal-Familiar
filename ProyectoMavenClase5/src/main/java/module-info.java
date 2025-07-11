@@ -5,6 +5,7 @@ module org.kinalfamiliar.proyectomavenclase5 {
     requires javafx.fxml;
     requires org.json;
     requires mysql.connector.java;
+    requires java.base;
 
     opens org.kinalfamiliar.system to javafx.fxml;
     opens org.kinalfamiliar.controller to javafx.fxml;
