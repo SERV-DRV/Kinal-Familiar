@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import org.kinalfamiliar.controller.LoginController;
 
 public class Main extends Application {
 
@@ -24,8 +25,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage escenario) throws Exception {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource(URL_VIEW + "InventarioView.fxml"));
+        this.cambioEscena = escenario;
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource(URL_VIEW + "LoginView.fxml"));
         Parent raiz = cargador.load();
+
+        LoginController controlador = cargador.getController();
+        controlador.setPrincipal(this);
+
         Scene escena = new Scene(raiz);
         escenario.setScene(escena);
         escenario.show();

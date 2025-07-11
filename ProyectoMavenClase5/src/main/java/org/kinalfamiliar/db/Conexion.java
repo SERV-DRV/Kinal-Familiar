@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author informatica
- */
 public class Conexion {
 
     private static Conexion instancia;

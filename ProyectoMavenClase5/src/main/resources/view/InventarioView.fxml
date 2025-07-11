@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
    <children>
       <Label layoutX="1025.0" prefHeight="725.0" prefWidth="263.0" styleClass="HBOX" />
       <GridPane prefHeight="723.0" prefWidth="321.0" styleClass="gridpaneMenu">
