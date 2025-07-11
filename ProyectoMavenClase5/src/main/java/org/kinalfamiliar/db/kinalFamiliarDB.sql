@@ -7,7 +7,6 @@ create table Usuarios(
     nombreUsuario varchar(64) not null,
     apellidoUsuario varchar(64) not null,
     correoUsuario varchar(128) not null unique,
-	username varchar(32) not null unique,
     contrasenaUsuario varchar(255) not null,    
     estadoUsuario enum('Activo', 'Inactivo') not null default 'Activo',
     fechaRegistro datetime not null default current_timestamp,
