@@ -14,11 +14,32 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>org.kinalfamiliar.system.Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>--module-path</argument>
+                        <argument>%classpath</argument>
+                        <argument>--add-modules</argument>
+                        <argument>javafx.controls,javafx.fxml</argument>
+                        <argument>-m</argument>
+                        <argument>org.kinalfamiliar.proyectomavenclase5/org.kinalfamiliar.system.Main</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
@@ -35,12 +56,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>23.0.2</version>
+            <version>21.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>23.0.2</version>
+            <version>21.0.3</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
