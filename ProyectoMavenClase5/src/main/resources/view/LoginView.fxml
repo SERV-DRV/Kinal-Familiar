@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="1153.0" stylesheets="@loginview.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.kinalfamiliar.controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="1153.0" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.LoginController">
    <children>
       <ImageView fitHeight="722.0" fitWidth="1213.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -36,7 +36,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="525.0" layoutY="511.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" style="-fx-background-color: transparent;" text="or Sing up">
+      <Button layoutX="525.0" layoutY="511.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" style="-fx-background-color: transparent;" text="or Sign Up">
          <font>
             <Font size="15.0" />
          </font>
