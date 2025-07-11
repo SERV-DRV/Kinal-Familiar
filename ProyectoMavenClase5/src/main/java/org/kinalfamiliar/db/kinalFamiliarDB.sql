@@ -2,16 +2,17 @@ drop database if exists KinalFamiliarDB;
 create database KinalFamiliarDB;
 use KinalFamiliarDB;
 
-/*
 create table Usuarios(
 	idUsuario int auto_increment,
     nombreUsuario varchar(64) not null,
     apellidoUsuario varchar(64) not null,
-    correoUsuario varchar(128) not null,
-    contrasenaUsuario varchar(16) not null,
-    constraint PK_usuarios primary key(idUsuarios)
+    correoUsuario varchar(128) not null unique,
+    contrasenaUsuario varchar(255) not null,    
+    estadoUsuario enum('Activo', 'Inactivo') not null default 'Activo',
+    fechaRegistro datetime not null default current_timestamp,
+    constraint PK_usuarios primary key(idUsuario)
 );
-*/
+
 create table Categorias(
 	idCategoria int auto_increment,
     nombreCategoria varchar(64) not null,
