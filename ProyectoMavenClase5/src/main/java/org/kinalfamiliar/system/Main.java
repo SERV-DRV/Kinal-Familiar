@@ -34,6 +34,7 @@ public class Main extends Application {
 
         Scene escena = new Scene(raiz);
         escenario.setScene(escena);
+        escenario.setResizable(false);
         escenario.show();
     }
 

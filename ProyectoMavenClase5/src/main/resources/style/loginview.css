@@ -51,22 +51,6 @@
     -fx-prompt-text-fill: transparent;
 }
 
-.check-box-style {
-    -fx-text-fill: #26a69a;
-    -fx-font-size: 13px;
-    -fx-cursor: hand;
-}
-
-.check-box-style .box {
-    -fx-border-color: #26a69a;
-    -fx-background-color: white;
-    -fx-border-radius: 3;
-}
-
-.check-box-style:selected .mark {
-    -fx-background-color: #2eafad;
-}
-
 .login-button {
     -fx-background-color: #2eafad;
     -fx-text-fill: white;

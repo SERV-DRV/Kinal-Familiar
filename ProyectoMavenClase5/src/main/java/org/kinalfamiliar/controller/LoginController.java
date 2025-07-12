@@ -32,13 +32,12 @@ public class LoginController implements Initializable {
 
     public void manejarBotonLogin(ActionEvent evento) {
         //login();
-        principal.cambiarEscena("InventarioView.fxml", 1280, 720);
+        principal.cambiarEscena("InventarioView.fxml", 1213, 722);
     }
-    
-//    public void manejarBotonRegister(ActionEvent evento) {
-//        //register();
-//        principal.cambiarEscena("RegistroView.fxml", 1213, 722);
-//    }
+
+    public void manejarBotonRegister(ActionEvent evento) {
+        principal.cambiarEscena("RegistroView.fxml", 1213, 722);
+    }
 
     private void login() {
         String emailCliente = usernameField.getText();

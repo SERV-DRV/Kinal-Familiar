@@ -2,6 +2,30 @@
 
 -- ________________________ Categorias ________________________ --
 
+-- Insertar Usuario
+delimiter //
+create procedure sp_insertarusuario(
+	in p_nombreusuario varchar(64),
+	in p_apellidousuario varchar(64),
+	in p_correousuario varchar(128),
+	in p_contrasenausuario varchar(255))
+begin
+	insert into Usuarios(
+		nombreusuario, 
+		apellidousuario, 
+		correousuario, 
+		contrasenausuario
+	) values (
+		p_nombreusuario, 
+		p_apellidousuario, 
+		p_correousuario, 
+		p_contrasenausuario
+	);
+end//
+delimiter ;
+
+
+
 -- Insertar Categorias
 delimiter //
 	create procedure sp_InsertarCategoria(
@@ -199,3 +223,6 @@ CALL sp_InsertarProducto('Grapadora metálica', 25, 30.00, 'Disponible', 12);
 CALL sp_InsertarProducto('Tijeras escolares', 150, 8.00, 'Disponible', 13);
 CALL sp_InsertarProducto('Libro Harry Potter y la Piedra Filosofal', 20, 160.00, 'Disponible', 14);
 CALL sp_InsertarProducto('Cuento ilustrado La Oruga Muy Hambrienta', 40, 95.00, 'Disponible', 15);
+
+use kinalfamiliardb;
+select * from Usuarios;
