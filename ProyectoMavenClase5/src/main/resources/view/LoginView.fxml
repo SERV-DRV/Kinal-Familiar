@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,67 +11,63 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="1153.0" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="722.0" prefWidth="1213.0" stylesheets="@../style/loginview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.LoginController">
    <children>
-      <ImageView fitHeight="722.0" fitWidth="1213.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="758.0" fitWidth="1230.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Log%20In.png" />
+            <Image url="@../images/background.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="431.0" layoutY="306.0" prefHeight="30.0" prefWidth="284.0" promptText="Username">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TextField>
-      <PasswordField fx:id="passwordField" layoutX="431.0" layoutY="352.0" prefHeight="30.0" prefWidth="283.0" promptText="Password">
-         <padding>
-            <Insets left="2.0" />
-         </padding>
-      </PasswordField>
-      <CheckBox layoutX="434.0" layoutY="391.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="113.0" text="Aceptar" />
-      <Button fx:id="botonLogin" layoutX="432.0" layoutY="434.0" mnemonicParsing="false" onAction="#manejarBotonLogin" prefHeight="44.0" prefWidth="283.0" style="-fx-background-color: #2eafad;" text="Log in" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="525.0" layoutY="511.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" style="-fx-background-color: transparent;" text="or Sign Up">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="17.0" fitWidth="26.0" layoutX="692.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/logacoun.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="22.0" layoutX="692.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/password.png" />
-         </image>
-      </ImageView>
-      <GridPane layoutX="824.0" layoutY="62.0" prefHeight="46.0" prefWidth="256.0">
-        <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox alignment="CENTER" layoutX="416.0" layoutY="146.0" maxWidth="380.0" styleClass="form-container">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Acerca De" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Log In" textFill="WHITE" underline="true" GridPane.columnIndex="1">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Button>
+            <Label styleClass="title-label" text="Login" />
+            <TextField fx:id="usuarioField" promptText="Nombre de Usuario" styleClass="text-field" />
+            <PasswordField fx:id="contrasenaField" promptText="Contraseña" styleClass="password-field" />
+            <CheckBox fx:id="terminosCheckBox" mnemonicParsing="false" styleClass="check-box-style" text="Acepto los términos y condiciones" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#manejarBotonLogin" prefHeight="45.0" prefWidth="380.0" styleClass="login-button" text="Iniciar Sesión" />
+            <Button fx:id="btnIrARegistro" mnemonicParsing="false" styleClass="link-button" text="¿No tienes una cuenta? Regístrate" />
          </children>
-      </GridPane>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="24.0" prefHeight="100.0" prefWidth="1165.0" spacing="600.0" styleClass="header-bar">
+         <children>
+            <Label prefHeight="36.0" prefWidth="246.0" styleClass="header-label" text="KINAL FAMILIAR">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+            <GridPane prefHeight="100.0" prefWidth="258.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="124.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="117.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-background-color: transparent;" styleClass="header-label" text="Acerca de" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" style="-fx-background-color: transparent;" styleClass="header-label" text="Register" textFill="WHITE" underline="true" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
