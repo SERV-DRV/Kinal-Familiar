@@ -34,6 +34,11 @@ public class LoginController implements Initializable {
         //login();
         principal.cambiarEscena("InventarioView.fxml", 1280, 720);
     }
+    
+//    public void manejarBotonRegister(ActionEvent evento) {
+//        //register();
+//        principal.cambiarEscena("RegistroView.fxml", 1213, 722);
+//    }
 
     private void login() {
         String emailCliente = usernameField.getText();
@@ -67,5 +72,4 @@ public class LoginController implements Initializable {
             }
         }
     }
-
 }
