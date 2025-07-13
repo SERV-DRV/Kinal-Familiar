@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
    <children>
       <Label layoutX="1025.0" prefHeight="725.0" prefWidth="263.0" styleClass="HBOX" />
       <GridPane prefHeight="723.0" prefWidth="321.0" styleClass="gridpaneMenu">
@@ -97,7 +97,7 @@
             <Button mnemonicParsing="false" prefHeight="83.0" prefWidth="258.0" styleClass="btnMenus" text="Menu Principal               &gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="258.0" styleClass="btnMenus" text="Estadisticas                  &gt;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="251.0" styleClass="btnMenus" text="Inventario                     &gt;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Carrito de Compras        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onAction="#manejarBotonCarrito" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Carrito de Compras        &gt;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="258.0" styleClass="btnMenus" text="Salir de la Aplicación      &gt;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="251.0" styleClass="btnContactanos" text="Contactanos              &gt;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label opacity="0.87" prefHeight="106.0" prefWidth="251.0" style="-fx-background-color: #2ed1ac;" text="KINAL FAMILIAR" GridPane.columnIndex="1">

@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -109,7 +110,7 @@ public class InventarioController implements Initializable {
             txtIdProducto.setText(String.valueOf(producto.getIdProducto()));
             txtNombre.setText(producto.getNombre());
             spCantidad.getValueFactory().setValue(producto.getCantidad());
-            txtPrecio.setText(String.valueOf(producto.getPrecio()));            
+            txtPrecio.setText(String.valueOf(producto.getPrecio()));
             for (Categoria c : cbxCategoria.getItems()) {
                 if (c.getIdCategoria() == producto.getIdCategoria()) {
                     cbxCategoria.setValue(c);
@@ -273,7 +274,7 @@ public class InventarioController implements Initializable {
         txtBuscar.setDisable(activo);
         btnNuevo.setText(activo ? "Guardar" : "Nuevo");
         btnEliminar.setText(activo ? "Cancelar" : "Eliminar");
-         if (btnNuevo.getText().contains("Nuevo")) {
+        if (btnNuevo.getText().contains("Nuevo")) {
             btnNuevo.getStyleClass().remove("botonGuardar");
             btnNuevo.getStyleClass().add("botonNuevo");
         } else if (btnNuevo.getText().contains("Guardar")) {
@@ -393,7 +394,7 @@ public class InventarioController implements Initializable {
             cargarFormulario();
         }
     }
-    
+
     @FXML
     private void buscarProducto() {
         String filtro = txtBuscar.getText().toLowerCase();
@@ -425,5 +426,9 @@ public class InventarioController implements Initializable {
             tblProductos.getSelectionModel().select(indice + 1);
             cargarFormulario();
         }
+    }
+
+    public void manejarBotonCarrito(ActionEvent evento) {
+        principal.cambiarEscena("CompraView.fxml", 1213, 722);
     }
 }
