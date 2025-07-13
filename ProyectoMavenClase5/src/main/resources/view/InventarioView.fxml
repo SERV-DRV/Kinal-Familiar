@@ -20,24 +20,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1288.0" styleClass="anchorPaneInicioView" stylesheets="@../style/inventarioview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.InventarioController">
     <children>
         <GridPane prefHeight="720.0" prefWidth="321.0" styleClass="gridpaneMenu">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="251.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="269.0" minHeight="80.0" prefHeight="269.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="62.0" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="62.0" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="62.0" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="62.0" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="269.0" minHeight="80.0" prefHeight="204.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="140.0" minHeight="78.0" prefHeight="86.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="111.0" minHeight="78.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="140.0" minHeight="76.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="116.0" minHeight="70.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="96.0" minHeight="68.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="93.0" minHeight="71.0" prefHeight="79.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label styleClass="menu-header-background" GridPane.rowIndex="3" />
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
                <graphic>
                       <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -45,10 +45,8 @@
                           </image>
                       </ImageView>
                </graphic>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus" text="Contactanos" GridPane.rowIndex="6">
+            </Button>
+            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="321.0" styleClass="btnMenus" text="Contactanos" GridPane.rowIndex="6">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -57,7 +55,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus" text="Carrito de compras" GridPane.rowIndex="4">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="321.0" styleClass="btnMenus" text="Carrito de compras" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +64,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus-active" text="Inventario" GridPane.rowIndex="3">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus-active" text="Inventario" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" styleClass="btnMenus-active">
                      <image>
@@ -75,7 +73,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus" text="Estadísticas" GridPane.rowIndex="2">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="321.0" styleClass="btnMenus" text="Estadísticas" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -84,7 +82,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="325.0" styleClass="btnMenus" text="Menú Principal" GridPane.rowIndex="1">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="321.0" styleClass="btnMenus" text="Menú Principal" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -93,28 +91,25 @@
                   </ImageView>
                </graphic>
             </Button>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="241.0" prefWidth="321.0">
                <children>
-                  <GridPane prefHeight="118.0" prefWidth="321.0">
+                  <GridPane prefHeight="82.0" prefWidth="321.0" styleClass="menu-header-background">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="129.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="75.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                            <ImageView fitHeight="103.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
                                     <Image url="@../images/kinalFamiliarLogo-re.png" />
                                 </image>
-                           <GridPane.margin>
-                              <Insets left="15.0" />
-                           </GridPane.margin>
                             </ImageView>
-                        <Label prefHeight="61.0" prefWidth="192.0" style="-fx-font-size: 22; -fx-font-weight: bold;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
+                        <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
                            <font>
-                              <Font name="System Bold" size="34.0" />
+                              <Font size="34.0" />
                            </font>
                         </Label>
                      </children>
@@ -155,19 +150,19 @@
             </VBox>
             </children>
         </GridPane>
-        <Label layoutX="321.0" prefHeight="72.0" prefWidth="1016.0" styleClass="header-bar" text="INVENTARIO | KINAL FAMILIAR" />
-        <TextField fx:id="txtBuscar" layoutX="351.0" layoutY="90.0" prefHeight="36.0" prefWidth="711.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
-        <TableView fx:id="tblProductos" layoutX="351.0" layoutY="140.0" prefHeight="556.0" prefWidth="711.0">
+        <Label layoutX="321.0" layoutY="-3.0" prefHeight="72.0" prefWidth="959.0" styleClass="header-bar" text="INVENTARIO | KINAL FAMILIAR" />
+        <TextField fx:id="txtBuscar" layoutX="341.0" layoutY="90.0" prefHeight="36.0" prefWidth="658.0" promptText="Buscar Producto - Nombre" styleClass="buscarTxt" />
+        <TableView fx:id="tblProductos" layoutX="341.0" layoutY="145.0" prefHeight="556.0" prefWidth="658.0">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
-                <TableColumn fx:id="colNombre" prefWidth="160.0" text="Nombre" />
-                <TableColumn fx:id="colCantidad" prefWidth="100.0" text="Stock" />
-                <TableColumn fx:id="colPrecio" prefWidth="110.0" text="Precio c/u" />
-                <TableColumn fx:id="colEstado" prefWidth="157.0" text="Estado" />
-                <TableColumn fx:id="colIdCategoria" prefWidth="132.0" text="Categoria ID" />
+                <TableColumn fx:id="colId" prefWidth="40.0" text="ID" />
+                <TableColumn fx:id="colNombre" prefWidth="150.0" text="Nombre" />
+                <TableColumn fx:id="colCantidad" prefWidth="80.0" text="Stock" />
+                <TableColumn fx:id="colPrecio" prefWidth="100.0" text="Precio c/u" />
+                <TableColumn fx:id="colEstado" prefWidth="110.0" text="Estado" />
+                <TableColumn fx:id="colIdCategoria" prefWidth="120.0" text="Categoria ID" />
             </columns>
         </TableView>
-        <VBox alignment="CENTER" layoutX="1067.0" layoutY="90.0" prefHeight="611.0" prefWidth="241.0" spacing="30.0">
+        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="611.0" prefWidth="241.0" spacing="30.0">
             <children>
                 <VBox alignment="TOP_CENTER" prefHeight="265.0" prefWidth="241.0" spacing="10.0">
                     <children>

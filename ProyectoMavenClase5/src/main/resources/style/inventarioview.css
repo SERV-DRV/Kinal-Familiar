@@ -33,7 +33,7 @@
 }
 
 .menu-header-background {
-    -fx-background-color: #2ed1ac;
+    -fx-background-color: rgba(47,177,173,1)
 }
 
 .btnSalir {
