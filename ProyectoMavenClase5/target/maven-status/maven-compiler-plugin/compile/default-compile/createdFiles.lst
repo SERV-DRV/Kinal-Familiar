@@ -1,0 +1,10 @@
+org\kinalfamiliar\controller\InventarioController.class
+org\kinalfamiliar\system\Main.class
+org\kinalfamiliar\controller\CompraViewController.class
+org\kinalfamiliar\controller\InventarioController$acciones.class
+org\kinalfamiliar\controller\RegisterController.class
+module-info.class
+org\kinalfamiliar\db\Conexion.class
+org\kinalfamiliar\model\Categoria.class
+org\kinalfamiliar\model\Producto.class
+org\kinalfamiliar\controller\LoginController.class
