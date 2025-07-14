@@ -4,11 +4,15 @@
  */
 package org.kinalfamiliar.controller;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -33,6 +37,7 @@ import org.kinalfamiliar.system.Main;
 import org.kinalfamiliar.db.Conexion;
 import org.kinalfamiliar.model.Categoria;
 import org.kinalfamiliar.model.Producto;
+import org.kinalfamiliar.reporte.Report;
 
 /**
  * FXML Controller class
@@ -431,4 +436,27 @@ public class InventarioController implements Initializable {
     public void manejarBotonCarrito(ActionEvent evento) {
         principal.cambiarEscena("CompraView.fxml", 1213, 722);
     }
+    
+        @FXML private Button btnReporte;
+    private Map<String, Object> mapa;
+    
+    
+    public void imprimirReporte(){
+        Connection conexion = Conexion.getInstancia().getConexion();
+        mapa = new HashMap<String, Object>();
+        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/org/santiagoderosa/reporte/SUBVCLIENTES.jasper"));
+        Report.mostrarReporte();
+    }
+    
+    public InputStream obtenerReporte(String rutaReporte){
+            InputStream reporte = null;
+            try{
+                reporte = Main.class .getResourceAsStream(rutaReporte);
+                reporte.getClass().getResource(rutaReporte);
+            }catch(Exception e){
+                System.out.println("Error al cargar el Jasper en InputStream "+e.getMessage());
+                e.printStackTrace();
+            }
+            return reporte;
+        }
 }

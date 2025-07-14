@@ -198,7 +198,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-download" text="Descargar">
+                        <Button fx:id="btnReporte" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#imprimirReporte" prefHeight="33.0" prefWidth="175.0" styleClass="button-download" text="Descargar">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
