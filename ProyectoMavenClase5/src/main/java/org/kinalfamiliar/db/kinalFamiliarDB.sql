@@ -31,6 +31,50 @@ create table Productos(
     constraint PK_productos primary key(idProducto)
 );
 
+create table Carritos(
+	idCarrito int auto_increment,
+    estado enum('Activo', 'Inactivo') not null default 'Activo',
+    fechaCreacion datetime default current_timestamp,
+    idUsuario int not null,
+    constraint FK_carritos_usuarios foreign	key(idUsuario)
+		references Usuarios(idUsuario),
+    constraint PK_carritos primary key(idCarrito)
+);
 
+create table DetalleCarritos(
+	idDetalleCarrito int auto_increment,
+    idCarrito int not null,
+    idProducto int not null,
+    cantidad int not null,
+    constraint FK_detalleCarritos_carritos foreign key(idCarrito)
+		references Carritos(idCarrito),
+    constraint FK_detalleCarritos_productos foreign key(idProducto)
+		references Productos(idProducto),
+    constraint PK_detalleCarritos primary key(idDetalleCarrito)
+);
 
-
+create table Facturas (
+	idFactura int auto_increment,
+    fechaFactura datetime default current_timestamp,
+    estadoFactura enum("Activa", "Cancelada"),
+    idCarrito int not null,
+    idUsuario int not null,
+    constraint FK_facturas_carritos foreign key(idCarrito)
+		references Carritos(idCarritos),
+    constraint FK_facturas_usuarios foreign key(idUsuario)
+		references Usuarios(idUsuario),	
+    constraint PK_facturas primary key(idFactura)
+);
+ 
+create table DetalleFacturas (
+	idDetalleFactura int auto_increment,
+    cantidadPedida int not null,
+    precioUnitario decimal(10,2) not null,
+    idFactura int not null,
+    idProducto int not null,
+    constraint FK_detalleFacturas_facturas foreign key(idFactura)
+		references Facturas(idFactura),
+	constraint FK_detalleFacturas_productos foreign key(idProducto)
+		references Productos(idProducto),
+    constraint PK_detallefacturas primary key(idDetalleFactura)
+);
