@@ -444,7 +444,7 @@ public class InventarioController implements Initializable {
     public void imprimirReporte(){
         Connection conexion = Conexion.getInstancia().getConexion();
         mapa = new HashMap<String, Object>();
-        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/org/santiagoderosa/reporte/SUBVCLIENTES.jasper"));
+        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/jasper/Inventario.jasper"));
         Report.mostrarReporte();
     }
     

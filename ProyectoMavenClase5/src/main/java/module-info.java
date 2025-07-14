@@ -12,4 +12,6 @@ module org.kinalfamiliar.proyectomavenclase5 {
     opens org.kinalfamiliar.model to javafx.base;
     
     exports org.kinalfamiliar.system;
+        
+    requires jasperreports;
 }
