@@ -436,27 +436,23 @@ public class InventarioController implements Initializable {
     public void manejarBotonCarrito(ActionEvent evento) {
         principal.cambiarEscena("CompraView.fxml", 1213, 722);
     }
-    
-        @FXML private Button btnReporte;
+
+    @FXML
+    private Button btnReporte;
     private Map<String, Object> mapa;
-    
-    
-    public void imprimirReporte(){
+
+    public void imprimirReporte() {
         Connection conexion = Conexion.getInstancia().getConexion();
         mapa = new HashMap<String, Object>();
-        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/jasper/Inventario.jasper"));
+        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/jasper/Inventario.jrxml"));
         Report.mostrarReporte();
     }
-    
-    public InputStream obtenerReporte(String rutaReporte){
-            InputStream reporte = null;
-            try{
-                reporte = Main.class .getResourceAsStream(rutaReporte);
-                reporte.getClass().getResource(rutaReporte);
-            }catch(Exception e){
-                System.out.println("Error al cargar el Jasper en InputStream "+e.getMessage());
-                e.printStackTrace();
-            }
-            return reporte;
+
+    public InputStream obtenerReporte(String rutaReporte) {
+        InputStream reporte = Main.class.getResourceAsStream(rutaReporte);
+        if (reporte == null) {
+            System.err.println("Error: No se pudo encontrar el reporte en la ruta: " + rutaReporte);
         }
+        return reporte;
+    }
 }
