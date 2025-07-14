@@ -443,9 +443,23 @@ public class InventarioController implements Initializable {
 
     public void imprimirReporte() {
         Connection conexion = Conexion.getInstancia().getConexion();
+
         mapa = new HashMap<String, Object>();
-        Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, obtenerReporte("/jasper/Inventario.jrxml"));
-        Report.mostrarReporte();
+        mapa.put("IMAGES_DIR", "jasper/");
+
+        InputStream reporteStream = obtenerReporte("/jasper/Inventario.jrxml");
+
+        if (reporteStream != null) {
+            Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, reporteStream);
+            Report.mostrarReporte();
+        } else {
+            System.err.println("El archivo de reporte .jrxml no fue encontrado.");
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error de Reporte");
+            alerta.setHeaderText("No se pudo generar el reporte.");
+            alerta.setContentText("El archivo de diseño 'Inventario.jrxml' no se encuentra en los recursos de la aplicación.");
+            alerta.showAndWait();
+        }
     }
 
     public InputStream obtenerReporte(String rutaReporte) {
