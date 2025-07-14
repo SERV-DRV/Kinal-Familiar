@@ -4,6 +4,7 @@
  */
 package org.kinalfamiliar.controller;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.CallableStatement;
@@ -443,22 +444,30 @@ public class InventarioController implements Initializable {
 
     public void imprimirReporte() {
         Connection conexion = Conexion.getInstancia().getConexion();
-
         mapa = new HashMap<String, Object>();
-        mapa.put("IMAGES_DIR", "jasper/");
 
-        InputStream reporteStream = obtenerReporte("/jasper/Inventario.jrxml");
+        try {
+            URL imageUrl = getClass().getResource("/jasper/");
 
-        if (reporteStream != null) {
-            Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, reporteStream);
-            Report.mostrarReporte();
-        } else {
-            System.err.println("El archivo de reporte .jrxml no fue encontrado.");
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error de Reporte");
-            alerta.setHeaderText("No se pudo generar el reporte.");
-            alerta.setContentText("El archivo de diseño 'Inventario.jrxml' no se encuentra en los recursos de la aplicación.");
-            alerta.showAndWait();
+            if (imageUrl == null) {
+                System.err.println("Error Crítico: No se pudo encontrar la carpeta de recursos '/jasper/'.");
+                System.err.println("Verifica que la carpeta 'jasper' exista en 'src/main/resources'.");
+                return;
+            }
+
+            File imageDir = new File(imageUrl.toURI());
+            mapa.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
+            InputStream reporteStream = obtenerReporte("/jasper/Inventario.jrxml");
+
+            if (reporteStream != null) {
+                Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, reporteStream);
+                Report.mostrarReporte();
+            } else {
+                System.err.println("El archivo de reporte .jrxml no fue encontrado.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
