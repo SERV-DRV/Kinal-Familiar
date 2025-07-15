@@ -442,6 +442,7 @@ public class InventarioController implements Initializable {
     @FXML
     private void imprimirReporte(ActionEvent event) {
         Report reporte = new Report();
-        reporte.imprimirReporteInventario(event);
+        reporte.generarReporte("Inventario.jrxml", "ReporteInventario");
     }
+
 }

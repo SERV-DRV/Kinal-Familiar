@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -24,14 +23,13 @@ import org.kinalfamiliar.db.Conexion;
 
 public class Report {
 
-    public void imprimirReporteInventario(ActionEvent event) {
+    public void generarReporte(String jrxmlFileName, String outputBaseName) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf"));
 
-        String reportName = "ReporteInventario";
         String date = LocalDate.now().toString();
-        String initialFileName = reportName + "_" + date + ".pdf";
+        String initialFileName = outputBaseName + "_" + date + ".pdf";
         fileChooser.setInitialFileName(initialFileName);
 
         File file = fileChooser.showSaveDialog(null);
@@ -53,9 +51,9 @@ public class Report {
                     parametros.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
                 }
 
-                InputStream reporteStream = getClass().getResourceAsStream("/jasper/Inventario.jrxml");
+                InputStream reporteStream = getClass().getResourceAsStream("/jasper/" + jrxmlFileName);
                 if (reporteStream == null) {
-                    System.err.println("Error: No se pudo encontrar el archivo de reporte '/jasper/Inventario.jrxml'.");
+                    System.err.println("Error: No se pudo encontrar el archivo de reporte '/jasper/" + jrxmlFileName + "'.");
                     return;
                 }
 
@@ -63,10 +61,9 @@ public class Report {
                 JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conexion);
 
-                OutputStream outputStream = new FileOutputStream(file);
-                JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
-
-                outputStream.close();
+                try (OutputStream outputStream = new FileOutputStream(file)) {
+                    JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+                }
 
                 System.out.println("Reporte guardado exitosamente en: " + file.getAbsolutePath());
 
