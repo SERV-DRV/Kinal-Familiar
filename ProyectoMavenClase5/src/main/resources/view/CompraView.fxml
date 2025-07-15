@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -189,6 +190,12 @@
                 <VBox prefHeight="70.0" prefWidth="200.0" styleClass="right-panel">
                     <children>
                         <ComboBox fx:id="cbxUsuario" disable="true" prefWidth="225.0" promptText="Usuario" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Activo" />
+                        <RadioButton mnemonicParsing="false" text="Inactivo" />
+                     </children>
+                  </HBox>
                     </children>
                 </VBox>
             <VBox prefHeight="150.0" prefWidth="100.0" spacing="25.0" styleClass="right-panel">
@@ -196,9 +203,15 @@
                   <ComboBox fx:id="cbxProducto" disable="true" prefHeight="50.0" prefWidth="210.0" promptText="Producto" />
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="btnMenos" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-" />
+                        <Button fx:id="btnMenos" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font></Button>
                         <TextArea fx:id="txtACantidad" disable="true" prefHeight="50.0" prefWidth="50.0" />
-                        <Button fx:id="btnMas" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+" />
+                        <Button fx:id="btnMas" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                </children>

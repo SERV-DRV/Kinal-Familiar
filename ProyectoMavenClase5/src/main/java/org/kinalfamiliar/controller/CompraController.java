@@ -13,9 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kinalfamiliar.db.Conexion;
 import org.kinalfamiliar.model.Carrito;
@@ -30,6 +33,12 @@ public class CompraController implements Initializable {
     private TableView<Carrito> tblCarrito;
     @FXML
     private TableColumn colIdCarrito, colIdUsuario, colFechaCreacion, colEstado;
+    @FXML
+    private TextField txtIdCarrito;
+    @FXML
+    private RadioButton rbActivo, rbInactivo;
+    @FXML
+    private ToggleGroup grupoEstado;
     @FXML
     private TableView<DetalleCarrito> tblDetalleCarrito;
     @FXML
@@ -46,7 +55,7 @@ public class CompraController implements Initializable {
     private TextArea txtACantidad;
 
     private Main principal;
-    private Producto mProducto;
+    private Carrito mCarrito;
     private ObservableList<Producto> listaProductos;
     private ObservableList<Usuario> listaUsuarios;
     private ObservableList<Carrito> listaCarritos;
@@ -160,5 +169,30 @@ public class CompraController implements Initializable {
         }
         return usuario;
     }
+    
+    private Carrito cargarModelo(){
+        int idCarrito = txtIdCarrito.getText().isEmpty() ? 0 : Integer.parseInt(txtIdCarrito.getText());
+        
+        Usuario usuarioSeleccionado = cbxUsuario.getSelectionModel().getSelectedItem();
+        int idUsuario = usuarioSeleccionado != null ? usuarioSeleccionado.getIdUsuario() : 0;
+        
+        String estado = rbActivo.isSelected() ? "Activo" : "Inactivo";
+        
+        return new Carrito(idCarrito, estado, idUsuario);
+    }
+    
+/*    
+    private Producto cargarModelo() {
+        int idProducto = txtIdProducto.getText().isEmpty() ? 0 : Integer.parseInt(txtIdProducto.getText());
+        
+        Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
+        int idCategoria = categoriaSeleccionada != null ? categoriaSeleccionada.getIdCategoria() : 0;
+        
+        String estado = rbDisponible.isSelected() ? "Disponible" : "Indisponible";
+        
+        return new Producto(idProducto, txtNombre.getText(), spCantidad.getValue(),
+                Double.parseDouble(txtPrecio.getText()), estado, idCategoria);
+    }
+*/
     
 }

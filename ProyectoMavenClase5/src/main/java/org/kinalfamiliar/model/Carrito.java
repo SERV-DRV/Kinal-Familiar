@@ -26,6 +26,13 @@ public class Carrito {
         this.idUsuario = idUsuario;
     }
 
+    public Carrito(int idCarrito, String estado, int idUsuario) {
+        this.idCarrito = idCarrito;
+        this.estado = estado;
+        this.idUsuario = idUsuario;
+    }
+        
+
     public int getIdCarrito() {
         return idCarrito;
     }
