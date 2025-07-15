@@ -213,7 +213,7 @@
                         <Insets top="5.0" />
                      </padding>
                         </Label>
-                        <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#agregarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
+                        <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -222,7 +222,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEliminar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#cancelarEliminar" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
+                        <Button fx:id="btnEliminar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -231,7 +231,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#editarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
+                        <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -1,12 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package org.kinalfamiliar.controller;
 
 import java.net.URL;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,18 +17,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.kinalfamiliar.db.Conexion;
 import org.kinalfamiliar.model.Carrito;
-import org.kinalfamiliar.model.Categoria;
 import org.kinalfamiliar.model.DetalleCarrito;
 import org.kinalfamiliar.model.Producto;
 import org.kinalfamiliar.model.Usuario;
 import org.kinalfamiliar.system.Main;
 
-/**
- * FXML Controller class
- *
- * @author enriq
- */
 public class CompraController implements Initializable {
 
     @FXML
@@ -52,10 +48,14 @@ public class CompraController implements Initializable {
     private Main principal;
     private Producto mProducto;
     private ObservableList<Producto> listaProductos;
+    private ObservableList<Usuario> listaUsuarios;
+    private ObservableList<Carrito> listaCarritos;
+    private ObservableList<DetalleCarrito> listaDetalleCarritos;
 
     private enum acciones {
         AGREGAR, EDITAR, ELIMINAR, NINGUNA
     }
+
     acciones accionActual = acciones.NINGUNA;
 
     public Main getPrincipal() {
@@ -66,22 +66,19 @@ public class CompraController implements Initializable {
         this.principal = principal;
     }
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
     private void configurarColumnasCarrito() {
         colIdCarrito.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idCarrito"));
-        colIdUsuario.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idCliente"));
+        colIdUsuario.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idUsuario"));
         colFechaCreacion.setCellValueFactory(new PropertyValueFactory<Carrito, LocalDateTime>("fechaCreacion"));
         colEstado.setCellValueFactory(new PropertyValueFactory<Carrito, String>("estado"));
     }
-    
-    private void configurarColumnasDetalleCarrito(){
+
+    private void configurarColumnasDetalleCarrito() {
         colIdDetalleCarrito.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idDetalleCarrito"));
         colIdCarrito2.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idCarrito"));
         colIdProducto.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idProducto"));
@@ -109,9 +106,58 @@ public class CompraController implements Initializable {
                     break;
                 }
             }
+            txtACantidad.setText(String.valueOf(detalleCarrito.getCantidad()));
         }
     }
     
+    private  ArrayList<Carrito> listarCarrito(){
+        ArrayList<Carrito> carrito = new ArrayList<>();
+        try {
+            CallableStatement enunciado = Conexion.getInstancia().getConexion()
+                    .prepareCall("call sp_ListarCarritos();");
+            ResultSet resultado = enunciado.executeQuery();
+            while (resultado.next()) {
+                carrito.add(new Carrito(
+                        resultado.getInt(1),
+                        resultado.getString(2),
+                        resultado.getTimestamp(3).toLocalDateTime(),
+                        resultado.getInt(4)
+                )
+                );
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al listar Carrito");
+            ex.printStackTrace();
+        }
+        return carrito;
+    }
     
-
+    private void cargarTableView(){
+        listaCarritos = FXCollections.observableArrayList(listarCarrito());
+        tblCarrito.setItems(listaCarritos);
+        tblCarrito.getSelectionModel().selectFirst();
+        cargarFormularioCarrito();
+    }
+    
+    private ArrayList<Usuario> listarUsuarios(){
+        ArrayList<Usuario> usuario = new ArrayList<>();
+        try {
+            CallableStatement enunciado = Conexion.getInstancia().getConexion()
+                    .prepareCall("call sp_ListarDetalleCarritos");
+            ResultSet resultado = enunciado.executeQuery();
+            while(resultado.next()){
+                usuario.add(new Usuario(
+                        resultado.getInt(1),
+                        resultado.getString(2),
+                        resultado.getString(3)                                                
+                )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al listar usuarios en vista compras");
+            ex.printStackTrace();
+        }
+    }
+    
 }

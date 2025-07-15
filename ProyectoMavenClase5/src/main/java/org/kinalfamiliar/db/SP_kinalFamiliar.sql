@@ -235,72 +235,70 @@ delimiter ;
 
 -- Insertar DetalleCarrito
 delimiter //
-create procedure sp_InsertarDetalleCarrito(
-    in p_idCarrito int,
-    in p_idProducto int,
-    in p_cantidad int
-)
-begin
-    insert into DetalleCarritos(idCarrito, idProducto, cantidad)
-        values(p_idCarrito, p_idProducto, p_cantidad);
-end//
+	create procedure sp_InsertarDetalleCarrito(
+		in p_idCarrito int,
+		in p_idProducto int,
+		in p_cantidad int
+		)
+		begin
+			insert into DetalleCarritos(idCarrito, idProducto, cantidad)
+				values(p_idCarrito, p_idProducto, p_cantidad);
+		end//
 delimiter ;
 
 -- Listar DetalleCarritos
 delimiter //
-create procedure sp_ListarDetalleCarritos()
-begin
-    select 
-        DC.idDetalleCarrito as ID,
-        DC.idCarrito as CarritoID,
-        DC.idProducto as ProductoID,
-        DC.cantidad as Cantidad
-    from DetalleCarritos DC;
-end//
+	create procedure sp_ListarDetalleCarritos()
+		begin
+			select 
+				DC.idDetalleCarrito as ID,
+				DC.idCarrito as CarritoID,
+				DC.idProducto as ProductoID,
+				DC.cantidad as Cantidad
+			from DetalleCarritos DC;
+		end//
 delimiter ;
 
 -- Actualizar DetalleCarrito
 delimiter //
-create procedure sp_ActualizarDetalleCarrito(
-    in p_idDetalleCarrito int,
-    in p_idCarrito int,
-    in p_idProducto int,
-    in p_cantidad int
-)
-begin
-    update DetalleCarritos DC
-        set 
-            DC.idCarrito = p_idCarrito,
-            DC.idProducto = p_idProducto,
-            DC.cantidad = p_cantidad
-    where DC.idDetalleCarrito = p_idDetalleCarrito;
-end//
+	create procedure sp_ActualizarDetalleCarrito(
+		in p_idDetalleCarrito int,
+		in p_idCarrito int,
+		in p_idProducto int,
+		in p_cantidad int
+		)
+		begin
+			update DetalleCarritos DC
+				set 
+					DC.idCarrito = p_idCarrito,
+					DC.idProducto = p_idProducto,
+					DC.cantidad = p_cantidad
+			where DC.idDetalleCarrito = p_idDetalleCarrito;
+		end//
 delimiter ;
 
 -- Eliminar DetalleCarrito
 delimiter //
 create procedure sp_EliminarDetalleCarrito(in p_idDetalleCarrito int)
-begin
-    delete from DetalleCarritos
-        where idDetalleCarrito = p_idDetalleCarrito;
-end//
+	begin
+		delete from DetalleCarritos
+			where idDetalleCarrito = p_idDetalleCarrito;
+	end//
 delimiter ;
 
 -- Buscar DetalleCarrito
 delimiter //
 create procedure sp_BuscarDetalleCarrito(in p_idDetalleCarrito int)
-begin
-    select 
-        DC.idDetalleCarrito as ID,
-        DC.idCarrito as CarritoID,
-        DC.idProducto as ProductoID,
-        DC.cantidad as Cantidad
-    from DetalleCarritos DC
-        where DC.idDetalleCarrito = p_idDetalleCarrito;
-end//
+	begin
+		select 
+			DC.idDetalleCarrito as ID,
+			DC.idCarrito as CarritoID,
+			DC.idProducto as ProductoID,
+			DC.cantidad as Cantidad
+		from DetalleCarritos DC
+			where DC.idDetalleCarrito = p_idDetalleCarrito;
+	end//
 delimiter ;
-
-
 
 -- _____ _____ _____ _____ _____ Login _____ _____ _____ _____ _____
 
