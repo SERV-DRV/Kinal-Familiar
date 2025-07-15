@@ -22,8 +22,12 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.kinalfamiliar.db.Conexion;
 
 public class Report {
+    
+    
 
     public void generarReporte(String jrxmlFileName, String outputBaseName) {
+        //int idCliente = 1;//viene del texfild idClinete en el fxml
+        
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf"));
@@ -49,6 +53,7 @@ public class Report {
                 if (imageUrl != null) {
                     File imageDir = new File(imageUrl.toURI());
                     parametros.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
+                    //parametros.put("codigoCliente" , idCliente);
                 }
 
                 InputStream reporteStream = getClass().getResourceAsStream("/jasper/" + jrxmlFileName);
