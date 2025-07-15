@@ -4,12 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/compraview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.CompraController">
+<AnchorPane id="AnchorPane" maxWidth="1280.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/compraview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.CompraController">
     <children>
         <GridPane prefHeight="720.0" prefWidth="321.0" styleClass="gridpaneMenu">
             <columnConstraints>
@@ -151,26 +149,42 @@
             </children>
         </GridPane>
         <Label layoutX="321.0" layoutY="-3.0" prefHeight="72.0" prefWidth="959.0" styleClass="header-bar" text="CARRITO | KINAL FAMILIAR" />
-        <TextField fx:id="txtBuscar" layoutX="341.0" layoutY="90.0" prefHeight="36.0" prefWidth="658.0" promptText="Buscar Carrito - Cliente" styleClass="buscarTxt" />
-        <TableView fx:id="tblCompras" layoutX="341.0" layoutY="145.0" prefHeight="556.0" prefWidth="658.0">
+        <TextField fx:id="txtBuscar" layoutX="341.0" layoutY="90.0" prefHeight="36.0" prefWidth="658.0" promptText="Buscar en el carrito" styleClass="buscarTxt" />
+        <TableView fx:id="tblCompras" layoutX="341.0" layoutY="145.0" prefHeight="100.0" prefWidth="660.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
-                <TableColumn fx:id="colCliente" prefWidth="258.0" text="Cliente" />
-                <TableColumn fx:id="colPrecio" prefWidth="100.0" text="Precio c/u" />
-                <TableColumn fx:id="colCantidad" prefWidth="111.0" text="Cantidad" />
-                <TableColumn fx:id="colEstado" prefWidth="137.0" text="Estado" />
+                <TableColumn fx:id="colCliente" prefWidth="285.0" text="Cliente" />
+                <TableColumn fx:id="colPrecio" prefWidth="165.0" text="Fecha Creación" />
+                <TableColumn fx:id="colEstado" prefWidth="160.0" text="Estado" />
             </columns>
         </TableView>
-        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="611.0" prefWidth="241.0" spacing="30.0">
+        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="610.0" prefWidth="240.0" spacing="20.0">
             <children>
-                <VBox alignment="TOP_CENTER" prefHeight="265.0" prefWidth="241.0" spacing="10.0">
+                <VBox prefHeight="70.0" prefWidth="240.0" styleClass="right-panel">
+                    <children>
+                        <ComboBox fx:id="cbxCliente" disable="true" prefWidth="225.0" promptText="Usuario" />
+                    </children>
+                </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" styleClass="right-panel">
+               <children>
+                  <ComboBox disable="true" prefHeight="50.0" prefWidth="210.0" promptText="Producto" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-" />
+                        <TextArea disable="true" prefHeight="50.0" prefWidth="50.0" />
+                        <Button disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="240.0" spacing="10.0">
                     <children>
                         <Label styleClass="panel-title" text="Acciones">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#agregarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Nuevo">
+                        <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#agregarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -179,7 +193,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEliminar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#cancelarEliminar" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar">
+                        <Button fx:id="btnEliminar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#cancelarEliminar" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -188,7 +202,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#editarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar">
+                        <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#editarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -197,45 +211,18 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-download" text="Descargar">
-                            <graphic>
-                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/download.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </children>
-                </VBox>
-                <VBox prefHeight="310.0" prefWidth="241.0" styleClass="right-panel">
-                    <children>
-                        <Label styleClass="panel-title" text="Carrito">
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <ComboBox fx:id="cbxCliente" disable="true" prefWidth="223.0" promptText="Seleccionar Cliente" />
-                        <ComboBox fx:id="cbxProducto" disable="true" prefWidth="223.0" promptText="Seleccionar Producto" />
-                        <TextField fx:id="txtPrecio" disable="true" promptText="Precio" />
-                        <Spinner fx:id="spCantidad" disable="true" editable="true" />
-                        <HBox alignment="CENTER" spacing="20.0">
-                            <children>
-                                <RadioButton fx:id="rbActiva" disable="true" mnemonicParsing="false" text="Activa">
-                                    <toggleGroup>
-                                        <ToggleGroup fx:id="grupoEstado" />
-                                    </toggleGroup>
-                                </RadioButton>
-                                <RadioButton fx:id="rbAnulada" disable="true" mnemonicParsing="false" text="Anulada" toggleGroup="$grupoEstado" />
-                            </children>
-                            <padding>
-                                <Insets top="5.0" />
-                            </padding>
-                        </HBox>
                     </children>
                 </VBox>
             </children>
         </VBox>
         <TextField fx:id="txtIdCompra" layoutX="1240.0" layoutY="20.0" visible="false" />
+      <TableView layoutX="341.0" layoutY="270.0" prefHeight="426.0" prefWidth="660.0">
+        <columns>
+          <TableColumn prefWidth="50.0" text="ID" />
+          <TableColumn prefWidth="75.0" text="Cantidad" />
+            <TableColumn prefWidth="100.0" text="Producto ID" />
+            <TableColumn prefWidth="100.0" text="Carrito ID" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>
