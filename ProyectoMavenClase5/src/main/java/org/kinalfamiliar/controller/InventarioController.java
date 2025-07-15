@@ -5,15 +5,16 @@
 package org.kinalfamiliar.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -38,7 +39,7 @@ import org.kinalfamiliar.system.Main;
 import org.kinalfamiliar.db.Conexion;
 import org.kinalfamiliar.model.Categoria;
 import org.kinalfamiliar.model.Producto;
-import org.kinalfamiliar.reporte.Report;
+import org.kinalfamiliar.reporte.*;
 
 /**
  * FXML Controller class
@@ -174,12 +175,12 @@ public class InventarioController implements Initializable {
 
     private Producto cargarModelo() {
         int idProducto = txtIdProducto.getText().isEmpty() ? 0 : Integer.parseInt(txtIdProducto.getText());
-        
+
         Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
         int idCategoria = categoriaSeleccionada != null ? categoriaSeleccionada.getIdCategoria() : 0;
-        
+
         String estado = rbDisponible.isSelected() ? "Disponible" : "Indisponible";
-        
+
         return new Producto(idProducto, txtNombre.getText(), spCantidad.getValue(),
                 Double.parseDouble(txtPrecio.getText()), estado, idCategoria);
     }
@@ -385,7 +386,6 @@ public class InventarioController implements Initializable {
 
                 confirmacion.getButtonTypes().setAll(btnEliminar, btnCancelar);
 
-                // Mostrar alerta y capturar la respuesta del usuario
                 Optional<ButtonType> resultado = confirmacion.showAndWait();
 
                 if (resultado.isPresent() && resultado.get() == btnEliminar) {
@@ -440,43 +440,8 @@ public class InventarioController implements Initializable {
     }
 
     @FXML
-    private Button btnReporte;
-    private Map<String, Object> mapa;
-
-    public void imprimirReporte() {
-        Connection conexion = Conexion.getInstancia().getConexion();
-        mapa = new HashMap<String, Object>();
-
-        try {
-            URL imageUrl = getClass().getResource("/jasper/");
-
-            if (imageUrl == null) {
-                System.err.println("Error Crítico: No se pudo encontrar la carpeta de recursos '/jasper/'.");
-                System.err.println("Verifica que la carpeta 'jasper' exista en 'src/main/resources'.");
-                return;
-            }
-
-            File imageDir = new File(imageUrl.toURI());
-            mapa.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
-            InputStream reporteStream = obtenerReporte("/jasper/Inventario.jrxml");
-
-            if (reporteStream != null) {
-                Report.crearReporte((com.mysql.jdbc.Connection) conexion, mapa, reporteStream);
-                Report.mostrarReporte();
-            } else {
-                System.err.println("El archivo de reporte .jrxml no fue encontrado.");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public InputStream obtenerReporte(String rutaReporte) {
-        InputStream reporte = Main.class.getResourceAsStream(rutaReporte);
-        if (reporte == null) {
-            System.err.println("Error: No se pudo encontrar el reporte en la ruta: " + rutaReporte);
-        }
-        return reporte;
+    private void imprimirReporte(ActionEvent event) {
+        Report reporte = new Report();
+        reporte.imprimirReporteInventario(event);
     }
 }

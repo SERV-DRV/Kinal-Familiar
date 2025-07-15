@@ -38,7 +38,7 @@
                         <argument>--add-modules</argument>
                         <argument>javafx.controls,javafx.fxml</argument>
                         <argument>-m</argument>
-                        <argument>org.kinalfamiliar.proyectomavenclase5/org.kinalfamiliar.system.Main</argument>
+                        <argument>org.kinalfamiliar.proyectomaven.clase/org.kinalfamiliar.system.Main</argument>
                     </arguments>
                 </configuration>
             </plugin>

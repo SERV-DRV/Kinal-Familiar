@@ -1,4 +1,4 @@
-module org.kinalfamiliar.proyectomavenclase5 {
+module org.kinalfamiliar.proyectomaven.clase {
     requires java.sql;
     requires java.logging;
     requires javafx.controls;
@@ -7,6 +7,7 @@ module org.kinalfamiliar.proyectomavenclase5 {
     requires mysql.connector.java;
     requires java.base;
     requires jasperreports;
+    requires java.desktop;
 
     opens org.kinalfamiliar.system to javafx.fxml;
     opens org.kinalfamiliar.controller to javafx.fxml, jasperreports;
