@@ -60,7 +60,7 @@ create table Facturas (
     idCarrito int not null,
     idUsuario int not null,
     constraint FK_facturas_carritos foreign key(idCarrito)
-		references Carritos(idCarritos),
+		references Carritos(idCarrito),
     constraint FK_facturas_usuarios foreign key(idUsuario)
 		references Usuarios(idUsuario),	
     constraint PK_facturas primary key(idFactura)

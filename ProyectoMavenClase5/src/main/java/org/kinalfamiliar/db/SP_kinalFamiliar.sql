@@ -11,8 +11,8 @@ delimiter //
 		in p_contrasenaUsuario varchar(255)
 		)
 		begin
-			insert into Usuarios(nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario, estadoUsuario)
-				values(p_nombreUsuario, p_apellidoUsuario, p_correoUsuario, p_contrasenaUsuario, p_estadoUsuario);
+			insert into Usuarios(nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario)
+				values(p_nombreUsuario, p_apellidoUsuario, p_correoUsuario, p_contrasenaUsuario);
 		end//
 delimiter ;
 
