@@ -16,7 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.kinalfamiliar.model.Carrito;
+import org.kinalfamiliar.model.Categoria;
+import org.kinalfamiliar.model.DetalleCarrito;
 import org.kinalfamiliar.model.Producto;
+import org.kinalfamiliar.model.Usuario;
 import org.kinalfamiliar.system.Main;
 
 /**
@@ -29,9 +33,9 @@ public class CompraController implements Initializable {
     @FXML
     private TableView<Carrito> tblCarrito;
     @FXML
-    private TableView<DetalleCarrito> tblDetalleCarrito;
+    private TableColumn colIdCarrito, colIdUsuario, colFechaCreacion, colEstado;
     @FXML
-    private TableColumn colIdCarrito, colIdCliente, colFechaCreacion, colEstado;
+    private TableView<DetalleCarrito> tblDetalleCarrito;
     @FXML
     private TableColumn colIdDetalleCarrito, colCantidad, colIdProducto, colIdCarrito2;
     @FXML
@@ -72,21 +76,42 @@ public class CompraController implements Initializable {
 
     private void configurarColumnasCarrito() {
         colIdCarrito.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idCarrito"));
-        colIdCliente.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idCliente"));
+        colIdUsuario.setCellValueFactory(new PropertyValueFactory<Carrito, Integer>("idCliente"));
         colFechaCreacion.setCellValueFactory(new PropertyValueFactory<Carrito, LocalDateTime>("fechaCreacion"));
         colEstado.setCellValueFactory(new PropertyValueFactory<Carrito, String>("estado"));
     }
     
+    private void configurarColumnasDetalleCarrito(){
+        colIdDetalleCarrito.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idDetalleCarrito"));
+        colIdCarrito2.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idCarrito"));
+        colIdProducto.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("idProducto"));
+        colCantidad.setCellValueFactory(new PropertyValueFactory<DetalleCarrito, Integer>("cantidad"));
+    }
+
     private void cargarFormularioCarrito() {
         Carrito carrito = tblCarrito.getSelectionModel().getSelectedItem();
-        if(carrito != null){
-            for(Usuario u: cbxUsuario.getItems()){
-                if(u.idUsuario == carrito.getIdUsuario()){
+        if (carrito != null) {
+            for (Usuario u : cbxUsuario.getItems()) {
+                if (u.getIdUsuario() == carrito.getIdUsuario()) {
                     cbxUsuario.setValue(u);
                     break;
                 }
             }
         }
     }
+
+    private void cargarFormularioDetalleCarrito() {
+        DetalleCarrito detalleCarrito = tblDetalleCarrito.getSelectionModel().getSelectedItem();
+        if (detalleCarrito != null) {
+            for (Producto p : cbxProducto.getItems()) {
+                if (p.getIdProducto() == detalleCarrito.getIdProducto()) {
+                    cbxProducto.setValue(p);
+                    break;
+                }
+            }
+        }
+    }
+    
+    
 
 }

@@ -150,29 +150,55 @@
         </GridPane>
         <Label layoutX="321.0" layoutY="-3.0" prefHeight="72.0" prefWidth="959.0" styleClass="header-bar" text="CARRITO | KINAL FAMILIAR" />
         <TextField fx:id="txtBuscar" layoutX="341.0" layoutY="90.0" prefHeight="36.0" prefWidth="658.0" promptText="Buscar en el carrito" styleClass="buscarTxt" />
-        <TableView fx:id="tblCompras" layoutX="341.0" layoutY="145.0" prefHeight="100.0" prefWidth="660.0">
+        <TableView fx:id="tblCarrito" layoutX="341.0" layoutY="145.0" prefHeight="100.0" prefWidth="660.0">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
-                <TableColumn fx:id="colCliente" prefWidth="285.0" text="Cliente" />
-                <TableColumn fx:id="colPrecio" prefWidth="165.0" text="Fecha Creación" />
+                <TableColumn fx:id="colIdCarrito" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="colIdUsuario" prefWidth="285.0" text="Usuario ID" />
+                <TableColumn fx:id="colFechaCreacion" prefWidth="165.0" text="Fecha Creación" />
                 <TableColumn fx:id="colEstado" prefWidth="160.0" text="Estado" />
             </columns>
         </TableView>
-        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="610.0" prefWidth="240.0" spacing="20.0">
+        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="610.0" prefWidth="240.0" spacing="15.0">
             <children>
-                <VBox prefHeight="70.0" prefWidth="240.0" styleClass="right-panel">
+            <VBox prefHeight="50.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-new">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit">
+                           <graphic>
+                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../images/edit.png" />
+                                          </image>
+                                      </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+                <VBox prefHeight="70.0" prefWidth="200.0" styleClass="right-panel">
                     <children>
-                        <ComboBox fx:id="cbxCliente" disable="true" prefWidth="225.0" promptText="Usuario" />
+                        <ComboBox fx:id="cbxUsuario" disable="true" prefWidth="225.0" promptText="Usuario" />
                     </children>
                 </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" styleClass="right-panel">
+            <VBox prefHeight="150.0" prefWidth="100.0" spacing="25.0" styleClass="right-panel">
                <children>
-                  <ComboBox disable="true" prefHeight="50.0" prefWidth="210.0" promptText="Producto" />
+                  <ComboBox fx:id="cbxProducto" disable="true" prefHeight="50.0" prefWidth="210.0" promptText="Producto" />
                   <HBox alignment="CENTER">
                      <children>
-                        <Button disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-" />
-                        <TextArea disable="true" prefHeight="50.0" prefWidth="50.0" />
-                        <Button disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+" />
+                        <Button fx:id="btnMenos" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-" />
+                        <TextArea fx:id="txtACantidad" disable="true" prefHeight="50.0" prefWidth="50.0" />
+                        <Button fx:id="btnMas" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+" />
                      </children>
                   </HBox>
                </children>
@@ -183,6 +209,9 @@
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
                         </Label>
                         <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#agregarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
                             <graphic>
@@ -203,25 +232,25 @@
                             </graphic>
                         </Button>
                         <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#editarAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
-                            <graphic>
-                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/edit.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/edit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </Button>
                     </children>
                 </VBox>
             </children>
         </VBox>
         <TextField fx:id="txtIdCompra" layoutX="1240.0" layoutY="20.0" visible="false" />
-      <TableView layoutX="341.0" layoutY="270.0" prefHeight="426.0" prefWidth="660.0">
+      <TableView fx:id="tblDetalleCarrito" layoutX="341.0" layoutY="270.0" prefHeight="426.0" prefWidth="660.0">
         <columns>
-          <TableColumn prefWidth="50.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Cantidad" />
-            <TableColumn prefWidth="100.0" text="Producto ID" />
-            <TableColumn prefWidth="100.0" text="Carrito ID" />
+          <TableColumn fx:id="colIdDetalleCarrito" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="colCantidad" prefWidth="250.0" text="Cantidad" />
+            <TableColumn fx:id="colIdProducto" prefWidth="185.0" text="Producto ID" />
+            <TableColumn fx:id="colIdCarrito2" prefWidth="175.0" text="Carrito ID" />
         </columns>
       </TableView>
     </children>
