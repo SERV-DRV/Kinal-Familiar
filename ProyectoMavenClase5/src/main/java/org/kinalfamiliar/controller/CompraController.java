@@ -144,13 +144,13 @@ public class CompraController implements Initializable {
         ArrayList<Usuario> usuario = new ArrayList<>();
         try {
             CallableStatement enunciado = Conexion.getInstancia().getConexion()
-                    .prepareCall("call sp_ListarDetalleCarritos");
+                    .prepareCall("call sp_ListarUsuarios(?, ?, ?)");
             ResultSet resultado = enunciado.executeQuery();
             while(resultado.next()){
                 usuario.add(new Usuario(
                         resultado.getInt(1),
                         resultado.getString(2),
-                        resultado.getString(3)                                                
+                        resultado.getString(3)                        
                 )
                 );
             }
@@ -158,6 +158,7 @@ public class CompraController implements Initializable {
             System.out.println("Error al listar usuarios en vista compras");
             ex.printStackTrace();
         }
+        return usuario;
     }
     
 }

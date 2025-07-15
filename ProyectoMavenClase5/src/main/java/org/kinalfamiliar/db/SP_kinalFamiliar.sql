@@ -1,5 +1,81 @@
 -- ________________________________ CRUD ________________________________ --
 
+-- ________________________ Usuarios ________________________ --
+
+-- Insertar Usuario
+delimiter //
+create procedure sp_InsertarUsuario(
+    in p_nombreUsuario varchar(64),
+    in p_apellidoUsuario varchar(64),
+    in p_correoUsuario varchar(128),
+    in p_contrasenaUsuario varchar(255),
+    in p_estadoUsuario enum('Activo', 'Inactivo')
+)
+begin
+    insert into Usuarios(nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario, estadoUsuario)
+        values(p_nombreUsuario, p_apellidoUsuario, p_correoUsuario, p_contrasenaUsuario, p_estadoUsuario);
+end//
+delimiter ;
+
+-- Listar Usuarios
+delimiter //
+create procedure sp_ListarUsuarios()
+begin
+    select 
+        U.idUsuario as ID,
+        U.nombreUsuario as Nombre,
+        U.apellidoUsuario as Apellido,
+    from Usuarios U;
+end//
+delimiter ;
+
+-- Actualizar Usuario
+delimiter //
+create procedure sp_ActualizarUsuario(
+    in p_idUsuario int,
+    in p_nombreUsuario varchar(64),
+    in p_apellidoUsuario varchar(64),
+    in p_correoUsuario varchar(128),
+    in p_contrasenaUsuario varchar(255),
+    in p_estadoUsuario enum('Activo', 'Inactivo')
+)
+begin
+    update Usuarios U
+        set 
+            U.nombreUsuario = p_nombreUsuario,
+            U.apellidoUsuario = p_apellidoUsuario,
+            U.correoUsuario = p_correoUsuario,
+            U.contrasenaUsuario = p_contrasenaUsuario,
+            U.estadoUsuario = p_estadoUsuario
+    where U.idUsuario = p_idUsuario;
+end//
+delimiter ;
+
+-- Eliminar Usuario
+delimiter //
+create procedure sp_EliminarUsuario(in p_idUsuario int)
+begin
+    delete from Usuarios
+        where idUsuario = p_idUsuario;
+end//
+delimiter ;
+
+-- Buscar Usuario
+delimiter //
+create procedure sp_BuscarUsuario(in p_idUsuario int)
+begin
+    select 
+        U.idUsuario as ID,
+        U.nombreUsuario as Nombre,
+        U.apellidoUsuario as Apellido,
+        U.correoUsuario as Correo,
+        U.estadoUsuario as Estado,
+        U.fechaRegistro as Fecha
+    from Usuarios U
+        where U.idUsuario = p_idUsuario;
+end//
+delimiter ;
+
 -- ________________________ Categorias ________________________ --
 
 -- Insertar Usuario

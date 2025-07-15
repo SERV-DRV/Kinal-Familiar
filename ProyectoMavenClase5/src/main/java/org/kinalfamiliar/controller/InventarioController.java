@@ -144,7 +144,8 @@ public class InventarioController implements Initializable {
     private ArrayList<Producto> listarProductos() {
         ArrayList<Producto> productos = new ArrayList<>();
         try {
-            CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("call sp_ListarProductos();");
+            CallableStatement enunciado = Conexion.getInstancia().getConexion()
+                    .prepareCall("call sp_ListarProductos();");
             ResultSet resultado = enunciado.executeQuery();
             while (resultado.next()) {
                 productos.add(new Producto(
@@ -173,12 +174,12 @@ public class InventarioController implements Initializable {
 
     private Producto cargarModelo() {
         int idProducto = txtIdProducto.getText().isEmpty() ? 0 : Integer.parseInt(txtIdProducto.getText());
-
+        
         Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
         int idCategoria = categoriaSeleccionada != null ? categoriaSeleccionada.getIdCategoria() : 0;
-
+        
         String estado = rbDisponible.isSelected() ? "Disponible" : "Indisponible";
-
+        
         return new Producto(idProducto, txtNombre.getText(), spCantidad.getValue(),
                 Double.parseDouble(txtPrecio.getText()), estado, idCategoria);
     }
