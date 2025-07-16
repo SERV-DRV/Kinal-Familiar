@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -165,7 +166,7 @@
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-new">
+                        <Button fx:id="btnNuevoC" mnemonicParsing="false" onAction="#agregarCarritoAction" prefHeight="50.0" prefWidth="50.0" styleClass="button-new" text=".">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -173,8 +174,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit">
+                        <Button fx:id="btnEditarC" mnemonicParsing="false" onAction="#editarCarritoAction" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit">
                            <graphic>
                                       <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                           <image>
@@ -182,6 +186,9 @@
                                           </image>
                                       </ImageView>
                            </graphic>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
                         </Button>
                      </children>
                   </HBox>
@@ -192,8 +199,11 @@
                         <ComboBox fx:id="cbxUsuario" disable="true" prefWidth="225.0" promptText="Usuario" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Activo" />
-                        <RadioButton mnemonicParsing="false" text="Inactivo" />
+                        <RadioButton fx:id="rbActivo" mnemonicParsing="false" text="Activo">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grupoEstado" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rbInactivo" mnemonicParsing="false" text="Inactivo" toggleGroup="$grupoEstado" />
                      </children>
                   </HBox>
                     </children>
@@ -226,7 +236,7 @@
                         <Insets top="5.0" />
                      </padding>
                         </Label>
-                        <Button fx:id="btnNuevo" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
+                        <Button fx:id="btnNuevoDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -235,7 +245,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEliminar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
+                        <Button fx:id="btnEliminarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -244,7 +254,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEditar" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
+                        <Button fx:id="btnEditarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

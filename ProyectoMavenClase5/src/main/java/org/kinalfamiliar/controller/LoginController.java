@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
 
     public void manejarBotonLogin(ActionEvent evento) {
         //login();
-        principal.cambiarEscena("InventarioView.fxml", 1280, 720);
+        principal.cambiarEscena("CompraView.fxml", 1280, 720);
     }
 
     public void manejarBotonRegister(ActionEvent evento) {
