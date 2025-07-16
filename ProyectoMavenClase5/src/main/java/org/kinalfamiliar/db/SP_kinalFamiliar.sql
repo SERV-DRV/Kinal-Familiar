@@ -62,6 +62,25 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- USUARIO AUTENTICADO
+
+DELIMITER $$
+CREATE PROCEDURE sp_ObtenerDatosEmpleado(IN p_nombreUsuario VARCHAR(255))
+BEGIN
+    SELECT 
+        nombreUsuario, 
+        apellidoUsuario, 
+        correoUsuario
+    FROM 
+        Usuarios
+    WHERE 
+        nombreUsuario = p_nombreUsuario;
+END$$
+DELIMITER ;
+
+
+
+
 -- ##################################################################################################################################
 -- ########################################################### CATEGORIAS ###########################################################
 -- ##################################################################################################################################
@@ -411,6 +430,22 @@ BEGIN
 END$$
 DELIMITER ;
 
+delimiter //
+create procedure sp_inicioSesion(
+    in p_nombreUsuario varchar(100),
+    in p_contrasenaUsuario varchar(100))
+    begin
+    if exists (
+        select 1 from Usuarios
+        where nombreUsuario = p_nombreUsuario
+        and contrasenaUsuario = p_contrasenaUsuario
+    ) then
+        select 1 as inicioValido;
+    else
+        select 0 as inicioInvalido;
+    end if;
+end//
+delimiter ;
 
 USE KinalFamiliarDB;
 
@@ -497,3 +532,5 @@ CALL sp_AgregarDetalleFactura(5, 22.00, 7, 7);
 CALL sp_AgregarDetalleFactura(2, 8.50, 8, 8);
 CALL sp_AgregarDetalleFactura(1, 35.20, 9, 9);
 CALL sp_AgregarDetalleFactura(1, 55.00, 10, 10);
+
+CALL sp_ObtenerDatosEmpleado("Juan");

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="722.0" prefWidth="1213.0" stylesheets="@../style/loginview.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="722.0" prefWidth="1213.0" stylesheets="@../style/loginview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.LoginController">
    <children>
       <ImageView fitHeight="758.0" fitWidth="1230.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,8 +25,8 @@
       <VBox alignment="CENTER" layoutX="416.0" layoutY="163.0" maxWidth="380.0" styleClass="form-container">
          <children>
             <Label styleClass="title-label" text="Login" />
-            <TextField fx:id="usuarioField" promptText="Nombre de Usuario" styleClass="text-field" />
-            <PasswordField fx:id="contrasenaField" promptText="Contraseña" styleClass="password-field" />
+            <TextField fx:id="usernameField" promptText="Nombre de Usuario" styleClass="text-field" />
+            <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="password-field" />
             <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#manejarBotonLogin" prefHeight="45.0" prefWidth="380.0" styleClass="login-button" text="Iniciar Sesión" />
             <Button mnemonicParsing="false" onAction="#manejarBotonRegister" styleClass="link-button" text="¿No tienes una cuenta? Regístrate" />
          </children>

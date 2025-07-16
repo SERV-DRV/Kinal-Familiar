@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -69,6 +70,12 @@ public class CompraController implements Initializable {
     private RadioButton rbActivo, rbInactivo;
     @FXML
     private ToggleGroup grupoEstado;
+    @FXML
+    private Label labelNombre;
+    @FXML
+    private Label labelApellido;
+    @FXML
+    private Label labelEmail;
 
     private Main principal;
     private ObservableList<Carrito> listaCarritos;
@@ -95,6 +102,20 @@ public class CompraController implements Initializable {
         cargarDatosIniciales();
         configurarListeners();
         configurarBotonesCantidad();
+        cargarDatosUsuario();
+    }
+
+    public void cargarDatosUsuario() {
+        UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+        labelNombre.setText(usuario.getNombreUsuario());
+        labelApellido.setText(usuario.getApellidoUsuario());
+        labelEmail.setText(usuario.getCorreoUsuario());
+    }
+
+    public void cerrarSesion(ActionEvent evento) {
+        UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+        usuario.cerrarSesion();
+        principal.cambiarEscena("LoginView.fxml", 1213, 722);
     }
 
     private void configurarColumnas() {

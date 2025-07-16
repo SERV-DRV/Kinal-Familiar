@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -31,6 +32,7 @@ import org.kinalfamiliar.model.Categoria;
 import org.kinalfamiliar.model.Producto;
 import org.kinalfamiliar.reporte.Report;
 import org.kinalfamiliar.system.Main;
+import org.kinalfamiliar.controller.UsuarioAutenticado;
 
 public class InventarioController implements Initializable {
 
@@ -50,6 +52,12 @@ public class InventarioController implements Initializable {
     private RadioButton rbDisponible, rbIndisponible;
     @FXML
     private ToggleGroup grupoEstado;
+    @FXML
+    private Label labelNombre;
+    @FXML
+    private Label labelApellido;
+    @FXML
+    private Label labelEmail;
 
     private Main principal;
     private Producto mProducto;
@@ -74,10 +82,24 @@ public class InventarioController implements Initializable {
         configurarSpinner();
         cargarCategorias();
         cargarTableView();
+        cargarDatosUsuario();
         tblProductos.setOnMouseClicked(eh -> cargarFormulario());
         txtBuscar.textProperty().addListener((obs, oldText, newText) -> {
             buscarProducto();
         });
+    }
+
+    public void cargarDatosUsuario() {
+        UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+        labelNombre.setText(usuario.getNombreUsuario());
+        labelApellido.setText(usuario.getApellidoUsuario());
+        labelEmail.setText(usuario.getCorreoUsuario());
+    }
+    
+    public void cerrarSesion(ActionEvent evento) {
+        UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+        usuario.cerrarSesion();
+        principal.cambiarEscena("LoginView.fxml", 1213, 722);
     }
 
     private void configurarColumnas() {

@@ -124,22 +124,22 @@
                       <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label style="-fx-font-size: 15; -fx-font-weight: bold;" text="Nombre">
+                        <Label fx:id="labelNombre" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Nombre">
                            <font>
                               <Font name="System Bold" size="34.0" />
                            </font>
                         </Label>
-                        <Label style="-fx-font-size: 15; -fx-font-weight: bold;" text="Apellido" GridPane.columnIndex="1">
+                        <Label fx:id="labelApellido" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Apellido" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="34.0" />
                            </font>
                         </Label>
-                        <Label style="-fx-font-size: 15; -fx-font-weight: bold;" text="Correo" GridPane.rowIndex="1">
+                        <Label fx:id="labelEmail" style="-fx-font-size: 10; -fx-font-weight: bold;" text="Correo" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="34.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="91.0" styleClass="btnSalir" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="39.0" prefWidth="91.0" styleClass="btnSalir" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
