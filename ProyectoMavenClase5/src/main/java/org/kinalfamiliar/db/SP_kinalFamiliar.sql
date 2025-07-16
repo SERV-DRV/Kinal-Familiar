@@ -78,7 +78,20 @@ BEGIN
 END$$
 DELIMITER ;
 
-
+DELIMITER $$
+CREATE PROCEDURE sp_ObtenerIdUsuarioPorCorreo(
+    IN p_correoUsuario VARCHAR(128),
+    OUT p_idUsuario INT
+)
+BEGIN
+    SELECT 
+        idUsuario INTO p_idUsuario
+    FROM 
+        Usuarios
+    WHERE 
+        correoUsuario = p_correoUsuario;
+END$$
+DELIMITER ;
 
 
 -- ##################################################################################################################################

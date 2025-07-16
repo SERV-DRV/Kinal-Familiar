@@ -265,6 +265,20 @@
                         </Button>
                     </children>
                 </VBox>
+            <VBox alignment="CENTER" prefHeight="101.0" prefWidth="245.0" spacing="10.0">
+               <children>
+                  <Label styleClass="panel-title" text="Reportaje" />
+                  <Button fx:id="btnReporte" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#imprimirReporte" prefHeight="33.0" prefWidth="175.0" styleClass="button-download" text="Descargar reporte">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/download.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
             </children>
         </VBox>
         <TextField fx:id="txtIdCarrito" layoutX="1020.0" layoutY="20.0" visible="false" />

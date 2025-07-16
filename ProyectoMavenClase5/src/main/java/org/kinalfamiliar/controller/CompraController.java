@@ -32,6 +32,7 @@ import org.kinalfamiliar.model.Carrito;
 import org.kinalfamiliar.model.DetalleCarrito;
 import org.kinalfamiliar.model.Producto;
 import org.kinalfamiliar.model.Usuario;
+import org.kinalfamiliar.reporte.Report;
 import org.kinalfamiliar.system.Main;
 
 public class CompraController implements Initializable {
@@ -496,5 +497,38 @@ public class CompraController implements Initializable {
 
     public void manejarBotonSalir(ActionEvent evento) {
         Platform.exit();
+    }
+
+    @FXML
+    private void imprimirReporte(ActionEvent event) {
+        String correoUsuario = labelEmail.getText();
+        Integer idUsuario = null;
+
+        if (correoUsuario != null && !correoUsuario.isEmpty()) {
+            try {
+                CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}");
+                enunciado.setString(1, correoUsuario);
+                enunciado.registerOutParameter(2, java.sql.Types.INTEGER);
+                enunciado.execute();
+
+                int retrievedId = enunciado.getInt(2);
+                if (!enunciado.wasNull()) {
+                    idUsuario = retrievedId;
+                }
+                
+                enunciado.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                mostrarAlerta("Error de Base de Datos", "No se pudo obtener el ID del usuario para el reporte.");
+            }
+        }
+
+        Report reporte = new Report();
+        if (idUsuario != null) {
+            reporte.generarReporte("Carrito.jrxml", "ReporteCarrito", idUsuario);
+        } else {
+            reporte.generarReporte("Carrito.jrxml", "ReporteCarrito");
+        }
     }
 }

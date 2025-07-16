@@ -22,10 +22,8 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.kinalfamiliar.db.Conexion;
 
 public class Report {
-    
+
     public void generarReporte(String jrxmlFileName, String outputBaseName) {
-        //int idCliente = 1;//viene del texfild idClinete en el fxml
-        
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf"));
@@ -51,7 +49,68 @@ public class Report {
                 if (imageUrl != null) {
                     File imageDir = new File(imageUrl.toURI());
                     parametros.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
-                    //parametros.put("codigoCliente" , idCliente);
+                }
+
+                InputStream reporteStream = getClass().getResourceAsStream("/jasper/" + jrxmlFileName);
+                if (reporteStream == null) {
+                    System.err.println("Error: No se pudo encontrar el archivo de reporte '/jasper/" + jrxmlFileName + "'.");
+                    return;
+                }
+
+                JasperDesign jasperDesign = JRXmlLoader.load(reporteStream);
+                JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conexion);
+
+                try (OutputStream outputStream = new FileOutputStream(file)) {
+                    JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+                }
+
+                System.out.println("Reporte guardado exitosamente en: " + file.getAbsolutePath());
+
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().open(file);
+                    } catch (IOException e) {
+                        System.err.println("Error al intentar abrir el archivo PDF automáticamente.");
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("El usuario canceló la operación de guardado.");
+        }
+    }
+
+    public void generarReporte(String jrxmlFileName, String outputBaseName, Integer idUsuario) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Reporte");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf"));
+
+        String date = LocalDate.now().toString();
+        String initialFileName = outputBaseName + "_" + date + ".pdf";
+        fileChooser.setInitialFileName(initialFileName);
+
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                Connection conexion = Conexion.getInstancia().getConexion();
+
+                if (conexion == null) {
+                    System.err.println("Error Crítico: La conexión a la base de datos es nula.");
+                    return;
+                }
+
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("idUsuario", idUsuario);
+
+                URL imageUrl = getClass().getResource("/jasper/");
+                if (imageUrl != null) {
+                    File imageDir = new File(imageUrl.toURI());
+                    parametros.put("IMAGES_DIR", imageDir.getAbsolutePath() + File.separator);
                 }
 
                 InputStream reporteStream = getClass().getResourceAsStream("/jasper/" + jrxmlFileName);
