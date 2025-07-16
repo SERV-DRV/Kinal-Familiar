@@ -1,80 +1,72 @@
-drop database if exists KinalFamiliarDB;
-create database KinalFamiliarDB;
-use KinalFamiliarDB;
+DROP DATABASE IF EXISTS KinalFamiliarDB;
+CREATE DATABASE KinalFamiliarDB;
+USE KinalFamiliarDB;
 
-create table Usuarios(
-	idUsuario int auto_increment,
-    nombreUsuario varchar(64) not null,
-    apellidoUsuario varchar(64) not null,
-    correoUsuario varchar(128) not null unique,
-    contrasenaUsuario varchar(255) not null,    
-    estadoUsuario enum('Activo', 'Inactivo') not null default 'Activo',
-    fechaRegistro datetime not null default current_timestamp,
-    constraint PK_usuarios primary key(idUsuario)
+CREATE TABLE Usuarios(
+    idUsuario INT AUTO_INCREMENT,
+    nombreUsuario VARCHAR(64) NOT NULL,
+    apellidoUsuario VARCHAR(64) NOT NULL,
+    correoUsuario VARCHAR(128) NOT NULL UNIQUE,
+    contrasenaUsuario VARCHAR(255) NOT NULL,
+    estadoUsuario ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo',
+    fechaRegistro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PK_usuarios PRIMARY KEY(idUsuario)
 );
 
-create table Categorias(
-	idCategoria int auto_increment,
-    nombreCategoria varchar(64) not null,
-    constraint PK_categoria primary key(idCategoria)
+CREATE TABLE Categorias(
+    idCategoria INT AUTO_INCREMENT,
+    nombreCategoria VARCHAR(64) NOT NULL,
+    CONSTRAINT PK_categoria PRIMARY KEY(idCategoria)
 );
 
-create table Productos(
-	idProducto int auto_increment,    
-    nombreProducto varchar(128) not null,
-    cantidadProducto int not null,
-    precioProducto decimal(10,2) not null,
-    estadoProducto enum("Disponible", "Indisponible"),
-    idCategoria int not null,
-    constraint FK_productos_categorias foreign key(idCategoria)
-		references Categorias(idCategoria),
-    constraint PK_productos primary key(idProducto)
+CREATE TABLE Productos(
+    idProducto INT AUTO_INCREMENT,
+    nombreProducto VARCHAR(128) NOT NULL,
+    cantidadProducto INT NOT NULL,
+    precioProducto DECIMAL(10, 2) NOT NULL,
+    estadoProducto ENUM("Disponible", "Indisponible"),
+    idCategoria INT NOT NULL,
+    CONSTRAINT FK_productos_categorias FOREIGN KEY(idCategoria) REFERENCES Categorias(idCategoria),
+    CONSTRAINT PK_productos PRIMARY KEY(idProducto)
 );
 
-create table Carritos(
-	idCarrito int auto_increment,
-    estado enum('Activo', 'Inactivo') not null default 'Activo',
-    fechaCreacion datetime default current_timestamp,
-    idUsuario int not null,
-    constraint FK_carritos_usuarios foreign	key(idUsuario)
-		references Usuarios(idUsuario),
-    constraint PK_carritos primary key(idCarrito)
+CREATE TABLE Carritos(
+    idCarrito INT AUTO_INCREMENT,
+    estado ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo',
+    fechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    idUsuario INT NOT NULL,
+    CONSTRAINT FK_carritos_usuarios FOREIGN KEY(idUsuario) REFERENCES Usuarios(idUsuario),
+    CONSTRAINT PK_carritos PRIMARY KEY(idCarrito)
 );
 
-create table DetalleCarritos(
-	idDetalleCarrito int auto_increment,
-    idCarrito int not null,
-    idProducto int not null,
-    cantidad int not null,
-    constraint FK_detalleCarritos_carritos foreign key(idCarrito)
-		references Carritos(idCarrito),
-    constraint FK_detalleCarritos_productos foreign key(idProducto)
-		references Productos(idProducto),
-    constraint PK_detalleCarritos primary key(idDetalleCarrito)
+CREATE TABLE DetalleCarritos(
+    idDetalleCarrito INT AUTO_INCREMENT,
+    idCarrito INT NOT NULL,
+    idProducto INT NOT NULL,
+    cantidad INT NOT NULL,
+    CONSTRAINT FK_detalleCarritos_carritos FOREIGN KEY(idCarrito) REFERENCES Carritos(idCarrito),
+    CONSTRAINT FK_detalleCarritos_productos FOREIGN KEY(idProducto) REFERENCES Productos(idProducto),
+    CONSTRAINT PK_detalleCarritos PRIMARY KEY(idDetalleCarrito)
 );
 
-create table Facturas (
-	idFactura int auto_increment,
-    fechaFactura datetime default current_timestamp,
-    estadoFactura enum("Activa", "Cancelada"),
-    idCarrito int not null,
-    idUsuario int not null,
-    constraint FK_facturas_carritos foreign key(idCarrito)
-		references Carritos(idCarrito),
-    constraint FK_facturas_usuarios foreign key(idUsuario)
-		references Usuarios(idUsuario),	
-    constraint PK_facturas primary key(idFactura)
+CREATE TABLE Facturas (
+    idFactura INT AUTO_INCREMENT,
+    fechaFactura DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estadoFactura ENUM("Activa", "Cancelada"),
+    idCarrito INT NOT NULL,
+    idUsuario INT NOT NULL,
+    CONSTRAINT FK_facturas_carritos FOREIGN KEY(idCarrito) REFERENCES Carritos(idCarrito),
+    CONSTRAINT FK_facturas_usuarios FOREIGN KEY(idUsuario) REFERENCES Usuarios(idUsuario),
+    CONSTRAINT PK_facturas PRIMARY KEY(idFactura)
 );
- 
-create table DetalleFacturas (
-	idDetalleFactura int auto_increment,
-    cantidadPedida int not null,
-    precioUnitario decimal(10,2) not null,
-    idFactura int not null,
-    idProducto int not null,
-    constraint FK_detalleFacturas_facturas foreign key(idFactura)
-		references Facturas(idFactura),
-	constraint FK_detalleFacturas_productos foreign key(idProducto)
-		references Productos(idProducto),
-    constraint PK_detallefacturas primary key(idDetalleFactura)
+
+CREATE TABLE DetalleFacturas (
+    idDetalleFactura INT AUTO_INCREMENT,
+    cantidadPedida INT NOT NULL,
+    precioUnitario DECIMAL(10, 2) NOT NULL,
+    idFactura INT NOT NULL,
+    idProducto INT NOT NULL,
+    CONSTRAINT FK_detalleFacturas_facturas FOREIGN KEY(idFactura) REFERENCES Facturas(idFactura),
+    CONSTRAINT FK_detalleFacturas_productos FOREIGN KEY(idProducto) REFERENCES Productos(idProducto),
+    CONSTRAINT PK_detallefacturas PRIMARY KEY(idDetalleFactura)
 );

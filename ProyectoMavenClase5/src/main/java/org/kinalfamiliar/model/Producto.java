@@ -1,30 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.kinalfamiliar.model;
 
-/**
- *
- * @author olive
- */
 public class Producto {
-    int idProducto;
-    String nombre;
-    int cantidad;
-    double precio;
-    String estado;
-    int idCategoria;
+    private int idProducto;
+    private String nombreProducto;
+    private int cantidadProducto;
+    private double precioProducto;
+    private String estadoProducto;
+    private int idCategoria;
 
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombre, int cantidad, double precio, String estado, int idCategoria) {
+    public Producto(int idProducto, String nombreProducto, int cantidadProducto, double precioProducto, String estadoProducto, int idCategoria) {
         this.idProducto = idProducto;
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.estado = estado;
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.precioProducto = precioProducto;
+        this.estadoProducto = estadoProducto;
         this.idCategoria = idCategoria;
     }
 
@@ -32,49 +24,52 @@ public class Producto {
         return idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public double getPrecio() {
-        return precio;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
-    public String getEstado() {
-        return estado;
+    public int getCantidadProducto() {
+        return cantidadProducto;
+    }
+
+    public void setCantidadProducto(int cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
+    }
+
+    public double getPrecioProducto() {
+        return precioProducto;
+    }
+
+    public void setPrecioProducto(double precioProducto) {
+        this.precioProducto = precioProducto;
+    }
+
+    public String getEstadoProducto() {
+        return estadoProducto;
+    }
+
+    public void setEstadoProducto(String estadoProducto) {
+        this.estadoProducto = estadoProducto;
     }
 
     public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nombreProducto;
+    }
 }

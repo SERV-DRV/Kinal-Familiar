@@ -37,7 +37,7 @@
             </rowConstraints>
             <children>
                 <Label styleClass="menu-header-background" GridPane.rowIndex="4" />
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonSalir" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -64,7 +64,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus" text="Inventario" GridPane.rowIndex="3">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonInventario" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus" text="Inventario" GridPane.rowIndex="3">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" styleClass="btnMenus-active">
                             <image>
@@ -236,7 +236,7 @@
                         <Insets top="5.0" />
                      </padding>
                         </Label>
-                        <Button fx:id="btnNuevoDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
+                        <Button fx:id="btnNuevoDc" onAction="#agregarDetalleCarritoAction" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -245,7 +245,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEliminarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
+                        <Button fx:id="btnEliminarDc" onAction="#cancelarEliminarDetalleCarritoAction" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -254,7 +254,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="btnEditarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
+                        <Button fx:id="btnEditarDc" onAction="#editarDetalleCarritoAction" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -267,7 +267,10 @@
                 </VBox>
             </children>
         </VBox>
-        <TextField fx:id="txtIdCompra" layoutX="1240.0" layoutY="20.0" visible="false" />
+        <TextField fx:id="txtIdCarrito" layoutX="1020.0" layoutY="20.0" visible="false" />
+        <TextField fx:id="txtIdDetalleCarrito" layoutX="1080.0" layoutY="20.0" visible="false" />
+        <TextField fx:id="txtIdCarrito2" layoutX="1140.0" layoutY="20.0" visible="false" />
+        
       <TableView fx:id="tblDetalleCarrito" layoutX="341.0" layoutY="270.0" prefHeight="426.0" prefWidth="660.0">
         <columns>
           <TableColumn fx:id="colIdDetalleCarrito" prefWidth="50.0" text="ID" />

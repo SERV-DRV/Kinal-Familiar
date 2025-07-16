@@ -7,14 +7,15 @@ package org.kinalfamiliar.model;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Modelo para la tabla Carritos.
  * @author olive
  */
+
 public class Carrito {
-    int idCarrito;
-    String estado;
-    LocalDateTime fechaCreacion;
-    int idUsuario;
+    private int idCarrito;
+    private String estado;
+    private LocalDateTime fechaCreacion;
+    private int idUsuario;
 
     public Carrito() {
     }
@@ -32,38 +33,42 @@ public class Carrito {
         this.idUsuario = idUsuario;
     }
         
+    // --- Getters y Setters ---
 
     public int getIdCarrito() {
         return idCarrito;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
     }
 
     public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Carrito #" + idCarrito;
+    }
 }

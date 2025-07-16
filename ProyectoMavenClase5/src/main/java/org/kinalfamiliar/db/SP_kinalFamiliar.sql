@@ -1,605 +1,499 @@
--- ________________________________ CRUD ________________________________ --
+-- ##################################################################################################################################
+-- ############################################################ USUARIOS ############################################################
+-- ##################################################################################################################################
 
--- ________________________ Usuarios ________________________ --
-
--- Insertar Usuario
-delimiter //
-	create procedure sp_insertarUsuario(
-		in p_nombreUsuario varchar(64),
-		in p_apellidoUsuario varchar(64),
-		in p_correoUsuario varchar(128),
-		in p_contrasenaUsuario varchar(255)
-		)
-		begin
-			insert into Usuarios(nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario)
-				values(p_nombreUsuario, p_apellidoUsuario, p_correoUsuario, p_contrasenaUsuario);
-		end//
-delimiter ;
-
--- Listar Usuarios
-delimiter //
-	create procedure sp_ListarUsuarios()
-		begin
-			select 
-				U.idUsuario as ID,
-				U.nombreUsuario as Nombre,
-				U.apellidoUsuario as Apellido
-			from Usuarios U;
-		end//
-delimiter ;
-
--- Actualizar Usuario
-delimiter //
-	create procedure sp_ActualizarUsuario(
-		in p_idUsuario int,
-		in p_nombreUsuario varchar(64),
-		in p_apellidoUsuario varchar(64),
-		in p_correoUsuario varchar(128),
-		in p_contrasenaUsuario varchar(255),
-		in p_estadoUsuario enum('Activo', 'Inactivo')
-		)
-		begin
-			update Usuarios U
-				set 
-					U.nombreUsuario = p_nombreUsuario,
-					U.apellidoUsuario = p_apellidoUsuario,
-					U.correoUsuario = p_correoUsuario,
-					U.contrasenaUsuario = p_contrasenaUsuario,
-					U.estadoUsuario = p_estadoUsuario
-			where U.idUsuario = p_idUsuario;
-		end//
-delimiter ;
-
--- Eliminar Usuario
-delimiter //
-	create procedure sp_EliminarUsuario(in p_idUsuario int)
-		begin
-			delete from Usuarios
-				where idUsuario = p_idUsuario;
-		end//
-delimiter ;
-
--- Buscar Usuario
-delimiter //
-	create procedure sp_BuscarUsuario(in p_idUsuario int)
-		begin
-			select 
-				U.idUsuario as ID,
-				U.nombreUsuario as Nombre,
-				U.apellidoUsuario as Apellido,
-				U.correoUsuario as Correo,
-				U.estadoUsuario as Estado,
-				U.fechaRegistro as Fecha
-			from Usuarios U
-				where U.idUsuario = p_idUsuario;
-		end//
-delimiter ;
-
--- ________________________ Categorias ________________________ --
-
--- Insertar Categorias
-delimiter //
-	create procedure sp_InsertarCategoria(
-		in p_nombreCategoria varchar(64)
-        )
-		begin
-			insert into Categorias(nombreCategoria)
-				values(p_nombreCategoria);
-        end//
-delimiter ;
-
--- Listar Categorias
-delimiter //
-	create procedure sp_ListarCategorias()
-		begin
-			select 
-				CT.idCategoria as ID,
-				CT.nombreCategoria as Nombre
-			from Categorias CT;
-        end//
-delimiter ;
-
--- Actualizar Categorias
-delimiter //
-	create procedure sp_ActualizarCategoria(
-		in p_idCategoria int,
-		in p_nombreCategoria varchar(64)
-        )
-		begin
-			update Categorias CT
-				set
-					CT.nombreCategoria = p_nombreCategoria
-			where CT.idCategoria = p_idCategoria;
-        end//
-delimiter ;
-
--- Eliminar Categorias
-delimiter //
-	create procedure sp_EliminarCategoria(in p_idCategoria int)
-		begin
-			delete from Categorias
-				where idCategoria = p_idCategoria;
-        end//
-delimiter ;
-
--- Buscar Categorias
-delimiter //
-	create procedure sp_BuscarCategoria(in p_idCategoria int)
-		begin
-			select 
-				CT.idCategoria as ID,
-				CT.nombreCategoria as Nombre
-			from Categorias CT
-				where CT.idCategoria = p_idCategoria;
-        end//
-delimiter ;
-
-
--- ________________________ Productos ________________________ -- 
-
--- Insertar Productos
-delimiter //
-	create procedure sp_InsertarProducto(
-		in p_nombreProducto varchar(128),
-		in p_cantidadProducto int,
-		in p_precioProducto decimal(10,2),
-		in p_estadoProducto enum("Disponible", "Indisponible"),
-		in p_idCategoria int
-        )
-		begin
-			insert into Productos(nombreProducto, cantidadProducto, 
-				precioProducto, estadoProducto, idCategoria)
-				values(p_nombreProducto, p_cantidadProducto, 
-					p_precioProducto, p_estadoProducto, p_idCategoria);
-        end//
-delimiter ;
-
--- Listar Productos
-delimiter //
-	create procedure sp_ListarProductos()
-		begin
-			select 
-				PD.idProducto as ID,
-				PD.nombreProducto as Nombre,
-				PD.cantidadProducto as Cantidad,
-				PD.precioProducto as Precio,
-				PD.estadoProducto as Estado,
-				PD.idCategoria as CategoriaID
-			from Productos PD;
-        end//
-delimiter ;
-
--- Actualizar Productos
-delimiter //
-	create procedure sp_ActualizarProducto(
-		in p_idProducto int,
-		in p_nombreProducto varchar(128),
-		in p_cantidadProducto int,
-		in p_precioProducto decimal(10,2),
-		in p_estadoProducto enum("Disponible", "Indisponible"),
-		in p_idCategoria int
-        )
-		begin
-			update Productos PD
-				set
-					PD.nombreProducto = p_nombreProducto,
-					PD.cantidadProducto = p_cantidadProducto,
-					PD.precioProducto = p_precioProducto,
-					PD.estadoProducto = p_estadoProducto,
-					PD.idCategoria = p_idCategoria
-			where PD.idProducto = p_idProducto;
-        end//
-delimiter ;
-
--- Eliminar Productos
-delimiter //
-	create procedure sp_EliminarProducto(in p_idProducto int)
-		begin
-			delete from Productos
-				where idProducto = p_idProducto;
-        end//
-delimiter ;
-
--- Buscar Productos
-delimiter //
-	create procedure sp_BuscarProducto(in p_idProducto int)
-		begin
-			select 
-				PD.idProducto as ID,
-				PD.nombreProducto as Nombre,
-				PD.cantidadProducto as Cantidad,
-				PD.precioProducto as Precio,
-				PD.estadoProducto as Estado,
-				PD.idCategoria as CategoriaID
-			from Productos PD
-				where PD.idProducto = p_idProducto;
-        end//
-delimiter ;
-
--- ________________________ Carritos ________________________ -- 
-
--- Insertar Carrito
-delimiter //
-	create procedure sp_InsertarCarrito(
-		in p_estado enum('Activo', 'Inactivo'),
-		in p_idUsuario int
-		)
-		begin
-			insert into Carritos(estado, idUsuario)
-				values(p_estado, p_idUsuario);
-		end//
-delimiter ;
-
--- Listar Carritos
-delimiter //
-	create procedure sp_ListarCarritos()
-		begin
-			select 
-				CA.idCarrito as ID,
-				CA.estado as Estado,
-				CA.fechaCreacion as Fecha,
-				CA.idUsuario as UsuarioID
-			from Carritos CA;
-		end//
-delimiter ;
-
--- Actualizar Carrito
-delimiter //
-	create procedure sp_ActualizarCarrito(
-		in p_idCarrito int,
-		in p_estado enum('Activo', 'Inactivo'),
-		in p_idUsuario int
-		)
-		begin
-			update Carritos CA
-				set 
-					CA.estado = p_estado,
-					CA.idUsuario = p_idUsuario
-			where CA.idCarrito = p_idCarrito;
-		end//
-delimiter ;
-
--- Eliminar Carrito
-delimiter //
-	create procedure sp_EliminarCarrito(in p_idCarrito int)
-		begin
-			delete from Carritos
-				where idCarrito = p_idCarrito;
-		end//
-delimiter ;
-
--- Buscar Carrito
-delimiter //
-	create procedure sp_BuscarCarrito(in p_idCarrito int)
-		begin
-			select 
-				CA.idCarrito as ID,
-				CA.estado as Estado,
-				CA.fechaCreacion as Fecha,
-				CA.idUsuario as UsuarioID
-			from Carritos CA
-				where CA.idCarrito = p_idCarrito;
-		end//
-delimiter ;
-
--- ________________________ Detalles Carritos ________________________ -- 
-
--- Insertar DetalleCarrito
-delimiter //
-	create procedure sp_InsertarDetalleCarrito(
-		in p_idCarrito int,
-		in p_idProducto int,
-		in p_cantidad int
-		)
-		begin
-			insert into DetalleCarritos(idCarrito, idProducto, cantidad)
-				values(p_idCarrito, p_idProducto, p_cantidad);
-		end//
-delimiter ;
-
--- Listar DetalleCarritos
-delimiter //
-	create procedure sp_ListarDetalleCarritos()
-		begin
-			select 
-				DC.idDetalleCarrito as ID,
-				DC.idCarrito as CarritoID,
-				DC.idProducto as ProductoID,
-				DC.cantidad as Cantidad
-			from DetalleCarritos DC;
-		end//
-delimiter ;
-
--- Actualizar DetalleCarrito
-delimiter //
-	create procedure sp_ActualizarDetalleCarrito(
-		in p_idDetalleCarrito int,
-		in p_idCarrito int,
-		in p_idProducto int,
-		in p_cantidad int
-		)
-		begin
-			update DetalleCarritos DC
-				set 
-					DC.idCarrito = p_idCarrito,
-					DC.idProducto = p_idProducto,
-					DC.cantidad = p_cantidad
-			where DC.idDetalleCarrito = p_idDetalleCarrito;
-		end//
-delimiter ;
-
--- Eliminar DetalleCarrito
-delimiter //
-create procedure sp_EliminarDetalleCarrito(in p_idDetalleCarrito int)
-	begin
-		delete from DetalleCarritos
-			where idDetalleCarrito = p_idDetalleCarrito;
-	end//
-delimiter ;
-
--- Buscar DetalleCarrito
-delimiter //
-create procedure sp_BuscarDetalleCarrito(in p_idDetalleCarrito int)
-	begin
-		select 
-			DC.idDetalleCarrito as ID,
-			DC.idCarrito as CarritoID,
-			DC.idProducto as ProductoID,
-			DC.cantidad as Cantidad
-		from DetalleCarritos DC
-			where DC.idDetalleCarrito = p_idDetalleCarrito;
-	end//
-delimiter ;
-
--- CRUD
-
--- insertar factura
-delimiter //
-create procedure sp_insertarfactura(
-	in p_estadofactura enum('activa', 'cancelada'),
-	in p_idcarrito int,
-	in p_idusuario int
+-- ------------------------------------------------- Agregar Usuario -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarUsuario(
+    IN p_nombreUsuario VARCHAR(64),
+    IN p_apellidoUsuario VARCHAR(64),
+    IN p_correoUsuario VARCHAR(128),
+    IN p_contrasenaUsuario VARCHAR(255)
 )
-begin
-	insert into facturas(estadofactura, idcarrito, idusuario)
-	values(p_estadofactura, p_idcarrito, p_idusuario);
-end//
-delimiter ;
+BEGIN
+    INSERT INTO Usuarios(nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario)
+    VALUES (p_nombreUsuario, p_apellidoUsuario, p_correoUsuario, p_contrasenaUsuario);
+END$$
+DELIMITER ;
 
--- listar facturas
-delimiter //
-create procedure sp_listarfacturas()
-begin
-	select 
-		f.idfactura as id,
-		f.fechafactura as fecha,
-		f.estadofactura as estado,
-		f.idcarrito as carritoid,
-		f.idusuario as usuarioid
-	from facturas f;
-end//
-delimiter ;
+-- ------------------------------------------------- Listar Usuarios -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarUsuarios()
+BEGIN
+    SELECT * FROM Usuarios;
+END$$
+DELIMITER ;
 
--- actualizar factura
-delimiter //
-create procedure sp_actualizarfactura(
-	in p_idfactura int,
-	in p_estadofactura enum('activa', 'cancelada'),
-	in p_idcarrito int,
-	in p_idusuario int
+-- ------------------------------------------------- Buscar Usuario -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarUsuario(IN p_idUsuario INT)
+BEGIN
+    SELECT * FROM Usuarios WHERE idUsuario = p_idUsuario;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Editar Usuario -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarUsuario(
+    IN p_idUsuario INT,
+    IN p_nombreUsuario VARCHAR(64),
+    IN p_apellidoUsuario VARCHAR(64),
+    IN p_correoUsuario VARCHAR(128),
+    IN p_contrasenaUsuario VARCHAR(255),
+    IN p_estadoUsuario ENUM('Activo', 'Inactivo')
 )
-begin
-	update facturas f
-	set 
-		f.estadofactura = p_estadofactura,
-		f.idcarrito = p_idcarrito,
-		f.idusuario = p_idusuario
-	where f.idfactura = p_idfactura;
-end//
-delimiter ;
+BEGIN
+    UPDATE Usuarios
+    SET
+        nombreUsuario = p_nombreUsuario,
+        apellidoUsuario = p_apellidoUsuario,
+        correoUsuario = p_correoUsuario,
+        contrasenaUsuario = p_contrasenaUsuario,
+        estadoUsuario = p_estadoUsuario
+    WHERE idUsuario = p_idUsuario;
+END$$
+DELIMITER ;
 
--- eliminar factura
-delimiter //
-create procedure sp_eliminarfactura(in p_idfactura int)
-begin
-	delete from facturas
-	where idfactura = p_idfactura;
-end//
-delimiter ;
+-- ------------------------------------------------- Eliminar Usuario -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarUsuario(IN p_idUsuario INT)
+BEGIN
+    DELETE FROM Usuarios WHERE idUsuario = p_idUsuario;
+END$$
+DELIMITER ;
 
--- buscar factura
-delimiter //
-create procedure sp_buscarfactura(in p_idfactura int)
-begin
-	select 
-		f.idfactura as id,
-		f.fechafactura as fecha,
-		f.estadofactura as estado,
-		f.idcarrito as carritoid,
-		f.idusuario as usuarioid
-	from facturas f
-	where f.idfactura = p_idfactura;
-end//
-delimiter ;
+-- ##################################################################################################################################
+-- ########################################################### CATEGORIAS ###########################################################
+-- ##################################################################################################################################
 
--- insertar detallefactura
-delimiter //
-create procedure sp_insertardetallefactura(
-	in p_cantidadpedida int,
-	in p_preciounitario decimal(10,2),
-	in p_idfactura int,
-	in p_idproducto int
+-- ------------------------------------------------- Agregar Categoria -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarCategoria(IN p_nombreCategoria VARCHAR(64))
+BEGIN
+    INSERT INTO Categorias(nombreCategoria) VALUES (p_nombreCategoria);
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Listar Categorias -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarCategorias()
+BEGIN
+    SELECT * FROM Categorias;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Buscar Categoria -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarCategoria(IN p_idCategoria INT)
+BEGIN
+    SELECT * FROM Categorias WHERE idCategoria = p_idCategoria;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Editar Categoria -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarCategoria(
+    IN p_idCategoria INT,
+    IN p_nombreCategoria VARCHAR(64)
 )
-begin
-	insert into detallefacturas(cantidadpedida, preciounitario, idfactura, idproducto)
-	values(p_cantidadpedida, p_preciounitario, p_idfactura, p_idproducto);
-end//
-delimiter ;
+BEGIN
+    UPDATE Categorias
+    SET
+        nombreCategoria = p_nombreCategoria
+    WHERE idCategoria = p_idCategoria;
+END$$
+DELIMITER ;
 
--- listar detallefacturas
-delimiter //
-create procedure sp_listardetallefacturas()
-begin
-	select 
-		df.iddetallefactura as id,
-		df.cantidadpedida as cantidad,
-		df.preciounitario as precio,
-		df.idfactura as facturaid,
-		df.idproducto as productoid
-	from detallefacturas df;
-end//
-delimiter ;
+-- ------------------------------------------------- Eliminar Categoria -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarCategoria(IN p_idCategoria INT)
+BEGIN
+    DELETE FROM Categorias WHERE idCategoria = p_idCategoria;
+END$$
+DELIMITER ;
 
--- actualizar detallefactura
-delimiter //
-create procedure sp_actualizardetallefactura(
-	in p_iddetallefactura int,
-	in p_cantidadpedida int,
-	in p_preciounitario decimal(10,2),
-	in p_idfactura int,
-	in p_idproducto int
+-- ##################################################################################################################################
+-- ########################################################### PRODUCTOS ############################################################
+-- ##################################################################################################################################
+
+-- ------------------------------------------------- Agregar Producto -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarProducto(
+    IN p_nombreProducto VARCHAR(128),
+    IN p_cantidadProducto INT,
+    IN p_precioProducto DECIMAL(10, 2),
+    IN p_estadoProducto ENUM("Disponible", "Indisponible"),
+    IN p_idCategoria INT
 )
-begin
-	update detallefacturas df
-	set 
-		df.cantidadpedida = p_cantidadpedida,
-		df.preciounitario = p_preciounitario,
-		df.idfactura = p_idfactura,
-		df.idproducto = p_idproducto
-	where df.iddetallefactura = p_iddetallefactura;
-end//
-delimiter ;
+BEGIN
+    INSERT INTO Productos(nombreProducto, cantidadProducto, precioProducto, estadoProducto, idCategoria)
+    VALUES (p_nombreProducto, p_cantidadProducto, p_precioProducto, p_estadoProducto, p_idCategoria);
+END$$
+DELIMITER ;
 
--- eliminar detallefactura
-delimiter //
-create procedure sp_eliminardetallefactura(in p_iddetallefactura int)
-begin
-	delete from detallefacturas
-	where iddetallefactura = p_iddetallefactura;
-end//
-delimiter ;
+-- ------------------------------------------------- Listar Productos -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarProductos()
+BEGIN
+    SELECT * FROM Productos;
+END$$
+DELIMITER ;
 
--- buscar detallefactura
-delimiter //
-create procedure sp_buscardetallefactura(in p_iddetallefactura int)
-begin
-	select 
-		df.iddetallefactura as id,
-		df.cantidadpedida as cantidad,
-		df.preciounitario as precio,
-		df.idfactura as facturaid,
-		df.idproducto as productoid
-	from detallefacturas df
-	where df.iddetallefactura = p_iddetallefactura;
-end//
-delimiter ;
+-- ------------------------------------------------- Buscar Producto -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarProducto(IN p_idProducto INT)
+BEGIN
+    SELECT * FROM Productos WHERE idProducto = p_idProducto;
+END$$
+DELIMITER ;
 
--- _____ _____ _____ _____ _____ Login _____ _____ _____ _____ _____
-
-delimiter //
-create procedure sp_inicioSesion(
-    in p_nombreUsuario varchar(100),
-    in p_contrasenaUsuario varchar(100)
+-- ------------------------------------------------- Editar Producto -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarProducto(
+    IN p_idProducto INT,
+    IN p_nombreProducto VARCHAR(128),
+    IN p_cantidadProducto INT,
+    IN p_precioProducto DECIMAL(10, 2),
+    IN p_estadoProducto ENUM("Disponible", "Indisponible"),
+    IN p_idCategoria INT
 )
-begin
-    if exists (
-        select 1 from Usuarios
-        where nombreUsuario = p_nombreUsuario
-        and contrasenaUsuario = p_contrasenaUsuario
-    ) then
-        select 1 as inicioValido;
-    else
-        select 0 as inicioInvalido;
-    end if;
-end//
-delimiter ;
+BEGIN
+    UPDATE Productos
+    SET
+        nombreProducto = p_nombreProducto,
+        cantidadProducto = p_cantidadProducto,
+        precioProducto = p_precioProducto,
+        estadoProducto = p_estadoProducto,
+        idCategoria = p_idCategoria
+    WHERE idProducto = p_idProducto;
+END$$
+DELIMITER ;
 
--- _____ _____ _____ _____ _____ DATOS _____ _____ _____ _____ _____
+-- ------------------------------------------------- Eliminar Producto -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarProducto(IN p_idProducto INT)
+BEGIN
+    DELETE FROM Productos WHERE idProducto = p_idProducto;
+END$$
+DELIMITER ;
 
-INSERT INTO Usuarios (nombreUsuario, apellidoUsuario, correoUsuario, contrasenaUsuario) VALUES
-	( 'Juan','Pérez','juan.perez@example.com','contrasena123');
+-- ##################################################################################################################################
+-- ############################################################ CARRITOS ############################################################
+-- ##################################################################################################################################
 
--- DATOS CATEGORIAS
-CALL sp_InsertarCategoria('Libros de Texto');
-CALL sp_InsertarCategoria('Cuadernos');
-CALL sp_InsertarCategoria('Escritura');
-CALL sp_InsertarCategoria('Dibujo y Arte');
-CALL sp_InsertarCategoria('Papelería General');
-CALL sp_InsertarCategoria('Mochilas y Estuches');
-CALL sp_InsertarCategoria('Educación Infantil');
-CALL sp_InsertarCategoria('Matemáticas y Geometría');
-CALL sp_InsertarCategoria('Tecnología Educativa');
-CALL sp_InsertarCategoria('Diccionarios y Enciclopedias');
-CALL sp_InsertarCategoria('Papeles Especiales');
-CALL sp_InsertarCategoria('Material de Oficina');
-CALL sp_InsertarCategoria('Accesorios Escolares');
-CALL sp_InsertarCategoria('Lectura Juvenil');
-CALL sp_InsertarCategoria('Lectura Infantil');
+-- ------------------------------------------------- Agregar Carrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarCarrito(
+    IN p_idUsuario INT
+)
+BEGIN
+    INSERT INTO Carritos(idUsuario) VALUES (p_idUsuario);
+END$$
+DELIMITER ;
 
--- DATOS PRODUCTOS
-CALL sp_InsertarProducto('Libro Matemáticas 5to grado', 50, 90.00, 'Disponible', 1);
-CALL sp_InsertarProducto('Cuaderno Profesional 100 hojas', 200, 15.00, 'Disponible', 2);
-CALL sp_InsertarProducto('Bolígrafo Bic Azul', 500, 2.50, 'Disponible', 3);
-CALL sp_InsertarProducto('Caja de crayones Crayola', 120, 18.00, 'Disponible', 4);
-CALL sp_InsertarProducto('Resma de papel carta', 80, 45.00, 'Disponible', 5);
-CALL sp_InsertarProducto('Mochila Escolar Spiderman', 35, 120.00, 'Disponible', 6);
-CALL sp_InsertarProducto('Libro para colorear', 60, 12.00, 'Disponible', 7);
-CALL sp_InsertarProducto('Juego de geometría', 100, 25.00, 'Disponible', 8);
-CALL sp_InsertarProducto('Calculadora científica Casio', 40, 195.00, 'Disponible', 9);
-CALL sp_InsertarProducto('Diccionario Español-Inglés', 55, 85.00, 'Disponible', 10);
-CALL sp_InsertarProducto('Cartulina brillante', 300, 5.00, 'Disponible', 11);
-CALL sp_InsertarProducto('Grapadora metálica', 25, 30.00, 'Disponible', 12);
-CALL sp_InsertarProducto('Tijeras escolares', 150, 8.00, 'Disponible', 13);
-CALL sp_InsertarProducto('Libro Harry Potter y la Piedra Filosofal', 20, 160.00, 'Disponible', 14);
-CALL sp_InsertarProducto('Cuento ilustrado La Oruga Muy Hambrienta', 40, 95.00, 'Disponible', 15);
+-- ------------------------------------------------- Listar Carritos -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarCarritos()
+BEGIN
+    SELECT * FROM Carritos;
+END$$
+DELIMITER ;
 
-insert into carritos (estado, idusuario) values
-('activo', 1),
-('inactivo', 1),
-('activo', 1),
-('activo', 1),
-('inactivo', 1),
-('activo', 1),
-('activo', 1),
-('inactivo', 1),
-('activo', 1),
-('activo', 1);
+-- ------------------------------------------------- Buscar Carrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarCarrito(IN p_idCarrito INT)
+BEGIN
+    SELECT * FROM Carritos WHERE idCarrito = p_idCarrito;
+END$$
+DELIMITER ;
 
-insert into detallecarritos (idcarrito, idproducto, cantidad) values
-(1, 1, 2),
-(2, 2, 5),
-(3, 3, 10),
-(4, 4, 3),
-(5, 5, 1),
-(6, 6, 2),
-(7, 7, 4),
-(8, 8, 3),
-(9, 9, 1),
-(10, 10, 2);
+-- ------------------------------------------------- Editar Carrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarCarrito(
+    IN p_idCarrito INT,
+    IN p_estado ENUM('Activo', 'Inactivo'),
+    IN p_idUsuario INT
+)
+BEGIN
+    UPDATE Carritos
+    SET
+        estado = p_estado,
+        idUsuario = p_idUsuario
+    WHERE idCarrito = p_idCarrito;
+END$$
+DELIMITER ;
 
-insert into facturas (estadofactura, idcarrito, idusuario) values
-('activa', 1, 1),
-('cancelada', 2, 1),
-('activa', 3, 1),
-('activa', 4, 1),
-('cancelada', 5, 1),
-('activa', 6, 1),
-('activa', 7, 1),
-('cancelada', 8, 1),
-('activa', 9, 1),
-('activa', 10, 1);
+-- ------------------------------------------------- Eliminar Carrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarCarrito(IN p_idCarrito INT)
+BEGIN
+    DELETE FROM Carritos WHERE idCarrito = p_idCarrito;
+END$$
+DELIMITER ;
 
-insert into detallefacturas (cantidadpedida, preciounitario, idfactura, idproducto) values
-(2, 90.00, 1, 1),
-(5, 15.00, 2, 2),
-(10, 2.50, 3, 3),
-(3, 18.00, 4, 4),
-(1, 45.00, 5, 5),
-(2, 120.00, 6, 6),
-(4, 12.00, 7, 7),
-(3, 25.00, 8, 8),
-(1, 195.00, 9, 9),
-(2, 85.00, 10, 10);
+-- ##################################################################################################################################
+-- ######################################################## DETALLE CARRITOS ########################################################
+-- ##################################################################################################################################
 
-use kinalfamiliardb;
-select * from Usuarios;
+-- ------------------------------------------------- Agregar DetalleCarrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarDetalleCarrito(
+    IN p_idCarrito INT,
+    IN p_idProducto INT,
+    IN p_cantidad INT
+)
+BEGIN
+    INSERT INTO DetalleCarritos(idCarrito, idProducto, cantidad)
+    VALUES (p_idCarrito, p_idProducto, p_cantidad);
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Listar DetalleCarritos -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarDetalleCarritos()
+BEGIN
+    SELECT * FROM DetalleCarritos;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Buscar DetalleCarrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarDetalleCarrito(IN p_idDetalleCarrito INT)
+BEGIN
+    SELECT * FROM DetalleCarritos WHERE idDetalleCarrito = p_idDetalleCarrito;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Editar DetalleCarrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarDetalleCarrito(
+    IN p_idDetalleCarrito INT,
+    IN p_idCarrito INT,
+    IN p_idProducto INT,
+    IN p_cantidad INT
+)
+BEGIN
+    UPDATE DetalleCarritos
+    SET
+        idCarrito = p_idCarrito,
+        idProducto = p_idProducto,
+        cantidad = p_cantidad
+    WHERE idDetalleCarrito = p_idDetalleCarrito;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Eliminar DetalleCarrito -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarDetalleCarrito(IN p_idDetalleCarrito INT)
+BEGIN
+    DELETE FROM DetalleCarritos WHERE idDetalleCarrito = p_idDetalleCarrito;
+END$$
+DELIMITER ;
+
+-- ##################################################################################################################################
+-- ############################################################ FACTURAS ############################################################
+-- ##################################################################################################################################
+
+-- ------------------------------------------------- Agregar Factura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarFactura(
+    IN p_estadoFactura ENUM("Activa", "Cancelada"),
+    IN p_idCarrito INT,
+    IN p_idUsuario INT
+)
+BEGIN
+    INSERT INTO Facturas(estadoFactura, idCarrito, idUsuario)
+    VALUES (p_estadoFactura, p_idCarrito, p_idUsuario);
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Listar Facturas -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarFacturas()
+BEGIN
+    SELECT * FROM Facturas;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Buscar Factura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarFactura(IN p_idFactura INT)
+BEGIN
+    SELECT * FROM Facturas WHERE idFactura = p_idFactura;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Editar Factura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarFactura(
+    IN p_idFactura INT,
+    IN p_estadoFactura ENUM("Activa", "Cancelada"),
+    IN p_idCarrito INT,
+    IN p_idUsuario INT
+)
+BEGIN
+    UPDATE Facturas
+    SET
+        estadoFactura = p_estadoFactura,
+        idCarrito = p_idCarrito,
+        idUsuario = p_idUsuario
+    WHERE idFactura = p_idFactura;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Eliminar Factura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarFactura(IN p_idFactura INT)
+BEGIN
+    DELETE FROM Facturas WHERE idFactura = p_idFactura;
+END$$
+DELIMITER ;
+
+-- ##################################################################################################################################
+-- ####################################################### DETALLE FACTURAS #########################################################
+-- ##################################################################################################################################
+
+-- ------------------------------------------------- Agregar DetalleFactura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarDetalleFactura(
+    IN p_cantidadPedida INT,
+    IN p_precioUnitario DECIMAL(10, 2),
+    IN p_idFactura INT,
+    IN p_idProducto INT
+)
+BEGIN
+    INSERT INTO DetalleFacturas(cantidadPedida, precioUnitario, idFactura, idProducto)
+    VALUES (p_cantidadPedida, p_precioUnitario, p_idFactura, p_idProducto);
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Listar DetalleFacturas -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_ListarDetalleFacturas()
+BEGIN
+    SELECT * FROM DetalleFacturas;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Buscar DetalleFactura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarDetalleFactura(IN p_idDetalleFactura INT)
+BEGIN
+    SELECT * FROM DetalleFacturas WHERE idDetalleFactura = p_idDetalleFactura;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Editar DetalleFactura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EditarDetalleFactura(
+    IN p_idDetalleFactura INT,
+    IN p_cantidadPedida INT,
+    IN p_precioUnitario DECIMAL(10, 2),
+    IN p_idFactura INT,
+    IN p_idProducto INT
+)
+BEGIN
+    UPDATE DetalleFacturas
+    SET
+        cantidadPedida = p_cantidadPedida,
+        precioUnitario = p_precioUnitario,
+        idFactura = p_idFactura,
+        idProducto = p_idProducto
+    WHERE idDetalleFactura = p_idDetalleFactura;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------- Eliminar DetalleFactura -------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarDetalleFactura(IN p_idDetalleFactura INT)
+BEGIN
+    DELETE FROM DetalleFacturas WHERE idDetalleFactura = p_idDetalleFactura;
+END$$
+DELIMITER ;
+
+
+USE KinalFamiliarDB;
+
+-- Insertar datos en Usuarios
+CALL sp_AgregarUsuario('Juan', 'Pérez', 'juan.perez@example.com', 'password123');
+CALL sp_AgregarUsuario('María', 'García', 'maria.garcia@example.com', 'password123');
+CALL sp_AgregarUsuario('Carlos', 'López', 'carlos.lopez@example.com', 'password123');
+CALL sp_AgregarUsuario('Ana', 'Martínez', 'ana.martinez@example.com', 'password123');
+CALL sp_AgregarUsuario('Luis', 'Hernández', 'luis.hernandez@example.com', 'password123');
+CALL sp_AgregarUsuario('Elena', 'González', 'elena.gonzalez@example.com', 'password123');
+CALL sp_AgregarUsuario('Javier', 'Rodríguez', 'javier.rodriguez@example.com', 'password123');
+CALL sp_AgregarUsuario('Sofia', 'Sánchez', 'sofia.sanchez@example.com', 'password123');
+CALL sp_AgregarUsuario('Miguel', 'Ramírez', 'miguel.ramirez@example.com', 'password123');
+CALL sp_AgregarUsuario('Laura', 'Torres', 'laura.torres@example.com', 'password123');
+
+-- Insertar datos en Categorias
+CALL sp_AgregarCategoria('Electrónicos');
+CALL sp_AgregarCategoria('Ropa');
+CALL sp_AgregarCategoria('Hogar');
+CALL sp_AgregarCategoria('Juguetes');
+CALL sp_AgregarCategoria('Alimentos');
+CALL sp_AgregarCategoria('Deportes');
+CALL sp_AgregarCategoria('Libros');
+CALL sp_AgregarCategoria('Salud y Belleza');
+CALL sp_AgregarCategoria('Automotriz');
+CALL sp_AgregarCategoria('Mascotas');
+
+-- Insertar datos en Productos
+CALL sp_AgregarProducto('Laptop Gamer', 15, 1200.50, 'Disponible', 1);
+CALL sp_AgregarProducto('Camiseta de Algodón', 100, 25.00, 'Disponible', 2);
+CALL sp_AgregarProducto('Sofá de Tres Plazas', 10, 450.75, 'Disponible', 3);
+CALL sp_AgregarProducto('Lego Star Wars', 50, 89.99, 'Disponible', 4);
+CALL sp_AgregarProducto('Arroz Blanco 1kg', 200, 1.50, 'Disponible', 5);
+CALL sp_AgregarProducto('Balón de Fútbol', 80, 19.95, 'Disponible', 6);
+CALL sp_AgregarProducto('Cien Años de Soledad', 120, 22.00, 'Disponible', 7);
+CALL sp_AgregarProducto('Shampoo Anticaspa', 90, 8.50, 'Disponible', 8);
+CALL sp_AgregarProducto('Aceite para Motor 5W-30', 40, 35.20, 'Disponible', 9);
+CALL sp_AgregarProducto('Comida para Perro 15kg', 60, 55.00, 'Disponible', 10);
+
+-- Insertar datos en Carritos
+CALL sp_AgregarCarrito(1);
+CALL sp_AgregarCarrito(2);
+CALL sp_AgregarCarrito(3);
+CALL sp_AgregarCarrito(4);
+CALL sp_AgregarCarrito(5);
+CALL sp_AgregarCarrito(6);
+CALL sp_AgregarCarrito(7);
+CALL sp_AgregarCarrito(8);
+CALL sp_AgregarCarrito(9);
+CALL sp_AgregarCarrito(10);
+
+-- Insertar datos en DetalleCarritos
+CALL sp_AgregarDetalleCarrito(1, 1, 1);
+CALL sp_AgregarDetalleCarrito(1, 5, 3);
+CALL sp_AgregarDetalleCarrito(2, 2, 2);
+CALL sp_AgregarDetalleCarrito(3, 3, 1);
+CALL sp_AgregarDetalleCarrito(4, 4, 1);
+CALL sp_AgregarDetalleCarrito(5, 6, 1);
+CALL sp_AgregarDetalleCarrito(6, 7, 5);
+CALL sp_AgregarDetalleCarrito(7, 8, 2);
+CALL sp_AgregarDetalleCarrito(8, 9, 1);
+CALL sp_AgregarDetalleCarrito(9, 10, 1);
+
+-- Insertar datos en Facturas
+CALL sp_AgregarFactura('Activa', 1, 1);
+CALL sp_AgregarFactura('Activa', 2, 2);
+CALL sp_AgregarFactura('Activa', 3, 3);
+CALL sp_AgregarFactura('Activa', 4, 4);
+CALL sp_AgregarFactura('Activa', 5, 5);
+CALL sp_AgregarFactura('Cancelada', 6, 6);
+CALL sp_AgregarFactura('Activa', 7, 7);
+CALL sp_AgregarFactura('Activa', 8, 8);
+CALL sp_AgregarFactura('Activa', 9, 9);
+CALL sp_AgregarFactura('Activa', 10, 10);
+
+-- Insertar datos en DetalleFacturas
+CALL sp_AgregarDetalleFactura(1, 1200.50, 1, 1);
+CALL sp_AgregarDetalleFactura(3, 1.50, 1, 5);
+CALL sp_AgregarDetalleFactura(2, 25.00, 2, 2);
+CALL sp_AgregarDetalleFactura(1, 450.75, 3, 3);
+CALL sp_AgregarDetalleFactura(1, 89.99, 4, 4);
+CALL sp_AgregarDetalleFactura(1, 19.95, 5, 6);
+CALL sp_AgregarDetalleFactura(5, 22.00, 7, 7);
+CALL sp_AgregarDetalleFactura(2, 8.50, 8, 8);
+CALL sp_AgregarDetalleFactura(1, 35.20, 9, 9);
+CALL sp_AgregarDetalleFactura(1, 55.00, 10, 10);

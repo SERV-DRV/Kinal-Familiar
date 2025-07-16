@@ -23,8 +23,6 @@ import org.kinalfamiliar.db.Conexion;
 
 public class Report {
     
-    
-
     public void generarReporte(String jrxmlFileName, String outputBaseName) {
         //int idCliente = 1;//viene del texfild idClinete en el fxml
         

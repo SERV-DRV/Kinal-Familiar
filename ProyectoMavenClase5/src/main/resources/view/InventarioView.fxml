@@ -37,7 +37,7 @@
             </rowConstraints>
             <children>
                 <Label styleClass="menu-header-background" GridPane.rowIndex="3" />
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonSalir" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
                <graphic>
                       <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -55,7 +55,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="321.0" styleClass="btnMenus" text="Carrito de compras" GridPane.rowIndex="4">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonCarrito" prefHeight="105.0" prefWidth="321.0" styleClass="btnMenus" text="Carrito de compras" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -155,11 +155,11 @@
         <TableView fx:id="tblProductos" layoutX="341.0" layoutY="145.0" prefHeight="556.0" prefWidth="658.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="40.0" text="ID" />
-                <TableColumn fx:id="colNombre" prefWidth="150.0" text="Nombre" />
-                <TableColumn fx:id="colCantidad" prefWidth="80.0" text="Stock" />
-                <TableColumn fx:id="colPrecio" prefWidth="100.0" text="Precio c/u" />
-                <TableColumn fx:id="colEstado" prefWidth="110.0" text="Estado" />
-                <TableColumn fx:id="colIdCategoria" prefWidth="120.0" text="Categoria ID" />
+                <TableColumn fx:id="colNombre" prefWidth="204.0" text="Nombre" />
+                <TableColumn fx:id="colCantidad" prefWidth="87.0" text="Stock" />
+                <TableColumn fx:id="colPrecio" prefWidth="92.0" text="Precio c/u" />
+                <TableColumn fx:id="colEstado" prefWidth="128.0" text="Estado" />
+                <TableColumn fx:id="colIdCategoria" prefWidth="105.0" text="Categoria ID" />
             </columns>
         </TableView>
         <VBox alignment="CENTER" layoutX="1019.0" layoutY="80.0" prefHeight="625.0" prefWidth="245.0" spacing="3.0">

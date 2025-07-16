@@ -1,22 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package org.kinalfamiliar.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,17 +26,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.kinalfamiliar.system.Main;
 import org.kinalfamiliar.db.Conexion;
 import org.kinalfamiliar.model.Categoria;
 import org.kinalfamiliar.model.Producto;
-import org.kinalfamiliar.reporte.*;
+import org.kinalfamiliar.reporte.Report;
+import org.kinalfamiliar.system.Main;
 
-/**
- * FXML Controller class
- *
- * @author informatica
- */
 public class InventarioController implements Initializable {
 
     @FXML
@@ -84,7 +70,6 @@ public class InventarioController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         configurarColumnas();
         configurarSpinner();
         cargarCategorias();
@@ -97,15 +82,14 @@ public class InventarioController implements Initializable {
 
     private void configurarColumnas() {
         colId.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("idProducto"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombre"));
-        colCantidad.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("cantidad"));
-        colPrecio.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precio"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<Producto, String>("estado"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombreProducto"));
+        colCantidad.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("cantidadProducto"));
+        colPrecio.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioProducto"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<Producto, String>("estadoProducto"));
         colIdCategoria.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("idCategoria"));
     }
 
     private void configurarSpinner() {
-        // tipo Double
         SpinnerValueFactory<Integer> valoresEnteros
                 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 500, 1);
         spCantidad.setValueFactory(valoresEnteros);
@@ -115,16 +99,16 @@ public class InventarioController implements Initializable {
         Producto producto = tblProductos.getSelectionModel().getSelectedItem();
         if (producto != null) {
             txtIdProducto.setText(String.valueOf(producto.getIdProducto()));
-            txtNombre.setText(producto.getNombre());
-            spCantidad.getValueFactory().setValue(producto.getCantidad());
-            txtPrecio.setText(String.valueOf(producto.getPrecio()));
+            txtNombre.setText(producto.getNombreProducto());
+            spCantidad.getValueFactory().setValue(producto.getCantidadProducto());
+            txtPrecio.setText(String.valueOf(producto.getPrecioProducto()));
             for (Categoria c : cbxCategoria.getItems()) {
                 if (c.getIdCategoria() == producto.getIdCategoria()) {
                     cbxCategoria.setValue(c);
                     break;
                 }
             }
-            if (producto.getEstado().equalsIgnoreCase("Disponible")) {
+            if (producto.getEstadoProducto().equalsIgnoreCase("Disponible")) {
                 rbDisponible.setSelected(true);
             } else {
                 rbIndisponible.setSelected(true);
@@ -150,14 +134,13 @@ public class InventarioController implements Initializable {
             ResultSet resultado = enunciado.executeQuery();
             while (resultado.next()) {
                 productos.add(new Producto(
-                        resultado.getInt(1),
-                        resultado.getString(2),
-                        resultado.getInt(3),
-                        resultado.getDouble(4),
-                        resultado.getString(5),
-                        resultado.getInt(6)
-                )
-                );
+                        resultado.getInt("idProducto"),
+                        resultado.getString("nombreProducto"),
+                        resultado.getInt("cantidadProducto"),
+                        resultado.getDouble("precioProducto"),
+                        resultado.getString("estadoProducto"),
+                        resultado.getInt("idCategoria")
+                ));
             }
         } catch (SQLException ex) {
             System.out.println("Error al listar productos");
@@ -193,10 +176,9 @@ public class InventarioController implements Initializable {
             ResultSet resultado = enunciado.executeQuery();
             while (resultado.next()) {
                 categorias.add(new Categoria(
-                        resultado.getInt(1),
-                        resultado.getString(2)
-                )
-                );
+                        resultado.getInt("idCategoria"),
+                        resultado.getString("nombreCategoria")
+                ));
             }
         } catch (SQLException ex) {
             System.out.println("Error al listar categorias en productos");
@@ -210,16 +192,16 @@ public class InventarioController implements Initializable {
         cbxCategoria.setItems(listaCategoria);
     }
 
-    private void insertarProducto() {
+    private void agregarProducto() {
         mProducto = cargarModelo();
         Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
         try {
             CallableStatement enunciado = Conexion.getInstancia().getConexion()
-                    .prepareCall("call sp_InsertarProducto(?, ?, ?, ?, ?)");
-            enunciado.setString(1, mProducto.getNombre());
-            enunciado.setInt(2, mProducto.getCantidad());
-            enunciado.setDouble(3, mProducto.getPrecio());
-            enunciado.setString(4, mProducto.getEstado());
+                    .prepareCall("call sp_AgregarProducto(?, ?, ?, ?, ?)");
+            enunciado.setString(1, mProducto.getNombreProducto());
+            enunciado.setInt(2, mProducto.getCantidadProducto());
+            enunciado.setDouble(3, mProducto.getPrecioProducto());
+            enunciado.setString(4, mProducto.getEstadoProducto());
             enunciado.setInt(5, categoriaSeleccionada.getIdCategoria());
             int registroAgregado = enunciado.executeUpdate();
             if (registroAgregado > 0) {
@@ -232,17 +214,17 @@ public class InventarioController implements Initializable {
         }
     }
 
-    private void actualizarProducto() {
+    private void editarProducto() {
         mProducto = cargarModelo();
         Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
         try {
             CallableStatement enunciado = Conexion.getInstancia().getConexion()
-                    .prepareCall("call sp_ActualizarProducto(?, ?, ?, ?, ?, ?)");
+                    .prepareCall("call sp_EditarProducto(?, ?, ?, ?, ?, ?)");
             enunciado.setInt(1, mProducto.getIdProducto());
-            enunciado.setString(2, mProducto.getNombre());
-            enunciado.setInt(3, mProducto.getCantidad());
-            enunciado.setDouble(4, mProducto.getPrecio());
-            enunciado.setString(5, mProducto.getEstado());
+            enunciado.setString(2, mProducto.getNombreProducto());
+            enunciado.setInt(3, mProducto.getCantidadProducto());
+            enunciado.setDouble(4, mProducto.getPrecioProducto());
+            enunciado.setString(5, mProducto.getEstadoProducto());
             enunciado.setInt(6, categoriaSeleccionada.getIdCategoria());
             enunciado.executeUpdate();
             cargarTableView();
@@ -320,7 +302,7 @@ public class InventarioController implements Initializable {
                     alerta.showAndWait();
                     return;
                 }
-                insertarProducto();
+                agregarProducto();
                 System.out.println("Guardando los datos ingresados");
                 actualizarEstadoAccion(acciones.NINGUNA);
                 break;
@@ -345,7 +327,7 @@ public class InventarioController implements Initializable {
                     alerta.showAndWait();
                     return;
                 }
-                actualizarProducto();
+                editarProducto();
                 System.out.println("Guardando edicion indicada");
                 actualizarEstadoAccion(acciones.NINGUNA);
                 break;
@@ -409,7 +391,7 @@ public class InventarioController implements Initializable {
 
         for (int i = 0; i < items.size(); i++) {
             Producto producto = items.get(i);
-            if (producto.getNombre().toLowerCase().contains(filtro)) {
+            if (producto.getNombreProducto().toLowerCase().contains(filtro)) {
                 tblProductos.getSelectionModel().select(i);
                 tblProductos.scrollTo(i);
                 break;
@@ -436,7 +418,11 @@ public class InventarioController implements Initializable {
     }
 
     public void manejarBotonCarrito(ActionEvent evento) {
-        principal.cambiarEscena("CompraView.fxml", 1213, 722);
+        principal.cambiarEscena("CompraView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonSalir(ActionEvent evento) {
+        Platform.exit();
     }
 
     @FXML
@@ -444,5 +430,4 @@ public class InventarioController implements Initializable {
         Report reporte = new Report();
         reporte.generarReporte("Inventario.jrxml", "ReporteInventario");
     }
-
 }
