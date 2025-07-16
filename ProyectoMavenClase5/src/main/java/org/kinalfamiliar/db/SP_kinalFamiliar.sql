@@ -351,6 +351,149 @@ create procedure sp_BuscarDetalleCarrito(in p_idDetalleCarrito int)
 	end//
 delimiter ;
 
+-- CRUD
+
+-- insertar factura
+delimiter //
+create procedure sp_insertarfactura(
+	in p_estadofactura enum('activa', 'cancelada'),
+	in p_idcarrito int,
+	in p_idusuario int
+)
+begin
+	insert into facturas(estadofactura, idcarrito, idusuario)
+	values(p_estadofactura, p_idcarrito, p_idusuario);
+end//
+delimiter ;
+
+-- listar facturas
+delimiter //
+create procedure sp_listarfacturas()
+begin
+	select 
+		f.idfactura as id,
+		f.fechafactura as fecha,
+		f.estadofactura as estado,
+		f.idcarrito as carritoid,
+		f.idusuario as usuarioid
+	from facturas f;
+end//
+delimiter ;
+
+-- actualizar factura
+delimiter //
+create procedure sp_actualizarfactura(
+	in p_idfactura int,
+	in p_estadofactura enum('activa', 'cancelada'),
+	in p_idcarrito int,
+	in p_idusuario int
+)
+begin
+	update facturas f
+	set 
+		f.estadofactura = p_estadofactura,
+		f.idcarrito = p_idcarrito,
+		f.idusuario = p_idusuario
+	where f.idfactura = p_idfactura;
+end//
+delimiter ;
+
+-- eliminar factura
+delimiter //
+create procedure sp_eliminarfactura(in p_idfactura int)
+begin
+	delete from facturas
+	where idfactura = p_idfactura;
+end//
+delimiter ;
+
+-- buscar factura
+delimiter //
+create procedure sp_buscarfactura(in p_idfactura int)
+begin
+	select 
+		f.idfactura as id,
+		f.fechafactura as fecha,
+		f.estadofactura as estado,
+		f.idcarrito as carritoid,
+		f.idusuario as usuarioid
+	from facturas f
+	where f.idfactura = p_idfactura;
+end//
+delimiter ;
+
+-- insertar detallefactura
+delimiter //
+create procedure sp_insertardetallefactura(
+	in p_cantidadpedida int,
+	in p_preciounitario decimal(10,2),
+	in p_idfactura int,
+	in p_idproducto int
+)
+begin
+	insert into detallefacturas(cantidadpedida, preciounitario, idfactura, idproducto)
+	values(p_cantidadpedida, p_preciounitario, p_idfactura, p_idproducto);
+end//
+delimiter ;
+
+-- listar detallefacturas
+delimiter //
+create procedure sp_listardetallefacturas()
+begin
+	select 
+		df.iddetallefactura as id,
+		df.cantidadpedida as cantidad,
+		df.preciounitario as precio,
+		df.idfactura as facturaid,
+		df.idproducto as productoid
+	from detallefacturas df;
+end//
+delimiter ;
+
+-- actualizar detallefactura
+delimiter //
+create procedure sp_actualizardetallefactura(
+	in p_iddetallefactura int,
+	in p_cantidadpedida int,
+	in p_preciounitario decimal(10,2),
+	in p_idfactura int,
+	in p_idproducto int
+)
+begin
+	update detallefacturas df
+	set 
+		df.cantidadpedida = p_cantidadpedida,
+		df.preciounitario = p_preciounitario,
+		df.idfactura = p_idfactura,
+		df.idproducto = p_idproducto
+	where df.iddetallefactura = p_iddetallefactura;
+end//
+delimiter ;
+
+-- eliminar detallefactura
+delimiter //
+create procedure sp_eliminardetallefactura(in p_iddetallefactura int)
+begin
+	delete from detallefacturas
+	where iddetallefactura = p_iddetallefactura;
+end//
+delimiter ;
+
+-- buscar detallefactura
+delimiter //
+create procedure sp_buscardetallefactura(in p_iddetallefactura int)
+begin
+	select 
+		df.iddetallefactura as id,
+		df.cantidadpedida as cantidad,
+		df.preciounitario as precio,
+		df.idfactura as facturaid,
+		df.idproducto as productoid
+	from detallefacturas df
+	where df.iddetallefactura = p_iddetallefactura;
+end//
+delimiter ;
+
 -- _____ _____ _____ _____ _____ Login _____ _____ _____ _____ _____
 
 delimiter //
@@ -409,6 +552,54 @@ CALL sp_InsertarProducto('Grapadora metálica', 25, 30.00, 'Disponible', 12);
 CALL sp_InsertarProducto('Tijeras escolares', 150, 8.00, 'Disponible', 13);
 CALL sp_InsertarProducto('Libro Harry Potter y la Piedra Filosofal', 20, 160.00, 'Disponible', 14);
 CALL sp_InsertarProducto('Cuento ilustrado La Oruga Muy Hambrienta', 40, 95.00, 'Disponible', 15);
+
+insert into carritos (estado, idusuario) values
+('activo', 1),
+('inactivo', 1),
+('activo', 1),
+('activo', 1),
+('inactivo', 1),
+('activo', 1),
+('activo', 1),
+('inactivo', 1),
+('activo', 1),
+('activo', 1);
+
+insert into detallecarritos (idcarrito, idproducto, cantidad) values
+(1, 1, 2),
+(2, 2, 5),
+(3, 3, 10),
+(4, 4, 3),
+(5, 5, 1),
+(6, 6, 2),
+(7, 7, 4),
+(8, 8, 3),
+(9, 9, 1),
+(10, 10, 2);
+
+insert into facturas (estadofactura, idcarrito, idusuario) values
+('activa', 1, 1),
+('cancelada', 2, 1),
+('activa', 3, 1),
+('activa', 4, 1),
+('cancelada', 5, 1),
+('activa', 6, 1),
+('activa', 7, 1),
+('cancelada', 8, 1),
+('activa', 9, 1),
+('activa', 10, 1);
+
+insert into detallefacturas (cantidadpedida, preciounitario, idfactura, idproducto) values
+(2, 90.00, 1, 1),
+(5, 15.00, 2, 2),
+(10, 2.50, 3, 3),
+(3, 18.00, 4, 4),
+(1, 45.00, 5, 5),
+(2, 120.00, 6, 6),
+(4, 12.00, 7, 7),
+(3, 25.00, 8, 8),
+(1, 195.00, 9, 9),
+(2, 85.00, 10, 10);
 
 use kinalfamiliardb;
 select * from Usuarios;
