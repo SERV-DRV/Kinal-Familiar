@@ -479,6 +479,19 @@ DELIMITER $$
 		end $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE sp_ObtenerCarritoActivoPorUsuario(
+    IN p_idUsuario INT,
+    OUT p_idCarrito INT
+)
+BEGIN
+    SELECT idCarrito INTO p_idCarrito
+    FROM Carritos
+    WHERE idUsuario = p_idUsuario AND estado = 'Activo'
+    LIMIT 1;
+END$$
+DELIMITER ;
+
 USE KinalFamiliarDB;
 
 -- Insertar datos en Usuarios
