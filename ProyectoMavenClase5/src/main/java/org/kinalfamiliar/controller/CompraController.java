@@ -499,6 +499,14 @@ public class CompraController implements Initializable {
         principal.cambiarEscena("EstadisticasView.fxml", 1280, 720);
     }
 
+    public void manejarBotonMenu(ActionEvent evento) {
+        principal.cambiarEscena("MenuPrincipalView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonContacto(ActionEvent evento) {
+        principal.cambiarEscena("ContactoView.fxml", 1280, 720);
+    }
+
     public void manejarBotonSalir(ActionEvent evento) {
         Platform.exit();
     }
