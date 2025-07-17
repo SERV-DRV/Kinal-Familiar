@@ -185,7 +185,10 @@ M2E2Ow==]]>
         </band>
     </pageHeader>
     <columnHeader>
-        <band height="79" splitType="Stretch">
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="31" splitType="Stretch">
             <textField>
                 <reportElement x="460" y="0" width="70" height="30" uuid="22a73810-defe-4c9b-9dfa-6568a7626463"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -217,9 +220,6 @@ M2E2Ow==]]>
                 <textFieldExpression><![CDATA[$F{precioProducto}]]></textFieldExpression>
             </textField>
         </band>
-    </columnHeader>
-    <detail>
-        <band height="125" splitType="Stretch"/>
     </detail>
     <columnFooter>
         <band height="45" splitType="Stretch"/>
