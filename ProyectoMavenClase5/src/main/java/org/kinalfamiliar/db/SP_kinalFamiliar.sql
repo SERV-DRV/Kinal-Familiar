@@ -412,6 +412,19 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+	create procedure sp_contarClientes()
+		begin
+			select concat(count(*), ' CLIENTES ACTIVOS') as RESULTADO from Usuarios;
+		end $$
+DELIMITER ;
+DELIMITER $$
+	create procedure sp_contarCarritos()
+		begin
+			select concat(count(*), ' CARRITOS ACTIVOS') as RESULTADO from Carritos;
+		end $$
+DELIMITER ;
+
 USE KinalFamiliarDB;
 
 -- Insertar datos en Usuarios
