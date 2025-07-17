@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import org.kinalfamiliar.controller.LoginController;
@@ -34,6 +35,8 @@ public class Main extends Application {
 
         Scene escena = new Scene(raiz);
         escenario.setScene(escena);
+        escenario.setTitle("Kinal-Familiar");
+        escenario.getIcons().add(new Image(getClass().getResourceAsStream(URL_IMAGE + "kinalFamiliarLogo-re.png")));
         escenario.setResizable(false);
         escenario.show();
     }
