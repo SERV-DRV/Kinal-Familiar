@@ -10,16 +10,19 @@ package org.kinalfamiliar.model;
  */
 public class Usuario {
     int idUsuario;
-    String nombreUsuario, apellidoUsuario;
+    String nombreUsuario, apellidoUsuario, correoUsuario;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario) {
+    public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario, String correoUsuario) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
+        this.correoUsuario = correoUsuario;
     }
+
+   
 
     public int getIdUsuario() {
         return idUsuario;
@@ -33,6 +36,10 @@ public class Usuario {
         return apellidoUsuario;
     }
 
+    public String getCorreoUsuario() {
+        return correoUsuario;
+    }
+    
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -45,6 +52,10 @@ public class Usuario {
         this.apellidoUsuario = apellidoUsuario;
     }
 
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
+    }
+    
     @Override
     public String toString() {
         return + idUsuario + " | " + nombreUsuario + " " + apellidoUsuario;

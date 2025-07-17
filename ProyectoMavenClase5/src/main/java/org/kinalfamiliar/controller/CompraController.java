@@ -104,6 +104,10 @@ public class CompraController implements Initializable {
         configurarListeners();
         configurarBotonesCantidad();
         cargarDatosUsuario();
+        cargarUsuarios();
+        limpiarDetallesDelUsuario();
+        seleccionarUsuarioAutenticadoEnComboBox();
+
     }
 
     public void cargarDatosUsuario() {
@@ -116,7 +120,7 @@ public class CompraController implements Initializable {
     public void cerrarSesion(ActionEvent evento) {
         UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
         usuario.cerrarSesion();
-        principal.cambiarEscena("LoginView.fxml", 1213, 722);
+        principal.cambiarEscena("LoginView.fxml", 1280, 720);
     }
 
     private void configurarColumnas() {
@@ -208,24 +212,71 @@ public class CompraController implements Initializable {
         txtACantidad.setText("1");
     }
 
-    private ArrayList<Carrito> listarCarritos() {
-        ArrayList<Carrito> carritos = new ArrayList<>();
-        try {
-            CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("call sp_ListarCarritos();");
-            ResultSet resultado = enunciado.executeQuery();
-            while (resultado.next()) {
-                carritos.add(new Carrito(
-                        resultado.getInt("idCarrito"),
-                        resultado.getString("estado"),
-                        resultado.getTimestamp("fechaCreacion").toLocalDateTime(),
-                        resultado.getInt("idUsuario")
-                ));
+
+private ArrayList<Carrito> listarCarritosPorUsuario() {
+    ArrayList<Carrito> carritos = new ArrayList<>();
+    try {
+        UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+        String correo = usuario.getCorreoUsuario();
+
+        CallableStatement stmt = Conexion.getInstancia().getConexion()
+            .prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}");
+        stmt.setString(1, correo);
+        stmt.registerOutParameter(2, java.sql.Types.INTEGER);
+        stmt.execute();
+
+        int idUsuario = stmt.getInt(2);
+        if (!stmt.wasNull()) {
+            CallableStatement carritoStmt = Conexion.getInstancia().getConexion()
+                .prepareCall("CALL sp_ListarCarritos()");
+            ResultSet rs = carritoStmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getInt("idUsuario") == idUsuario) {
+                    carritos.add(new Carrito(
+                        rs.getInt("idCarrito"),
+                        rs.getString("estado"),
+                        rs.getTimestamp("fechaCreacion").toLocalDateTime(),
+                        rs.getInt("idUsuario")
+                    ));
+                }
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
-        return carritos;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+    return carritos;
+}
+
+
+private void limpiarDetallesDelUsuario() {
+    UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
+    String correo = usuario.getCorreoUsuario();
+
+    try {
+        CallableStatement stmt = Conexion.getInstancia().getConexion()
+            .prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}");
+        stmt.setString(1, correo);
+        stmt.registerOutParameter(2, java.sql.Types.INTEGER);
+        stmt.execute();
+
+        int idUsuario = stmt.getInt(2);
+        if (!stmt.wasNull()) {
+            // Obtener carritos del usuario
+            for (Carrito carrito : listarCarritosPorUsuario()) {
+                CallableStatement deleteStmt = Conexion.getInstancia().getConexion()
+                    .prepareCall("CALL sp_EliminarDetalleCarritoPorCarrito(?)");
+                deleteStmt.setInt(1, carrito.getIdCarrito());
+                deleteStmt.execute();
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    tblDetalleCarrito.getItems().clear();
+}
+
+
 
     private ArrayList<DetalleCarrito> listarTodosLosDetalles() {
         ArrayList<DetalleCarrito> detalleCarritos = new ArrayList<>();
@@ -247,7 +298,7 @@ public class CompraController implements Initializable {
     }
 
     private void cargarTableViewCarrito() {
-        listaCarritos = FXCollections.observableArrayList(listarCarritos());
+        listaCarritos = FXCollections.observableArrayList(listarCarritosPorUsuario());
         tblCarrito.setItems(listaCarritos);
         if (!listaCarritos.isEmpty()) {
             tblCarrito.getSelectionModel().selectFirst();
@@ -278,7 +329,8 @@ public class CompraController implements Initializable {
                 usuarios.add(new Usuario(
                         resultado.getInt("idUsuario"),
                         resultado.getString("nombreUsuario"),
-                        resultado.getString("apellidoUsuario")
+                        resultado.getString("apellidoUsuario"),
+                        resultado.getString("correoUsuario")
                 ));
             }
         } catch (SQLException ex) {
@@ -316,6 +368,19 @@ public class CompraController implements Initializable {
     private void cargarProductos() {
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(listarProductos());
         cbxProducto.setItems(listaProductos);
+    }
+
+    private void seleccionarUsuarioAutenticadoEnComboBox() {
+        UsuarioAutenticado usuarioAutenticado = UsuarioAutenticado.getInstancia();
+        String correo = usuarioAutenticado.getCorreoUsuario();
+
+        for (Usuario usuario : cbxUsuario.getItems()) {
+            if (usuario.getCorreoUsuario().equalsIgnoreCase(correo)) {
+                cbxUsuario.setValue(usuario);
+                cbxUsuario.setDisable(true);
+                break;
+            }
+        }
     }
 
     private Carrito cargarModeloCarrito() {
@@ -515,7 +580,7 @@ public class CompraController implements Initializable {
                 if (!enunciado.wasNull()) {
                     idUsuario = retrievedId;
                 }
-                
+
                 enunciado.close();
 
             } catch (SQLException ex) {

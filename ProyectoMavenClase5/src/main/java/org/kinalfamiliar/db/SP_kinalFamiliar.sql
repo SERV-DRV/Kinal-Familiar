@@ -460,6 +460,14 @@ create procedure sp_inicioSesion(
 end//
 delimiter ;
 
+
+DELIMITER $$
+CREATE PROCEDURE sp_EliminarDetalleCarritoPorCarrito(IN p_idCarrito INT)
+BEGIN
+    DELETE FROM DetalleCarritos WHERE idCarrito = p_idCarrito;
+END$$
+DELIMITER ;
+
 USE KinalFamiliarDB;
 
 -- Insertar datos en Usuarios
