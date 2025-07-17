@@ -79,4 +79,8 @@ public class InfoController implements Initializable {
     public void manejarBotonSalir(ActionEvent evento) {
         Platform.exit();
     }
+
+    public void manejarBotonEstadistica(ActionEvent evento) {
+        principal.cambiarEscena("EstadisticasView.fxml", 1280, 720);
+    }
 }
