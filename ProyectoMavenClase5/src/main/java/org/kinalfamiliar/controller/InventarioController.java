@@ -95,7 +95,7 @@ public class InventarioController implements Initializable {
         labelApellido.setText(usuario.getApellidoUsuario());
         labelEmail.setText(usuario.getCorreoUsuario());
     }
-    
+
     public void cerrarSesion(ActionEvent evento) {
         UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
         usuario.cerrarSesion();
@@ -441,6 +441,10 @@ public class InventarioController implements Initializable {
 
     public void manejarBotonCarrito(ActionEvent evento) {
         principal.cambiarEscena("CompraView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonEstadistica(ActionEvent evento) {
+        principal.cambiarEscena("EstadisticasView.fxml", 1280, 720);
     }
 
     public void manejarBotonSalir(ActionEvent evento) {

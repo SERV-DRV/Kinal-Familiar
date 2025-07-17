@@ -164,12 +164,12 @@
             <Insets left="25.0" right="10.0" />
          </padding>
       </VBox>
-      <TextField fx:id="txtClientes" layoutX="720.0" layoutY="216.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
+      <TextField fx:id="txtClientes" editable="false" layoutX="720.0" layoutY="216.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
          <font>
             <Font name="Bookshelf Symbol 7" size="39.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtCarritos" layoutX="722.0" layoutY="449.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
+      <TextField fx:id="txtCarritos" editable="false" layoutX="722.0" layoutY="449.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
          <font>
             <Font name="Bookshelf Symbol 7" size="39.0" />
          </font>
