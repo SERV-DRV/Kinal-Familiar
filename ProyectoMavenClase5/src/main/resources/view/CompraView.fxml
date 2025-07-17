@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxWidth="1280.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="anchorPaneInicioView" stylesheets="@../style/compraview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.CompraController">
+    <children>
+        <GridPane prefHeight="720.0" prefWidth="321.0" styleClass="gridpaneMenu">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="251.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="269.0" minHeight="80.0" prefHeight="204.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="140.0" minHeight="78.0" prefHeight="86.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="111.0" minHeight="78.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="140.0" minHeight="76.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="116.0" minHeight="70.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="96.0" minHeight="68.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="93.0" minHeight="71.0" prefHeight="79.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label styleClass="menu-header-background" GridPane.rowIndex="4" />
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonSalir" prefHeight="110.0" prefWidth="321.0" styleClass="btnMenus" text="Salir de la Aplicación" GridPane.rowIndex="5">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/exit.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonContacto" prefHeight="101.0" prefWidth="321.0" styleClass="btnMenus" text="Contactanos" GridPane.rowIndex="6">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/contact.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="321.0" styleClass="btnMenus-active" text="Carrito de compras" GridPane.rowIndex="4">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/shopping%20car.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonInventario" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus" text="Inventario" GridPane.rowIndex="3">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" styleClass="btnMenus-active">
+                            <image>
+                                <Image url="@../images/inventario.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonEstadistica" prefHeight="108.0" prefWidth="321.0" styleClass="btnMenus" text="Estadísticas" GridPane.rowIndex="2">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/statics.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonMenu" prefHeight="94.0" prefWidth="321.0" styleClass="btnMenus" text="Menú Principal" GridPane.rowIndex="1">
+                    <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/home.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <VBox prefHeight="241.0" prefWidth="321.0">
+                    <children>
+                        <GridPane prefHeight="82.0" prefWidth="321.0" styleClass="menu-header-background">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="75.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <ImageView fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/kinalFamiliarLogo-re.png" />
+                                    </image>
+                                </ImageView>
+                                <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="KINAL FAMILIAR" GridPane.columnIndex="1">
+                                    <font>
+                                        <Font size="34.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </GridPane>
+                        <GridPane prefHeight="151.0" prefWidth="321.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="161.0" />
+                                <ColumnConstraints halignment="CENTER" maxWidth="164.0" minWidth="10.0" prefWidth="160.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label fx:id="labelNombre" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Nombre">
+                                    <font>
+                                        <Font name="System Bold" size="34.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="labelApellido" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Apellido" GridPane.columnIndex="1">
+                                    <font>
+                                        <Font name="System Bold" size="34.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="labelEmail" style="-fx-font-size: 10; -fx-font-weight: bold;" text="Correo" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font name="System Bold" size="34.0" />
+                                    </font>
+                                </Label>
+                                <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="39.0" prefWidth="91.0" styleClass="btnSalir" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+        <Label layoutX="321.0" layoutY="-3.0" prefHeight="72.0" prefWidth="959.0" styleClass="header-bar" text="CARRITO | KINAL FAMILIAR" />
+        <TableView fx:id="tblCarrito" layoutX="341.0" layoutY="90.0" prefHeight="100.0" prefWidth="660.0">
+            <columns>
+                <TableColumn fx:id="colIdCarrito" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="colIdUsuario" prefWidth="285.0" text="Usuario ID" />
+                <TableColumn fx:id="colFechaCreacion" prefWidth="165.0" text="Fecha Creación" />
+                <TableColumn fx:id="colEstado" prefWidth="160.0" text="Estado" />
+            </columns>
+        </TableView>
+        <VBox alignment="CENTER" layoutX="1019.0" layoutY="90.0" prefHeight="610.0" prefWidth="240.0" spacing="15.0">
+            <children>
+                <VBox prefHeight="50.0" prefWidth="100.0">
+                    <children>
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <Button fx:id="btnNuevoC" mnemonicParsing="false" onAction="#agregarCarritoAction" prefHeight="50.0" prefWidth="50.0" styleClass="button-new">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/add.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="btnEditarC" mnemonicParsing="false" onAction="#editarCarritoAction" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/edit.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#editarCarritoAction" prefHeight="50.0" prefWidth="50.0" styleClass="button-cancel">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/delete.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox prefHeight="70.0" prefWidth="200.0" styleClass="right-panel">
+                    <children>
+                        <ComboBox fx:id="cbxUsuario" disable="true" prefWidth="225.0" promptText="Usuario" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                            <children>
+                                <RadioButton fx:id="rbActivo" mnemonicParsing="false" text="Activo">
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="grupoEstado" />
+                                    </toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="rbInactivo" mnemonicParsing="false" text="Inactivo" toggleGroup="$grupoEstado" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox prefHeight="150.0" prefWidth="100.0" spacing="25.0" styleClass="right-panel">
+                    <children>
+                        <ComboBox fx:id="cbxProducto" disable="true" prefHeight="50.0" prefWidth="210.0" promptText="Producto" />
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnMenos" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="-">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Button>
+                                <TextArea fx:id="txtACantidad" disable="true" prefHeight="50.0" prefWidth="50.0" />
+                                <Button fx:id="btnMas" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="+">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="240.0" spacing="10.0">
+                    <children>
+                        <Label styleClass="panel-title" text="Acciones">
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets top="5.0" />
+                            </padding>
+                        </Label>
+                        <Button fx:id="btnNuevoDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#agregarDetalleCarritoAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-new" text="Agregar al carrito">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/add.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnEliminarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#cancelarEliminarDetalleCarritoAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-delete" text="Eliminar producto">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/delete.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnEditarDc" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#editarDetalleCarritoAction" prefHeight="33.0" prefWidth="175.0" styleClass="button-edit" text="Editar Pedido">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/edit.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="101.0" prefWidth="245.0" spacing="10.0">
+                    <children>
+                        <Label styleClass="panel-title" text="Reportaje" />
+                        <Button fx:id="btnReporte" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#imprimirReporte" prefHeight="33.0" prefWidth="175.0" styleClass="button-download" text="Descargar reporte">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/download.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+        <TextField fx:id="txtIdCarrito" editable="false" layoutX="1020.0" layoutY="20.0" visible="false" />
+        <TextField fx:id="txtIdDetalleCarrito" editable="false" layoutX="1080.0" layoutY="20.0" visible="false" />
+        <TextField fx:id="txtIdCarrito2" editable="false" layoutX="1140.0" layoutY="20.0" visible="false" />
+        
+        <TableView fx:id="tblDetalleCarrito" layoutX="341.0" layoutY="204.0" prefHeight="492.0" prefWidth="660.0">
+            <columns>
+                <TableColumn fx:id="colIdDetalleCarrito" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="colCantidad" prefWidth="250.0" text="Cantidad" />
+                <TableColumn fx:id="colIdProducto" prefWidth="185.0" text="Producto ID" />
+                <TableColumn fx:id="colIdCarrito2" prefWidth="175.0" text="Carrito ID" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

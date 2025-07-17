@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="722.0" prefWidth="1213.0" stylesheets="@../style/register.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalfamiliar.controller.RegisterController">
+   <children>
+      <ImageView fitHeight="758.0" fitWidth="1230.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/background.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="416.0" layoutY="128.0" maxWidth="380.0" styleClass="form-container">
+         <children>
+            <Label styleClass="title-label" text="Register" />
+            <TextField fx:id="nombreField" promptText="Nombre" styleClass="text-field" />
+            <TextField fx:id="apellidoField" promptText="Apellido" styleClass="text-field" />
+            <TextField fx:id="correoField" promptText="Correo electrónico" styleClass="text-field" />
+            <PasswordField fx:id="contrasenaField" promptText="Contraseña" styleClass="password-field" />
+            <CheckBox fx:id="terminosCheckBox" mnemonicParsing="false" styleClass="check-box-style" text="Acepto los términos y condiciones" />
+            <Button fx:id="btnRegistrarse" mnemonicParsing="false" onAction="#manejarBotonRegistro" prefHeight="45.0" prefWidth="380.0" styleClass="register-button" text="Registrarse" />
+            <Button fx:id="btnIrALogin" mnemonicParsing="false" onAction="#manejarBotonLogin" styleClass="link-button" text="¿Ya tienes una cuenta? Inicia Sesión" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="24.0" prefHeight="100.0" prefWidth="1165.0" spacing="600.0" styleClass="header-bar">
+         <children>
+            <Label prefHeight="36.0" prefWidth="246.0" styleClass="header-label" text="KINAL FAMILIAR">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+            <GridPane prefHeight="100.0" prefWidth="258.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="124.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="117.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-background-color: transparent;" styleClass="header-label" text="Acerca de" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#manejarBotonLogin" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: transparent;" styleClass="header-label" text="Log In" textFill="WHITE" underline="true" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
