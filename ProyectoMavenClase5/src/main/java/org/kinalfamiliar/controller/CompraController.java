@@ -534,7 +534,7 @@ public class CompraController implements Initializable {
 
     public void cerrarSesion(ActionEvent evento) {
         UsuarioAutenticado.getInstancia().cerrarSesion();
-        principal.cambiarEscena("LoginView.fxml", 1280, 720);
+        principal.cambiarEscena("LoginView.fxml", 1213, 722);
     }
 
     public void manejarBotonInventario(ActionEvent e) {
