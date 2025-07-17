@@ -460,12 +460,23 @@ create procedure sp_inicioSesion(
 end//
 delimiter ;
 
-
 DELIMITER $$
 CREATE PROCEDURE sp_EliminarDetalleCarritoPorCarrito(IN p_idCarrito INT)
 BEGIN
     DELETE FROM DetalleCarritos WHERE idCarrito = p_idCarrito;
 END$$
+
+DELIMITER $$
+	create procedure sp_contarClientes()
+		begin
+			select concat(count(*), ' CLIENTES ACTIVOS') as RESULTADO from Usuarios;
+		end $$
+DELIMITER ;
+DELIMITER $$
+	create procedure sp_contarCarritos()
+		begin
+			select concat(count(*), ' CARRITOS ACTIVOS') as RESULTADO from Carritos;
+		end $$
 DELIMITER ;
 
 USE KinalFamiliarDB;

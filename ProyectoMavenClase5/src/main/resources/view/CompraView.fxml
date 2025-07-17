@@ -46,7 +46,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="321.0" styleClass="btnMenus" text="Contactanos" GridPane.rowIndex="6">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonContacto" prefHeight="101.0" prefWidth="321.0" styleClass="btnMenus" text="Contactanos" GridPane.rowIndex="6">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -73,7 +73,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="321.0" styleClass="btnMenus" text="Estadísticas" GridPane.rowIndex="2">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonEstadistica" prefHeight="108.0" prefWidth="321.0" styleClass="btnMenus" text="Estadísticas" GridPane.rowIndex="2">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -82,7 +82,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="321.0" styleClass="btnMenus" text="Menú Principal" GridPane.rowIndex="1">
+                <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonMenu" prefHeight="94.0" prefWidth="321.0" styleClass="btnMenus" text="Menú Principal" GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                             <image>
