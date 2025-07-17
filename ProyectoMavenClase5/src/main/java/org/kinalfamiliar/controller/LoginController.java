@@ -33,7 +33,7 @@ public class LoginController implements Initializable {
 
     public void manejarBotonLogin(ActionEvent evento) {
         if (login()) {
-            principal.cambiarEscena("InventarioView.fxml", 1280, 720);
+            principal.cambiarEscena("MenuPrincipalView.fxml", 1280, 720);
         }
     }
 
