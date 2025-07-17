@@ -559,11 +559,40 @@ public class CompraController implements Initializable {
 
     @FXML
     private void imprimirReporte(ActionEvent event) {
-        Integer idUsuario = obtenerIdUsuarioPorCorreo(labelEmail.getText());
-        if (idUsuario != 0) {
-            new Report().generarReporte("Carrito.jrxml", "ReporteCarrito", idUsuario);
-        } else {
-            mostrarAlerta("Error de Reporte", "No se pudo generar el reporte porque no se encontró el usuario.");
+        String correoUsuario = labelEmail.getText();
+        System.out.println("DEBUG: 1. Correo obtenido de la etiqueta: " + correoUsuario);
+
+        Integer idUsuario = null;
+
+        if (correoUsuario == null || correoUsuario.trim().isEmpty()) {
+            mostrarAlerta("Error de Validación", "No se ha proporcionado un correo de usuario.");
+            return;
+        }
+        try {
+            try (CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}")) {
+                enunciado.setString(1, correoUsuario);
+                enunciado.registerOutParameter(2, java.sql.Types.INTEGER);
+                enunciado.execute();
+
+                int retrievedId = enunciado.getInt(2);
+                if (!enunciado.wasNull()) {
+                    idUsuario = retrievedId;
+                }
+                System.out.println("DEBUG: 2. ID devuelto por la DB: " + idUsuario);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error de Base de Datos", "Ocurrió un error al consultar el ID del usuario.");
+            return;
+        }
+
+        if (idUsuario != null) {
+            System.out.println("DEBUG: 3. ID que se enviará a Report.java: " + idUsuario);
+            Report reporte = new Report();
+            reporte.generarReporte("Carrito.jrxml", "ReporteCarrito", idUsuario);
+            } else {
+                System.out.println("DEBUG: El idUsuario es nulo, no se generará el reporte.");
+                mostrarAlerta("Error de Reporte", "No se pudo generar el reporte porque no se encontró el usuario.");
+            }
         }
     }
-}
