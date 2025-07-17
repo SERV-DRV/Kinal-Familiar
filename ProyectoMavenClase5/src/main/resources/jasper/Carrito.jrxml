@@ -13,26 +13,28 @@ M2E2Ow==]]>
     <parameter name="idUsuario" class="java.lang.Integer"/>
     <parameter name="IMAGES_DIR" class="java.lang.String"/>
     <queryString language="SQL">
-		<![CDATA[SELECT kinalfamiliardb.detallecarritos.`idCarrito`,
-	kinalfamiliardb.detallecarritos.cantidad,
-	kinalfamiliardb.carritos.estado,
-	kinalfamiliardb.carritos.`fechaCreacion`,
-	kinalfamiliardb.productos.`nombreProducto`,
-	kinalfamiliardb.productos.`precioProducto`,
-	kinalfamiliardb.usuarios.`nombreUsuario`,
-	kinalfamiliardb.usuarios.`apellidoUsuario`,
-	kinalfamiliardb.usuarios.`correoUsuario`,
-	kinalfamiliardb.productos.`precioProducto` * kinalfamiliardb.detallecarritos.cantidad AS totalLinea,
-	kinalfamiliardb.usuarios.`idUsuario`,
-	kinalfamiliardb.carritos.`idUsuario`,
-	kinalfamiliardb.productos.`idProducto`
-FROM kinalfamiliardb.detallecarritos
-	INNER JOIN kinalfamiliardb.carritos ON 
-	 kinalfamiliardb.detallecarritos.`idCarrito` = kinalfamiliardb.carritos.`idCarrito` 
-	INNER JOIN kinalfamiliardb.productos ON 
-	 kinalfamiliardb.detallecarritos.`idProducto` = kinalfamiliardb.productos.`idProducto` 
-	INNER JOIN kinalfamiliardb.usuarios ON 
-	 kinalfamiliardb.carritos.`idUsuario` = kinalfamiliardb.usuarios.`idUsuario`]]>
+    <![CDATA[SELECT kinalfamiliardb.detallecarritos.`idCarrito`,
+        kinalfamiliardb.detallecarritos.cantidad,
+        kinalfamiliardb.carritos.estado,
+        kinalfamiliardb.carritos.`fechaCreacion`,
+        kinalfamiliardb.productos.`nombreProducto`,
+        kinalfamiliardb.productos.`precioProducto`,
+        kinalfamiliardb.usuarios.`nombreUsuario`,
+        kinalfamiliardb.usuarios.`apellidoUsuario`,
+        kinalfamiliardb.usuarios.`correoUsuario`,
+        kinalfamiliardb.productos.`precioProducto` * kinalfamiliardb.detallecarritos.cantidad AS totalLinea,
+        kinalfamiliardb.usuarios.`idUsuario`,
+        kinalfamiliardb.carritos.`idUsuario`,
+        kinalfamiliardb.productos.`idProducto`
+    FROM kinalfamiliardb.detallecarritos
+        INNER JOIN kinalfamiliardb.carritos ON 
+         kinalfamiliardb.detallecarritos.`idCarrito` = kinalfamiliardb.carritos.`idCarrito` 
+        INNER JOIN kinalfamiliardb.productos ON 
+         kinalfamiliardb.detallecarritos.`idProducto` = kinalfamiliardb.productos.`idProducto` 
+        INNER JOIN kinalfamiliardb.usuarios ON 
+         kinalfamiliardb.carritos.`idUsuario` = kinalfamiliardb.usuarios.`idUsuario`
+    WHERE
+         kinalfamiliardb.usuarios.idUsuario = $P{idUsuario}]]>
     </queryString>
     <field name="idCarrito" class="java.lang.Integer">
         <property name="com.jaspersoft.studio.field.name" value="idCarrito"/>

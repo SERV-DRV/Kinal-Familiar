@@ -576,14 +576,19 @@ private void limpiarDetallesDelUsuario() {
         Platform.exit();
     }
 
-    @FXML
+    @FXML //Esta clase tiene bastantes DEBUGs por problemas con el .jrxml, ya está funcionando pero dejaré los DEBUGs
     private void imprimirReporte(ActionEvent event) {
         String correoUsuario = labelEmail.getText();
+        System.out.println("DEBUG: 1. Correo obtenido de la etiqueta: " + correoUsuario);
+
         Integer idUsuario = null;
 
-        if (correoUsuario != null && !correoUsuario.isEmpty()) {
-            try {
-                CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}");
+        if (correoUsuario == null || correoUsuario.trim().isEmpty()) {
+            mostrarAlerta("Error de Validación", "No se ha proporcionado un correo de usuario.");
+            return;
+        }
+        try {
+            try (CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}")) {
                 enunciado.setString(1, correoUsuario);
                 enunciado.registerOutParameter(2, java.sql.Types.INTEGER);
                 enunciado.execute();
@@ -592,20 +597,21 @@ private void limpiarDetallesDelUsuario() {
                 if (!enunciado.wasNull()) {
                     idUsuario = retrievedId;
                 }
-
-                enunciado.close();
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                mostrarAlerta("Error de Base de Datos", "No se pudo obtener el ID del usuario para el reporte.");
+                System.out.println("DEBUG: 2. ID devuelto por la DB: " + idUsuario);
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error de Base de Datos", "Ocurrió un error al consultar el ID del usuario.");
+            return;
         }
 
-        Report reporte = new Report();
         if (idUsuario != null) {
+            System.out.println("DEBUG: 3. ID que se enviará a Report.java: " + idUsuario);
+            Report reporte = new Report();
             reporte.generarReporte("Carrito.jrxml", "ReporteCarrito", idUsuario);
+
         } else {
-            reporte.generarReporte("Carrito.jrxml", "ReporteCarrito");
+            System.out.println("DEBUG: El idUsuario es nulo, no se generará el reporte.");
         }
     }
 }

@@ -94,14 +94,14 @@ public class RegisterController implements Initializable {
         }
         try {
             Connection quintom = Conexion.getInstancia().getConexion();
-            String sql = "call sp_insertarusuario(?, ?, ?, ?)";
+            String sql = "call sp_AgregarUsuario(?, ?, ?, ?)";
             CallableStatement agregado = quintom.prepareCall(sql);
             agregado.setString(1, nombreCliente);
             agregado.setString(2, apellidoCliente);
             agregado.setString(3, emailCliente);
             agregado.setString(4, contraseñaCliente);
             agregado.executeUpdate();
-            principal.cambiarEscena("LoginView.fxml", 1280, 720);
+            principal.cambiarEscena("LoginView.fxml", 1213, 722);
             agregado.close();
         } catch (SQLException e) {
             System.out.println("Error al agregar el usuario: " + e.getMessage());
