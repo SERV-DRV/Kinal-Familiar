@@ -160,6 +160,10 @@
     -fx-background-color: #3f51b5;
 }
 
+.button-cancel {
+    -fx-background-color: #FF0000;
+}
+
 .button-download {
     -fx-background-color: #78909c;
 }

@@ -37,31 +37,53 @@ import org.kinalfamiliar.system.Main;
 
 public class CompraController implements Initializable {
 
-    @FXML private TableView<Carrito> tblCarrito;
-    @FXML private TableColumn<Carrito, Integer> colIdCarrito;
-    @FXML private TableColumn<Carrito, Integer> colIdUsuario;
-    @FXML private TableColumn<Carrito, LocalDateTime> colFechaCreacion;
-    @FXML private TableColumn<Carrito, String> colEstado;
-    @FXML private TableView<DetalleCarrito> tblDetalleCarrito;
-    @FXML private TableColumn<DetalleCarrito, Integer> colIdDetalleCarrito;
-    @FXML private TableColumn<DetalleCarrito, Integer> colCantidad;
-    @FXML private TableColumn<DetalleCarrito, Integer> colIdProducto;
-    @FXML private TableColumn<DetalleCarrito, Integer> colIdCarrito2;
-    @FXML private ComboBox<Usuario> cbxUsuario;
-    @FXML private ComboBox<Producto> cbxProducto;
-    @FXML private Button btnNuevoDc, btnEliminarDc, btnEditarDc, btnNuevoC, btnEditarC, btnMas, btnMenos;
-    @FXML private TextArea txtACantidad;
-    @FXML private TextField txtIdCarrito, txtIdCarrito2, txtIdDetalleCarrito;
-    @FXML private RadioButton rbActivo, rbInactivo;
-    @FXML private ToggleGroup grupoEstado;
-    @FXML private Label labelNombre, labelApellido, labelEmail;
+    @FXML
+    private TableView<Carrito> tblCarrito;
+    @FXML
+    private TableColumn<Carrito, Integer> colIdCarrito;
+    @FXML
+    private TableColumn<Carrito, Integer> colIdUsuario;
+    @FXML
+    private TableColumn<Carrito, LocalDateTime> colFechaCreacion;
+    @FXML
+    private TableColumn<Carrito, String> colEstado;
+    @FXML
+    private TableView<DetalleCarrito> tblDetalleCarrito;
+    @FXML
+    private TableColumn<DetalleCarrito, Integer> colIdDetalleCarrito;
+    @FXML
+    private TableColumn<DetalleCarrito, Integer> colCantidad;
+    @FXML
+    private TableColumn<DetalleCarrito, Integer> colIdProducto;
+    @FXML
+    private TableColumn<DetalleCarrito, Integer> colIdCarrito2;
+    @FXML
+    private ComboBox<Usuario> cbxUsuario;
+    @FXML
+    private ComboBox<Producto> cbxProducto;
+    @FXML
+    private Button btnNuevoDc, btnEliminarDc, btnEditarDc, btnNuevoC, btnEditarC, btnMas, btnMenos;
+    @FXML
+    private TextArea txtACantidad;
+    @FXML
+    private TextField txtIdCarrito, txtIdCarrito2, txtIdDetalleCarrito;
+    @FXML
+    private RadioButton rbActivo, rbInactivo;
+    @FXML
+    private ToggleGroup grupoEstado;
+    @FXML
+    private Label labelNombre, labelApellido, labelEmail;
+    @FXML
+    private Button btnCancelar;
 
     private Main principal;
     private ObservableList<Carrito> listaCarritos;
     private ObservableList<DetalleCarrito> listaDetalleCarritos;
     private ObservableList<DetalleCarrito> listaCompletaDetalles;
 
-    private enum acciones { EDITAR_CARRITO, AGREGAR_DETALLE, EDITAR_DETALLE, NINGUNA }
+    private enum acciones {
+        EDITAR_CARRITO, AGREGAR_DETALLE, EDITAR_DETALLE, NINGUNA
+    }
     private acciones accionActual = acciones.NINGUNA;
 
     @Override
@@ -89,11 +111,10 @@ public class CompraController implements Initializable {
             cs.registerOutParameter(2, java.sql.Types.INTEGER);
             cs.execute();
             int idCarritoActivo = cs.getInt(2);
-            
+
             if (!cs.wasNull()) {
                 seleccionarCarritoEnTabla(idCarritoActivo);
             } else {
-                mostrarAlerta("Información", "No tienes un carrito de compras activo. Puedes crear uno nuevo con el botón 'Nuevo'.");
                 limpiarFormularioCarritoYDetalle();
             }
         } catch (SQLException ex) {
@@ -102,39 +123,50 @@ public class CompraController implements Initializable {
         }
         actualizarEstadoInterfaz();
     }
-    
+
     @FXML
     private void agregarCarritoAction() {
-        if (accionActual == acciones.EDITAR_CARRITO) {
-            Carrito carritoEditado = cargarModeloCarrito();
-            if (carritoEditado != null) {
-                ejecutarCRUD("call sp_EditarCarrito(?, ?, ?)", carritoEditado.getIdCarrito(), carritoEditado.getEstado(), carritoEditado.getIdUsuario());
+        for (Carrito c : tblCarrito.getItems()) {
+            if ("Activo".equalsIgnoreCase(c.getEstado())) {
+                mostrarAlerta("Acción no Válida", "Ya tienes un carrito activo. Finaliza tu compra o desactívalo antes de crear uno nuevo.");
+                return;
             }
-            accionActual = acciones.NINGUNA;
+        }
+        int idUsuario = obtenerIdUsuarioPorCorreo(UsuarioAutenticado.getInstancia().getCorreoUsuario());
+        if (idUsuario != 0) {
+            ejecutarCRUD("call sp_AgregarCarrito(?)", idUsuario);
             cargarVistaParaUsuarioAutenticado();
-        } else if (accionActual == acciones.NINGUNA) {
-            for (Carrito c : tblCarrito.getItems()) {
-                if ("Activo".equalsIgnoreCase(c.getEstado())) {
-                    mostrarAlerta("Acción no Válida", "Ya tienes un carrito activo. Finaliza tu compra o desactívalo.");
-                    return;
-                }
-            }
-            int idUsuario = obtenerIdUsuarioPorCorreo(UsuarioAutenticado.getInstancia().getCorreoUsuario());
-            if (idUsuario != 0) {
-                ejecutarCRUD("call sp_AgregarCarrito(?)", idUsuario);
-                cargarVistaParaUsuarioAutenticado();
-            }
         }
     }
 
     @FXML
-    private void editarCarritoAction() {
-        if (tblCarrito.getSelectionModel().getSelectedItem() == null) {
-            mostrarAlerta("Acción no válida", "Debe seleccionar un carrito para editar.");
-            return;
-        }
-        accionActual = acciones.EDITAR_CARRITO;
+    private void cancelarAccion(ActionEvent event) {
+        accionActual = acciones.NINGUNA;
         actualizarEstadoInterfaz();
+        cargarFormularioCarrito();
+        cargarFormularioDetalleCarrito();
+    }
+
+    @FXML
+    private void editarCarritoAction() {
+        if (accionActual == acciones.EDITAR_CARRITO) {
+            Carrito carritoEditado = cargarModeloCarrito();
+            if (carritoEditado != null) {
+                ejecutarCRUD("call sp_EditarCarrito(?, ?, ?)",
+                        carritoEditado.getIdCarrito(),
+                        carritoEditado.getEstado(),
+                        carritoEditado.getIdUsuario());
+            }
+            accionActual = acciones.NINGUNA;
+            cargarVistaParaUsuarioAutenticado();
+        } else {
+            if (tblCarrito.getSelectionModel().getSelectedItem() == null) {
+                mostrarAlerta("Acción no válida", "Debe seleccionar un carrito para editar.");
+                return;
+            }
+            accionActual = acciones.EDITAR_CARRITO;
+            actualizarEstadoInterfaz();
+        }
     }
 
     @FXML
@@ -151,8 +183,8 @@ public class CompraController implements Initializable {
                 } else {
                     ejecutarCRUD("call sp_EditarDetalleCarrito(?, ?, ?, ?)", detalle.getIdDetalleCarrito(), detalle.getIdCarrito(), detalle.getIdProducto(), detalle.getCantidad());
                 }
-                
-                refrescarDetallesYTabla(); 
+
+                refrescarDetallesYTabla();
                 accionActual = acciones.NINGUNA;
                 filtrarYcargarTableViewDetalle(detalle.getIdCarrito());
                 actualizarEstadoInterfaz();
@@ -163,16 +195,16 @@ public class CompraController implements Initializable {
             actualizarEstadoInterfaz();
         }
     }
-    
-    private void refrescarDetallesYTabla() {
-    this.listaCompletaDetalles = listarTodosLosDetalles();
 
-    Carrito carritoSeleccionado = tblCarrito.getSelectionModel().getSelectedItem();
-    if (carritoSeleccionado != null) {
-        filtrarYcargarTableViewDetalle(carritoSeleccionado.getIdCarrito());
+    private void refrescarDetallesYTabla() {
+        this.listaCompletaDetalles = listarTodosLosDetalles();
+
+        Carrito carritoSeleccionado = tblCarrito.getSelectionModel().getSelectedItem();
+        if (carritoSeleccionado != null) {
+            filtrarYcargarTableViewDetalle(carritoSeleccionado.getIdCarrito());
+        }
     }
-}
-    
+
     @FXML
     private void editarDetalleCarritoAction() {
         if (tblDetalleCarrito.getSelectionModel().getSelectedItem() == null) {
@@ -188,7 +220,7 @@ public class CompraController implements Initializable {
         if (accionActual == acciones.AGREGAR_DETALLE || accionActual == acciones.EDITAR_DETALLE) {
             accionActual = acciones.NINGUNA;
             actualizarEstadoInterfaz();
-            cargarFormularioDetalleCarrito(); 
+            cargarFormularioDetalleCarrito();
         } else {
             DetalleCarrito detalleSeleccionado = tblDetalleCarrito.getSelectionModel().getSelectedItem();
             if (detalleSeleccionado == null) {
@@ -197,15 +229,15 @@ public class CompraController implements Initializable {
             }
             Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION, "¿Seguro que desea eliminar este producto del carrito?", ButtonType.OK, ButtonType.CANCEL);
             confirmacion.setTitle("Confirmar eliminación");
-            
+
             Optional<ButtonType> resultado = confirmacion.showAndWait();
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
                 ejecutarCRUD("call sp_EliminarDetalleCarrito(?)", detalleSeleccionado.getIdDetalleCarrito());
-                refrescarDetallesYTabla(); 
+                refrescarDetallesYTabla();
             }
         }
     }
-    
+
     private void actualizarEstadoInterfaz() {
         Carrito carritoSeleccionado = tblCarrito.getSelectionModel().getSelectedItem();
         boolean hayCarritoSeleccionado = carritoSeleccionado != null;
@@ -213,28 +245,33 @@ public class CompraController implements Initializable {
         boolean modoEdicionCarrito = (accionActual == acciones.EDITAR_CARRITO);
         boolean modoEdicionDetalle = (accionActual == acciones.AGREGAR_DETALLE || accionActual == acciones.EDITAR_DETALLE);
         boolean existeActivo = tblCarrito.getItems().stream().anyMatch(c -> "Activo".equalsIgnoreCase(c.getEstado()));
-        
-        btnNuevoC.setDisable(existeActivo || modoEdicionDetalle);
-        btnNuevoC.setText(modoEdicionCarrito ? "Guardar" : "Nuevo");
-        btnEditarC.setDisable(!hayCarritoSeleccionado || modoEdicionCarrito || modoEdicionDetalle);
+
+        // --- Botón Cancelar ---
+        btnCancelar.setDisable(accionActual == acciones.NINGUNA);
+
+        // --- Controles del Carrito ---
+        btnNuevoC.setDisable(existeActivo || modoEdicionDetalle || modoEdicionCarrito);
+        btnEditarC.setDisable(!hayCarritoSeleccionado || modoEdicionDetalle); // Se puede editar aunque haya otro activo
         rbActivo.setDisable(!modoEdicionCarrito);
         rbInactivo.setDisable(!modoEdicionCarrito);
-        
-        btnNuevoDc.setDisable(!esCarritoActivo);
-        btnNuevoDc.setText(modoEdicionDetalle ? "Guardar Detalle" : "Agregar");
-        btnEditarDc.setDisable(!esCarritoActivo || tblDetalleCarrito.getSelectionModel().getSelectedItem() == null || modoEdicionDetalle);
-        btnEliminarDc.setText(modoEdicionDetalle ? "Cancelar" : "Eliminar");
-        btnEliminarDc.setDisable(!esCarritoActivo || tblDetalleCarrito.getSelectionModel().getSelectedItem() == null);
-        
+
+        // --- Controles del Detalle del Carrito ---
+        btnNuevoDc.setDisable(!esCarritoActivo || modoEdicionCarrito);
+        btnNuevoDc.setText((modoEdicionDetalle && accionActual == acciones.AGREGAR_DETALLE) ? "Guardar" : "Agregar");
+        btnEditarDc.setText((modoEdicionDetalle && accionActual == acciones.EDITAR_DETALLE) ? "Guardar" : "Editar");
+        btnEditarDc.setDisable(!esCarritoActivo || tblDetalleCarrito.getSelectionModel().getSelectedItem() == null || modoEdicionCarrito);
+        btnEliminarDc.setDisable(!esCarritoActivo || tblDetalleCarrito.getSelectionModel().getSelectedItem() == null || modoEdicionDetalle || modoEdicionCarrito);
+
         cbxProducto.setDisable(!modoEdicionDetalle);
         txtACantidad.setDisable(!modoEdicionDetalle);
         btnMas.setDisable(!modoEdicionDetalle);
         btnMenos.setDisable(!modoEdicionDetalle);
-        
+
+        // Bloquear tablas durante cualquier edición
         tblCarrito.setDisable(modoEdicionCarrito || modoEdicionDetalle);
         tblDetalleCarrito.setDisable(modoEdicionCarrito || modoEdicionDetalle);
     }
-    
+
     private void configurarListeners() {
         tblCarrito.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -256,13 +293,12 @@ public class CompraController implements Initializable {
     private void cargarCarritosDelUsuario(int idUsuario) {
         ArrayList<Carrito> carritosDelUsuario = new ArrayList<>();
         String sql = "call sp_ListarCarritos()";
-        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql); ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
                 if (rs.getInt("idUsuario") == idUsuario) {
                     carritosDelUsuario.add(new Carrito(
-                        rs.getInt("idCarrito"), rs.getString("estado"),
-                        rs.getTimestamp("fechaCreacion").toLocalDateTime(), rs.getInt("idUsuario")));
+                            rs.getInt("idCarrito"), rs.getString("estado"),
+                            rs.getTimestamp("fechaCreacion").toLocalDateTime(), rs.getInt("idUsuario")));
                 }
             }
         } catch (SQLException ex) {
@@ -274,7 +310,9 @@ public class CompraController implements Initializable {
     }
 
     private int obtenerIdUsuarioPorCorreo(String correo) {
-        if (correo == null || correo.trim().isEmpty()) return 0;
+        if (correo == null || correo.trim().isEmpty()) {
+            return 0;
+        }
         String sql = "{call sp_ObtenerIdUsuarioPorCorreo(?, ?)}";
         try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql)) {
             cs.setString(1, correo);
@@ -287,7 +325,7 @@ public class CompraController implements Initializable {
             return 0;
         }
     }
-    
+
     private void filtrarYcargarTableViewDetalle(int idCarrito) {
         listaDetalleCarritos = listaCompletaDetalles.stream()
                 .filter(d -> d.getIdCarrito() == idCarrito)
@@ -299,7 +337,7 @@ public class CompraController implements Initializable {
             limpiarFormularioDetalle();
         }
     }
-    
+
     private void ejecutarCRUD(String nombreProcedimiento, Object... parametros) {
         try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(nombreProcedimiento)) {
             for (int i = 0; i < parametros.length; i++) {
@@ -327,11 +365,13 @@ public class CompraController implements Initializable {
         btnMas.setOnAction(e -> cambiarCantidad(1));
         btnMenos.setOnAction(e -> cambiarCantidad(-1));
     }
-    
+
     private void cambiarCantidad(int delta) {
         try {
             int nuevaCantidad = Integer.parseInt(txtACantidad.getText()) + delta;
-            if (nuevaCantidad > 0) txtACantidad.setText(String.valueOf(nuevaCantidad));
+            if (nuevaCantidad > 0) {
+                txtACantidad.setText(String.valueOf(nuevaCantidad));
+            }
         } catch (NumberFormatException e) {
             txtACantidad.setText("1");
         }
@@ -342,10 +382,13 @@ public class CompraController implements Initializable {
         if (carrito != null) {
             txtIdCarrito.setText(String.valueOf(carrito.getIdCarrito()));
             cbxUsuario.getItems().stream()
-                .filter(u -> u.getIdUsuario() == carrito.getIdUsuario())
-                .findFirst().ifPresent(cbxUsuario::setValue);
-            if (carrito.getEstado().equalsIgnoreCase("Activo")) rbActivo.setSelected(true);
-            else rbInactivo.setSelected(true);
+                    .filter(u -> u.getIdUsuario() == carrito.getIdUsuario())
+                    .findFirst().ifPresent(cbxUsuario::setValue);
+            if (carrito.getEstado().equalsIgnoreCase("Activo")) {
+                rbActivo.setSelected(true);
+            } else {
+                rbInactivo.setSelected(true);
+            }
         }
     }
 
@@ -356,18 +399,18 @@ public class CompraController implements Initializable {
             txtIdCarrito2.setText(String.valueOf(detalle.getIdCarrito()));
             txtACantidad.setText(String.valueOf(detalle.getCantidad()));
             cbxProducto.getItems().stream()
-                .filter(p -> p.getIdProducto() == detalle.getIdProducto())
-                .findFirst().ifPresent(cbxProducto::setValue);
+                    .filter(p -> p.getIdProducto() == detalle.getIdProducto())
+                    .findFirst().ifPresent(cbxProducto::setValue);
         }
     }
-    
+
     private void limpiarFormularioDetalle() {
         txtIdDetalleCarrito.clear();
         txtIdCarrito2.clear();
         cbxProducto.getSelectionModel().clearSelection();
         txtACantidad.setText("1");
     }
-    
+
     private void limpiarFormularioCarritoYDetalle() {
         tblCarrito.getSelectionModel().clearSelection();
         txtIdCarrito.clear();
@@ -380,19 +423,23 @@ public class CompraController implements Initializable {
 
     private void seleccionarCarritoEnTabla(int idCarrito) {
         tblCarrito.getItems().stream()
-            .filter(c -> c.getIdCarrito() == idCarrito)
-            .findFirst()
-            .ifPresent(tblCarrito.getSelectionModel()::select);
+                .filter(c -> c.getIdCarrito() == idCarrito)
+                .findFirst()
+                .ifPresent(tblCarrito.getSelectionModel()::select);
     }
-    
+
     private Carrito cargarModeloCarrito() {
-        if (txtIdCarrito.getText().isEmpty()) return null;
+        if (txtIdCarrito.getText().isEmpty()) {
+            return null;
+        }
         Usuario usuario = cbxUsuario.getSelectionModel().getSelectedItem();
-        if (usuario == null) return null;
+        if (usuario == null) {
+            return null;
+        }
         return new Carrito(Integer.parseInt(txtIdCarrito.getText()),
                 rbActivo.isSelected() ? "Activo" : "Inactivo", usuario.getIdUsuario());
     }
-    
+
     private DetalleCarrito cargarModeloDetalleCarrito() {
         String idCarritoStr = txtIdCarrito.getText();
         String cantidadStr = txtACantidad.getText();
@@ -410,7 +457,7 @@ public class CompraController implements Initializable {
             return null;
         }
     }
-    
+
     private void cargarDatosUsuario() {
         UsuarioAutenticado usuario = UsuarioAutenticado.getInstancia();
         labelNombre.setText(usuario.getNombreUsuario());
@@ -421,12 +468,11 @@ public class CompraController implements Initializable {
     private void cargarUsuarios() {
         cbxUsuario.setItems(listarUsuarios());
     }
-    
+
     private ObservableList<Usuario> listarUsuarios() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         String sql = "call sp_ListarUsuarios()";
-        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql); ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
                 usuarios.add(new Usuario(rs.getInt("idUsuario"), rs.getString("nombreUsuario"),
                         rs.getString("apellidoUsuario"), rs.getString("correoUsuario")));
@@ -440,12 +486,11 @@ public class CompraController implements Initializable {
     private void cargarProductos() {
         cbxProducto.setItems(listarProductos());
     }
-    
+
     private ObservableList<Producto> listarProductos() {
         ArrayList<Producto> productos = new ArrayList<>();
         String sql = "call sp_ListarProductos();";
-        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql); ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
                 productos.add(new Producto(rs.getInt("idProducto"), rs.getString("nombreProducto"),
                         rs.getInt("cantidadProducto"), rs.getDouble("precioProducto"),
@@ -456,12 +501,11 @@ public class CompraController implements Initializable {
         }
         return FXCollections.observableArrayList(productos);
     }
-    
+
     private ObservableList<DetalleCarrito> listarTodosLosDetalles() {
         ArrayList<DetalleCarrito> detalles = new ArrayList<>();
         String sql = "call sp_ListarDetalleCarritos()";
-        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+        try (CallableStatement cs = Conexion.getInstancia().getConexion().prepareCall(sql); ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
                 detalles.add(new DetalleCarrito(rs.getInt("idDetalleCarrito"), rs.getInt("idCarrito"),
                         rs.getInt("idProducto"), rs.getInt("cantidad")));
@@ -480,18 +524,39 @@ public class CompraController implements Initializable {
         alerta.showAndWait();
     }
 
-    public Main getPrincipal() { return principal; }
-    public void setPrincipal(Main principal) { this.principal = principal; }
+    public Main getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(Main principal) {
+        this.principal = principal;
+    }
+
     public void cerrarSesion(ActionEvent evento) {
         UsuarioAutenticado.getInstancia().cerrarSesion();
         principal.cambiarEscena("LoginView.fxml", 1280, 720);
     }
-    public void manejarBotonInventario(ActionEvent e) { principal.cambiarEscena("InventarioView.fxml", 1280, 720); }
-    public void manejarBotonEstadistica(ActionEvent e) { principal.cambiarEscena("EstadisticasView.fxml", 1280, 720); }
-    public void manejarBotonMenu(ActionEvent e) { principal.cambiarEscena("MenuPrincipalView.fxml", 1280, 720); }
-    public void manejarBotonContacto(ActionEvent e) { principal.cambiarEscena("ContactoView.fxml", 1280, 720); }
-    public void manejarBotonSalir(ActionEvent e) { Platform.exit(); }
-    
+
+    public void manejarBotonInventario(ActionEvent e) {
+        principal.cambiarEscena("InventarioView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonEstadistica(ActionEvent e) {
+        principal.cambiarEscena("EstadisticasView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonMenu(ActionEvent e) {
+        principal.cambiarEscena("MenuPrincipalView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonContacto(ActionEvent e) {
+        principal.cambiarEscena("ContactoView.fxml", 1280, 720);
+    }
+
+    public void manejarBotonSalir(ActionEvent e) {
+        Platform.exit();
+    }
+
     @FXML
     private void imprimirReporte(ActionEvent event) {
         Integer idUsuario = obtenerIdUsuarioPorCorreo(labelEmail.getText());
