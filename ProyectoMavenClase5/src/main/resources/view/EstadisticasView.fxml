@@ -57,7 +57,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="15.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus" text="Inventario" GridPane.rowIndex="3">
+            <Button graphicTextGap="15.0" mnemonicParsing="false" onAction="#manejarBotonInventario" prefHeight="98.0" prefWidth="321.0" styleClass="btnMenus" text="Inventario" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" styleClass="btnMenus-active">
                      <image>
@@ -164,14 +164,14 @@
             <Insets left="25.0" right="10.0" />
          </padding>
       </VBox>
-      <TextField fx:id="txtClientes" editable="false" layoutX="720.0" layoutY="216.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
+      <TextField fx:id="txtClientes" editable="false" layoutX="720.0" layoutY="216.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="placeholder">
          <font>
-            <Font name="Bookshelf Symbol 7" size="39.0" />
+            <Font name="Arial Black" size="25.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtCarritos" editable="false" layoutX="722.0" layoutY="449.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="s">
+      <TextField fx:id="txtCarritos" editable="false" layoutX="722.0" layoutY="449.0" prefHeight="102.0" prefWidth="367.0" style="-fx-background-color: #2ed1ac; -fx-border-color: white; -fx-border-radius: 10;" text="placeholder">
          <font>
-            <Font name="Bookshelf Symbol 7" size="39.0" />
+            <Font name="Arial Black" size="25.0" />
          </font>
       </TextField>
     </children>

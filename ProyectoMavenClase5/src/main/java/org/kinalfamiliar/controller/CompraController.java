@@ -495,6 +495,10 @@ public class CompraController implements Initializable {
         principal.cambiarEscena("InventarioView.fxml", 1280, 720);
     }
 
+    public void manejarBotonEstadistica(ActionEvent evento) {
+        principal.cambiarEscena("EstadisticasView.fxml", 1280, 720);
+    }
+
     public void manejarBotonSalir(ActionEvent evento) {
         Platform.exit();
     }
@@ -515,7 +519,7 @@ public class CompraController implements Initializable {
                 if (!enunciado.wasNull()) {
                     idUsuario = retrievedId;
                 }
-                
+
                 enunciado.close();
 
             } catch (SQLException ex) {
